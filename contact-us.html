@@ -11,7 +11,11 @@
 
   <p>Picao Caldense Support</p>
 
-  <div id="chatbox">
+<div id="chatbox" style="border:2px solid #333; padding:10px; width:300px; background:#fff; position:fixed; bottom:20px; right:20px; z-index:9999;">
+  <div id="messages" style="height:200px; overflow-y:auto; border:1px solid #ddd; margin-bottom:10px; padding:5px;"></div>
+  <input id="userInput" type="text" placeholder="Type message..." style="width:70%;">
+  <button onclick="sendMessage()">Send</button>
+</div>
     <h3>🌶️ Picao Assistant</h3>
 
     <div id="messages"></div>
@@ -43,3 +47,23 @@
 
 </body>
 </html>
+
+<script>
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const messages = document.getElementById("messages");
+
+  if (!input.value) return;
+
+  const userMsg = document.createElement("div");
+  userMsg.innerText = "You: " + input.value;
+  messages.appendChild(userMsg);
+
+  const botMsg = document.createElement("div");
+  botMsg.innerText = "Support: Thanks! We'll respond shortly.";
+  messages.appendChild(botMsg);
+
+  input.value = "";
+}
+</script>
+
