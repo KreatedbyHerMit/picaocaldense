@@ -1,115 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Us - Picao Caldense</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      padding: 20px;
-    }
-
-    .nav a {
-      margin-right: 15px;
-      text-decoration: none;
-      color: #b22222;
-      font-weight: bold;
-    }
-
-    #picao-chat {
-      margin-top: 20px;
-      max-width: 500px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    #picao-header {
-      background: #b22222;
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-    }
-
-    #picao-messages {
-      height: 200px;
-      overflow-y: auto;
-      padding: 10px;
-    }
-
-    #picao-input {
-      width: 70%;
-      padding: 8px;
-    }
-
-    button {
-      width: 28%;
-      background: #b22222;
-      color: white;
-      border: none;
-      padding: 8px;
-    }
-  </style>
+  <title>Contact Us</title>
 </head>
-
 <body>
-
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="contact-us.html">Contact Us</a>
-  </div>
 
   <h1>Contact Us</h1>
 
-  <p>Ask about orders, wholesale, or product information.</p>
-
   <div id="picao-chat">
+    <h3>🌶️ Picao Assistant</h3>
 
-    <div id="picao-header">🌶️ Picao Assistant</div>
+    <div id="messages"></div>
 
-    <div id="picao-messages"></div>
-
-    <input id="picao-input" placeholder="Ask about orders..." />
+    <input id="input" placeholder="Ask a question..." />
     <button onclick="sendMsg()">Send</button>
-
   </div>
 
   <script>
     function sendMsg() {
-      const input = document.getElementById("picao-input");
+      const input = document.getElementById("input");
       const msg = input.value.trim();
-      const box = document.getElementById("picao-messages");
+      const box = document.getElementById("messages");
 
       if (!msg) return;
 
       box.innerHTML += "<div><b>You:</b> " + msg + "</div>";
-      box.innerHTML += "<div><b>Picao Assistant:</b> " + getReply(msg.toLowerCase()) + "</div>";
+
+      let reply = "Thanks! We will follow up with you shortly.";
+
+      if (msg.includes("price")) reply = "We sell 355ml bottles in packs.";
+      if (msg.includes("flavor")) reply = "We have Classic Pique, Jalapeño Special, Spicy Thai Delight.";
+
+      box.innerHTML += "<div><b>Picao Assistant:</b> " + reply + "</div>";
 
       input.value = "";
-      box.scrollTop = box.scrollHeight;
-    }
-
-    function getReply(msg) {
-
-      if (msg.includes("price")) {
-        return "We offer 355ml bottles in half-dozen and dozen packs.";
-      }
-
-      if (msg.includes("flavor")) {
-        return "Flavors: Classic Pique, Jalapeño Special, Spicy Thai Delight 🌶️";
-      }
-
-      if (msg.includes("ship")) {
-        return "We currently ship within Quebec and Ontario.";
-      }
-
-      if (msg.includes("order")) {
-        return "Please share your email and quantity, and we will contact you.";
-      }
-
-      return "Thanks! A member of Picao will follow up with you shortly.";
     }
   </script>
 
