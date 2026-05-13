@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Contact Us</title>
 </head>
+
 <body>
 
   <h1>Contact Us</h1>
 
-  <div id="picao-chat">
+  <p>Welcome to Picao Caldense support.</p>
+
+  <div id="chat">
     <h3>🌶️ Picao Assistant</h3>
 
     <div id="messages"></div>
 
-    <input id="input" placeholder="Ask a question..." />
+    <input id="input" placeholder="Ask about orders..." />
     <button onclick="sendMsg()">Send</button>
   </div>
 
@@ -26,10 +30,10 @@
 
       box.innerHTML += "<div><b>You:</b> " + msg + "</div>";
 
-      let reply = "Thanks! We will follow up with you shortly.";
+      let reply = "Thanks! We will contact you shortly.";
 
-      if (msg.includes("price")) reply = "We sell 355ml bottles in packs.";
-      if (msg.includes("flavor")) reply = "We have Classic Pique, Jalapeño Special, Spicy Thai Delight.";
+      if (msg.includes("price")) reply = "We sell 355ml bottles in half-dozen and dozen packs.";
+      if (msg.includes("flavor")) reply = "Flavors: Classic Pique, Jalapeño Special, Spicy Thai Delight.";
 
       box.innerHTML += "<div><b>Picao Assistant:</b> " + reply + "</div>";
 
