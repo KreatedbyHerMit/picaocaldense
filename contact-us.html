@@ -1,69 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Contact Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Picao Caldense</title>
+
+  <style>
+
+    body{
+      font-family:Arial;
+      max-width:800px;
+      margin:auto;
+      padding:40px;
+      background:#fafafa;
+    }
+
+    h1{
+      text-align:center;
+    }
+
+    #chatbox{
+      border:1px solid #ccc;
+      border-radius:12px;
+      padding:20px;
+      background:white;
+    }
+
+    #messages{
+      height:350px;
+      overflow-y:auto;
+      border:1px solid #ddd;
+      padding:10px;
+      margin-bottom:15px;
+      border-radius:8px;
+      background:#f9f9f9;
+    }
+
+    input{
+      width:75%;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+
+    button{
+      padding:12px 18px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <h1>Contact Us</h1>
+<h1>🌶️ Contact Us</h1>
 
-  <p>Picao Caldense Support</p>
+<div id="chatbox">
 
-<div id="chatbox" style="border:2px solid #333; padding:10px; width:300px; background:#fff; position:fixed; bottom:20px; right:20px; z-index:9999;">
-  <div id="messages" style="height:200px; overflow-y:auto; border:1px solid #ddd; margin-bottom:10px; padding:5px;"></div>
-  <input id="userInput" type="text" placeholder="Type message..." style="width:70%;">
-  <button onclick="sendMessage()">Send</button>
+  <h2>Picao Assistant</h2>
+
+  <div id="messages"></div>
+
+  <input
+    id="input"
+    type="text"
+    placeholder="Ask about orders, flavors, shipping..."
+  />
+
+  <button onclick="sendMsg()">Send</button>
+
 </div>
-    <h3>🌶️ Picao Assistant</h3>
 
-    <div id="messages"></div>
+<script>
 
-    <input id="input" placeholder="Ask about orders..." />
-    <button onclick="sendMsg()">Send</button>
-  </div>
+async function sendMsg() {
 
-  <script>
-    function sendMsg() {
-      const input = document.getElementById("input");
-      const msg = input.value.trim();
-      const box = document.getElementById("messages");
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
 
-      if (!msg) return;
+  const message = input.value.trim();
 
-      box.innerHTML += "<div><b>You:</b> " + msg + "</div>";
+  if (!message) return;
 
-      let reply = "Thanks! We will contact you shortly.";
+  messages.innerHTML += `
+    <div style="margin-bottom:10px;">
+      <b>You:</b> ${message}
+    </div>
+  `;
 
-      if (msg.includes("price")) reply = "We sell 355ml bottles in half-dozen and dozen packs.";
-      if (msg.includes("flavor")) reply = "Flavors: Classic Pique, Jalapeño Special, Spicy Thai Delight.";
+  input.value = '';
 
-      box.innerHTML += "<div><b>Picao Assistant:</b> " + reply + "</div>";
+  try {
 
-      input.value = "";
-    }
-  </script>
+    const response = await fetch('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    messages.innerHTML += `
+      <div style="margin-bottom:10px;">
+        <b>Picao Assistant:</b> ${data.reply}
+      </div>
+    `;
+
+    messages.scrollTop = messages.scrollHeight;
+
+  } catch(error){
+
+    messages.innerHTML += `
+      <div>
+        <b>Picao Assistant:</b>
+        Unable to connect right now.
+      </div>
+    `;
+  }
+
+}
+
+</script>
 
 </body>
 </html>
-
-<script>
-function sendMessage() {
-  const input = document.getElementById("userInput");
-  const messages = document.getElementById("messages");
-
-  if (!input.value) return;
-
-  const userMsg = document.createElement("div");
-  userMsg.innerText = "You: " + input.value;
-  messages.appendChild(userMsg);
-
-  const botMsg = document.createElement("div");
-  botMsg.innerText = "Support: Thanks! We'll respond shortly.";
-  messages.appendChild(botMsg);
-
-  input.value = "";
-}
-</script>
-
