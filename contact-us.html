@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Picao Caldense</title>
-
   <style>
-
     body{
       font-family:Arial;
       max-width:800px;
@@ -15,18 +13,13 @@
       padding:40px;
       background:#fafafa;
     }
-
     h1{
       text-align:center;
-    }
-
     #chatbox{
       border:1px solid #ccc;
       border-radius:12px;
       padding:20px;
       background:white;
-    }
-
     #messages{
       height:350px;
       overflow-y:auto;
@@ -35,66 +28,40 @@
       margin-bottom:15px;
       border-radius:8px;
       background:#f9f9f9;
-    }
-
     input{
       width:75%;
       padding:12px;
-      border-radius:8px;
-      border:1px solid #ccc;
-    }
-
     button{
       padding:12px 18px;
       border:none;
-      border-radius:8px;
       cursor:pointer;
-    }
-
   </style>
 </head>
-
 <body>
-
 <h1>🌶️ Contact Us</h1>
-
 <div id="chatbox">
-
   <h2>Picao Assistant</h2>
-
   <div id="messages"></div>
-
   <input
     id="input"
     type="text"
     placeholder="Ask about orders, flavors, shipping..."
   />
-
   <button onclick="sendMsg()">Send</button>
-
 </div>
-
 <script>
-
 async function sendMsg() {
-
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
-
   const message = input.value.trim();
-
   if (!message) return;
-
   messages.innerHTML += `
     <div style="margin-bottom:10px;">
       <b>You:</b> ${message}
     </div>
   `;
-
   input.value = '';
-
   try {
-
     const response = await fetch('/chat', {
       method: 'POST',
       headers: {
@@ -102,50 +69,29 @@ async function sendMsg() {
       },
       body: JSON.stringify({ message })
     });
-
     const data = await response.json();
-
     messages.innerHTML += `
       <div style="margin-bottom:10px;">
         <b>Picao Assistant:</b> ${data.reply}
       </div>
     `;
-
     messages.scrollTop = messages.scrollHeight;
-
   } catch(error){
-
-    messages.innerHTML += `
       <div>
         <b>Picao Assistant:</b>
         Unable to connect right now.
-      </div>
-    `;
   }
-
 }
-
 </script>
-
 </body>
 </html>
-
-
-
   <div id="picao-messages"></div>
-
   <input id="picao-input" placeholder="Ask about orders..." />
-  <button onclick="sendMsg()">Send</button>
-</div>
-
 
 <!-- PICAO CHATBOX -->
 <div id="picao-chat">
   <div id="picao-header">🌶️ Picao Assistant</div>
-
   <div id="picao-messages"></div>
-
   <input id="picao-input" placeholder="Ask about orders..." />
   <button onclick="sendMsg()">Send</button>
 </div>
-
