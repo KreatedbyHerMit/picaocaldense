@@ -10,20 +10,66 @@
 
 <body>
 
-  <h1>🌶️ Contact Us</h1>
+  <div class="container">
 
-  <p class="caption">
-    Ask us about orders, flavours, or shipping status.
-  </p>
+    <div class="section">
+      <h1>🌶️ Contact Us</h1>
 
-  <div class="contact-card" style="max-width:700px;margin:auto;padding:20px;background:#fff;border-radius:12px;">
-    
-    <h2>Picao Assistant</h2>
+      <p>
+        At <b>Picao Caldense</b>, our roots are deeply inspired by Colombian culinary traditions,
+        where food is more than flavor — it is family, culture, and shared identity.
+      </p>
 
-    <div id="messages" style="height:300px;overflow:auto;border:1px solid #ddd;padding:10px;margin-bottom:10px;"></div>
+      <p class="caption">
+        Guided by strong family values, respect for tradition, and a commitment to quality,
+        we believe every sauce should reflect authenticity, care, and heritage.
+      </p>
 
-    <input id="input" placeholder="Ask a question..." style="width:70%;padding:10px;" />
-    <button onclick="sendMsg()" style="padding:10px;">Send</button>
+      <p class="caption">
+        Our beliefs are grounded in honesty, ethical production, and honoring the rich diversity
+        of Latin American cuisine. Every product we create carries the spirit of home cooking,
+        community gatherings, and generational recipes passed down with pride.
+      </p>
+    </div>
+
+    <div class="card section">
+
+      <h2>💬 Picao Assistant</h2>
+
+      <p class="caption">
+        Ask us about shipping, available flavours, ingredient details, or wholesale opportunities.
+        We are here to provide clear and helpful responses rooted in transparency and care.
+      </p>
+
+      <div id="messages"
+           style="height:320px;overflow:auto;border:1px solid #eee;padding:12px;border-radius:10px;background:#fafafa;">
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:10px;">
+        <input id="input"
+               placeholder="Ask your question..."
+               style="flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;" />
+
+        <button onclick="sendMsg()"
+                style="padding:10px 16px;border:none;background:#e63946;color:white;border-radius:8px;">
+          Send
+        </button>
+      </div>
+
+    </div>
+
+    <div class="section">
+      <h2>📦 Common Inquiries</h2>
+
+      <div class="card">
+        <ul>
+          <li>Shipping timelines and delivery coverage</li>
+          <li>Traditional flavour profiles and spice levels</li>
+          <li>Bulk and restaurant supply options</li>
+          <li>Product ingredients and sourcing practices</li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 
