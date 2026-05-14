@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Picao Caldense</title>
+  <title>Contact Us</title>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      margin: 0;
+      font-family: Arial;
       padding: 40px;
+      background: #fafafa;
     }
 
-    h1 {
-      text-align: center;
-      color: #e63946;
+    nav {
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: black;
     }
 
     #chatbox {
       max-width: 500px;
-      margin: 40px auto;
+      margin: auto;
       background: white;
-      border-radius: 12px;
       padding: 20px;
+      border-radius: 12px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
 
@@ -32,123 +36,60 @@
       overflow-y: auto;
       border: 1px solid #ddd;
       padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      background: #f9f9f9;
+      margin-bottom: 10px;
     }
 
-    .user-msg {
-      text-align: right;
-      margin: 8px 0;
-    }
-
-    .bot-msg {
-      text-align: left;
-      margin: 8px 0;
-      color: #e63946;
-    }
-
-    #input-area {
-      display: flex;
-      gap: 10px;
-    }
-
-    #userInput {
-      flex: 1;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    input {
+      width: 70%;
+      padding: 10px;
     }
 
     button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 8px;
+      padding: 10px;
       background: #e63946;
       color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    button:focus,
-    a:focus {
-      outline: none;
-      box-shadow: none;
+      border: none;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>🌶️ Contact Us</h1>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="order.html">Order</a>
+</nav>
 
-  <div id="chatbox">
-    <h2>Picao Assistant</h2>
+<h1>Contact Us</h1>
 
-    <div id="messages"></div>
+<div id="chatbox">
+  <div id="messages"></div>
 
-    <div id="input-area">
-      <input
-        id="userInput"
-        type="text"
-        placeholder="Ask about shipping, flavours, orders..."
-      />
+  <input id="input" placeholder="Ask something..." />
+  <button onclick="sendMsg()">Send</button>
+</div>
 
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
+<script>
+function sendMsg() {
+  const input = document.getElementById("input");
+  const messages = document.getElementById("messages");
 
-  <script>
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const messages = document.getElementById("messages");
+  const msg = input.value.trim();
+  if (!msg) return;
 
-      const msg = input.value.trim();
+  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
 
-      if (!msg) return;
+  let reply = "I can help with orders, shipping, and flavours.";
 
-      messages.innerHTML += `
-        <div class="user-msg">
-          <b>You:</b> ${msg}
-        </div>
-      `;
+  if (msg.toLowerCase().includes("shipping")) reply = "Shipping is 2–5 days.";
+  if (msg.toLowerCase().includes("order")) reply = "Go to the Order page.";
+  if (msg.toLowerCase().includes("flavour")) reply = "We offer 3 signature sauces.";
 
-      let reply =
-        "I can help with flavours, orders, shipping, and quantities.";
-
-      const text = msg.toLowerCase();
-
-      if (text.includes("flavour") || text.includes("flavor")) {
-        reply =
-          "We offer Classic Pique, Jalapeño Special, and Spicy Thai Delight.";
-      }
-
-      if (text.includes("shipping")) {
-        reply = "Shipping usually takes 2–5 business days.";
-      }
-
-      if (text.includes("order")) {
-        reply = "You can place orders directly from our Order page.";
-      }
-
-      if (text.includes("quantity")) {
-        reply = "We sell 355ml bottles individually and by the dozen.";
-      }
-
-      messages.innerHTML += `
-        <div class="bot-msg">
-          <b>Picao Assistant:</b> ${reply}
-        </div>
-      `;
-
-      messages.scrollTop = messages.scrollHeight;
-
-      input.value = "";
-    }
-  </script>
+  messages.innerHTML += `<div><b>Bot:</b> ${reply}</div>`;
+  input.value = "";
+}
+</script>
 
 </body>
 </html>
