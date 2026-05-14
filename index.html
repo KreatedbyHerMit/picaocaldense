@@ -1,80 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Picao Caldense</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Welcome to Picao Caldense!</h1>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="order.html">Order</a>
+  <a href="contact-us.html">Contact</a>
+</nav>
+
+<div class="container">
+
+  <h1>Picao Caldense</h1>
+
+  <p style="text-align:center; font-size:18px;">
+    Welcome to Picao Caldense — where tradition meets bold, handcrafted flavor.
+  </p>
+
+  <p style="text-align:center;">
+    Explore our authentic sauces made in small batches with quality ingredients and care.
+  </p>
+
 </div>
 
-
-
-<style>
-
-#picao-header {
-  background: #b22222;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-}
-
-  height: 200px;
-  overflow-y: auto;
-  padding: 10px;
-  font-size: 14px;
-}
-
-  width: 70%;
-  padding: 8px;
-  border: 1px solid #ccc;
-}
-
-button {
-  width: 28%;
-  background: #b22222;
-  color: white;
-  border: none;
-  padding: 8px;
-}
-</style>
-
-
-<script>
-  const msg = input.value.trim();
-
-  if (!msg) return;
-
-  box.innerHTML += "<div><b>You:</b> " + msg + "</div>";
-
-  let reply = getReply(msg.toLowerCase());
-
-  box.innerHTML += "<div><b>Picao Assistant:</b> " + reply + "</div>";
-
-  input.value = "";
-  box.scrollTop = box.scrollHeight;
-}
-
-function getReply(msg) {
-
-  if (msg.includes("price")) {
-    return "We offer 355ml bottles in half-dozen and dozen packs.";
-  }
-
-  if (msg.includes("flavor")) {
-    return "Flavors: Classic Pique, Jalapeño Special, Spicy Thai Delight 🌶️";
-  }
-
-  if (msg.includes("ship")) {
-    return "We currently ship within Quebec and Ontario.";
-  }
-
-  if (msg.includes("order")) {
-    return "Please provide your email and quantity, and we will contact you.";
-  }
-
-  return "Thanks! The Picao team will follow up with you shortly.";
-}
-</script>
-
-<a href="contact-us.html">Contact</a>
-</body></html>
+</body>
+</html>
