@@ -10,96 +10,95 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="section">
-      <h1>🌶️ Contact Us</h1>
+  <div class="section">
+    <h1>🌶️ Contact Us</h1>
 
-      <p>
-        At <b>Picao Caldense</b>, our roots are deeply inspired by Colombian culinary traditions,
-        where food is more than flavor — it is family, culture, and shared identity.
-      </p>
+    <p>
+      At <b>Picao Caldense</b>, our identity is rooted in Colombian culinary tradition,
+      where food represents family, unity, and shared heritage.
+    </p>
 
-      <p class="caption">
-        Guided by strong family values, respect for tradition, and a commitment to quality,
-        we believe every sauce should reflect authenticity, care, and heritage.
-      </p>
+    <p class="caption">
+      Inspired by generations of home cooking, our values are built on respect, honesty,
+      and the belief that every product should carry cultural meaning and authenticity.
+    </p>
 
-      <p class="caption">
-        Our beliefs are grounded in honesty, ethical production, and honoring the rich diversity
-        of Latin American cuisine. Every product we create carries the spirit of home cooking,
-        community gatherings, and generational recipes passed down with pride.
-      </p>
+    <p class="caption">
+      We honor the richness of Latin American cuisine, blending tradition with modern craftsmanship
+      to deliver sauces that reflect both quality and heritage.
+    </p>
+  </div>
+
+  <div class="card section">
+
+    <h2>💬 Picao Assistant</h2>
+
+    <p class="caption">
+      Ask about shipping, flavours, product availability, or order details.
+      We are here to provide clear, helpful answers.
+    </p>
+
+    <div id="messages"
+      style="height:320px;overflow:auto;border:1px solid #eee;padding:12px;border-radius:10px;background:#fafafa;">
     </div>
 
-    <div class="card section">
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <input id="input" placeholder="Ask your question..."
+        style="flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;" />
 
-      <h2>💬 Picao Assistant</h2>
-
-      <p class="caption">
-        Ask us about shipping, available flavours, ingredient details, or wholesale opportunities.
-        We are here to provide clear and helpful responses rooted in transparency and care.
-      </p>
-
-      <div id="messages"
-           style="height:320px;overflow:auto;border:1px solid #eee;padding:12px;border-radius:10px;background:#fafafa;">
-      </div>
-
-      <div style="display:flex;gap:10px;margin-top:10px;">
-        <input id="input"
-               placeholder="Ask your question..."
-               style="flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;" />
-
-        <button onclick="sendMsg()"
-                style="padding:10px 16px;border:none;background:#e63946;color:white;border-radius:8px;">
-          Send
-        </button>
-      </div>
-
-    </div>
-
-    <div class="section">
-      <h2>📦 Common Inquiries</h2>
-
-      <div class="card">
-        <ul>
-          <li>Shipping timelines and delivery coverage</li>
-          <li>Traditional flavour profiles and spice levels</li>
-          <li>Bulk and restaurant supply options</li>
-          <li>Product ingredients and sourcing practices</li>
-        </ul>
-      </div>
+      <button onclick="sendMsg()"
+        style="padding:10px 16px;border:none;background:#e63946;color:white;border-radius:8px;">
+        Send
+      </button>
     </div>
 
   </div>
 
-  <script>
-    async function sendMsg() {
-      const input = document.getElementById('input');
-      const messages = document.getElementById('messages');
+  <div class="section">
+    <h2>📦 Common Questions</h2>
 
-      const msg = input.value.trim();
-      if (!msg) return;
+    <div class="card">
+      <ul>
+        <li>Shipping times and delivery coverage</li>
+        <li>Traditional Colombian-inspired flavours</li>
+        <li>Bulk and wholesale orders</li>
+        <li>Product ingredients and sourcing ethics</li>
+      </ul>
+    </div>
 
-      messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
-      input.value = '';
+  </div>
 
-      try {
-        const res = await fetch('/chat', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ message: msg })
-        });
+</div>
 
-        const data = await res.json();
-        messages.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
-        messages.scrollTop = messages.scrollHeight;
+<script>
+async function sendMsg() {
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
 
-      } catch (e) {
-        messages.innerHTML += `<div><b>Picao:</b> Offline</div>`;
-      }
-    }
-  </script>
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+  input.value = '';
+
+  try {
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ message: msg })
+    });
+
+    const data = await res.json();
+    messages.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+
+  } catch (e) {
+    messages.innerHTML += `<div><b>Picao:</b> Offline</div>`;
+  }
+}
+</script>
 
 </body>
 </html>
