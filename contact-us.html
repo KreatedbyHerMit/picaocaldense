@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - Picao Caldense</title>
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Salsa Picao Caldense</title>
+
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+#chat-wrapper {
+  max-width: 700px;
+  margin: 60px auto;
+}
+
+#chat-box {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 20px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+#chat-controls {
+  display: flex;
+  margin-top: 15px;
+}
+
+#userInput {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+#send-btn {
+  margin-left: 10px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #b22222;
+  color: white;
+  cursor: pointer;
+}
+
+.user-msg {
+  margin: 10px 0;
+  text-align: right;
+}
+
+.bot-msg {
+  margin: 10px 0;
+  color: #b22222;
+}
+</style>
 </head>
+
 <body>
 
 <nav>
@@ -17,17 +67,23 @@
 
 <div class="container">
 
-  <div class="card" style="text-align:center;">
-    <h1>💬 Picao Assistant</h1>
-    <p>Ask about orders, flavours, and shipping.</p>
-  </div>
+<h1>Contact Us</h1>
 
-  <div id="chat-box" class="card" style="height:350px; overflow-y:auto;"></div>
+<div id="chat-wrapper">
 
-  <div class="card" style="display:flex; gap:10px;">
-    <input id="userInput" style="flex:1;padding:10px;" placeholder="Type your message..." />
-    <button onclick="sendMessage()">Send</button>
+<div id="chat-box">
+  <div class="bot-msg">
+    <strong>Picao Assistant:</strong>
+    Welcome to Salsa Picao Caldense 🌶️
   </div>
+</div>
+
+<div id="chat-controls">
+  <input id="userInput" placeholder="Ask about shipping, flavours, quantities..." />
+  <button id="send-btn">Send</button>
+</div>
+
+</div>
 
 </div>
 
