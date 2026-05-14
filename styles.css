@@ -1,1 +1,33 @@
-button:focus, a:focus { outline: none; box-shadow: 0 0 0 2px transparent; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  color: #222;
+}
+
+nav {
+  background: #e63946;
+  padding: 14px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  color: #e63946;
+}
