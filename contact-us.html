@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Picao Caldense</title>
+  <title>Contact - Picao Caldense</title>
 
   <link rel="stylesheet" href="assets/style.css">
 </head>
-
 <body>
 
 <nav>
   <a href="index.html">Home</a>
-  <a href="order.html">Order</a>
   <a href="about.html">About</a>
+  <a href="order.html">Order</a>
   <a href="contact-us.html">Contact</a>
 </nav>
 
 <div class="container">
-  <h1>🌶️ Picao Assistant</h1>
 
-  <div class="card">
-    <p>Ask about shipping status, flavours, or order quantities.</p>
-
-    <div id="chat-box"></div>
-
-    <input id="userInput" placeholder="Type your question..." style="width:70%; padding:10px;" />
-    <button onclick="sendMessage()" style="padding:10px 15px;">Send</button>
+  <div class="card" style="text-align:center;">
+    <h1>💬 Picao Assistant</h1>
+    <p>Ask about orders, flavours, and shipping.</p>
   </div>
+
+  <div id="chat-box" class="card" style="height:350px; overflow-y:auto;"></div>
+
+  <div class="card" style="display:flex; gap:10px;">
+    <input id="userInput" style="flex:1;padding:10px;" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
 </div>
 
 <script src="assets/chatbot.js"></script>

@@ -16,11 +16,10 @@ async function sendMessage() {
     });
 
     const data = await res.json();
-
-    box.innerHTML += `<div><b>Picao Assistant:</b> ${data.reply}</div>`;
+    box.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
     box.scrollTop = box.scrollHeight;
 
-  } catch (e) {
-    box.innerHTML += `<div><b>Picao Assistant:</b> Offline</div>`;
+  } catch (err) {
+    box.innerHTML += `<div><b>Picao:</b> Offline</div>`;
   }
 }
