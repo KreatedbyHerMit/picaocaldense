@@ -11,15 +11,15 @@ async function sendMessage() {
   try {
     const res = await fetch("/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: msg })
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({message: msg})
     });
 
     const data = await res.json();
     box.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
     box.scrollTop = box.scrollHeight;
 
-  } catch (err) {
+  } catch (e) {
     box.innerHTML += `<div><b>Picao:</b> Offline</div>`;
   }
 }
