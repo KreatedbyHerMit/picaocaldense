@@ -19,7 +19,6 @@
       text-align: center;
     }
 
-    #chatbox {
       border: 1px solid #ccc;
       border-radius: 12px;
       padding: 20px;
@@ -27,7 +26,6 @@
       margin-top: 20px;
     }
 
-    #messages {
       height: 350px;
       overflow-y: auto;
       border: 1px solid #ddd;
@@ -54,24 +52,18 @@
 
   <h1>🌶️ Contact Us</h1>
 
-  <div id="chatbox">
     <h2>Picao Assistant</h2>
 
-    <div id="messages"></div>
 
     <input id="input" type="text" placeholder="Ask about orders, flavors, shipping..." />
-    <button onclick="sendMsg()">Send</button>
   </div>
 
   <script>
-    async function sendMsg() {
       const input = document.getElementById('input');
-      const messages = document.getElementById('messages');
 
       const msg = input.value.trim();
       if (!msg) return;
 
-      messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
       input.value = '';
 
       try {
@@ -83,17 +75,13 @@
 
         const data = await res.json();
 
-        messages.innerHTML += `<div><b>Picao Assistant:</b> ${data.reply}</div>`;
-        messages.scrollTop = messages.scrollHeight;
 
       } catch (e) {
-        messages.innerHTML += `<div><b>Picao Assistant:</b> Offline</div>`;
       }
     }
   </script>
 
 </body>
-<script src="assets/chatbot.html"></script>
 <div id="chat-root"></div>
 
 <!-- Chatbot UI -->
@@ -190,9 +178,7 @@
 
 
 <!-- Chatbot UI -->
-<div id="chat-toggle">💬</div>
 
-<div id="chat-widget" class="hidden">
   <div id="chat-header">
     <span>Picao Assistant</span>
     <button id="close-chat">✕</button>
@@ -207,7 +193,6 @@
 </div>
 
 <style>
-#chat-toggle {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -224,7 +209,6 @@
   z-index: 9999;
 }
 
-#chat-widget {
   position: fixed;
   bottom: 90px;
   right: 20px;
@@ -287,4 +271,78 @@
 }
 </style>
 
-<script src="assets/chatbot.js"></script>
+
+<!-- CLEAN CHATBOT -->
+<div id="chatbox">
+  <h2>Picao Assistant</h2>
+
+  <div id="messages"></div>
+
+  <input id="input" type="text" placeholder="Ask about shipping, flavours..." />
+  <button onclick="sendMsg()">Send</button>
+</div>
+
+<style>
+#chatbox {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+#messages {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 70%;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background: #e63946;
+  color: white;
+  border: none;
+}
+</style>
+
+<script>
+function sendMsg() {
+  const input = document.getElementById("input");
+  const messages = document.getElementById("messages");
+
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+
+  let reply = "I can help with shipping, flavours, and quantities.";
+
+  const text = msg.toLowerCase();
+
+  if (text.includes("flavour") || text.includes("flavors")) {
+    reply = "We offer: Classic Pique, Jalapeño Special, and Spicy Thai Delight.";
+  }
+
+  if (text.includes("shipping")) {
+    reply = "Shipping takes 2–5 business days.";
+  }
+
+  if (text.includes("quantity")) {
+    reply = "We sell 355ml bottles individually or by the dozen.";
+  }
+
+  messages.innerHTML += `<div><b>Picao Assistant:</b> ${reply}</div>`;
+  messages.scrollTop = messages.scrollHeight;
+
+  input.value = "";
+}
+</script>
+
