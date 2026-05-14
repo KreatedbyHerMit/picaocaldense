@@ -1,10 +1,3 @@
-const responses = {
-  shipping: "Shipping is available based on location and order size.",
-  flavours: "Available flavours include the Signature Blend and seasonal variations.",
-  quantities: "Orders can be discussed directly through the contact assistant.",
-  hello: "Welcome to Salsa Picao Caldense 🌶️"
-};
-
 function sendMessage() {
   const input = document.getElementById("userInput");
   const box = document.getElementById("chat-box");
@@ -16,18 +9,24 @@ function sendMessage() {
     <div class="user-msg"><strong>You:</strong> ${msg}</div>
   `;
 
-  let reply = "Please contact us directly for more details.";
+  let reply = "Thank you for contacting Salsa Picao Caldense.";
 
-  const lower = msg.toLowerCase();
+  const text = msg.toLowerCase();
 
-  if (lower.includes("shipping")) {
-    reply = responses.shipping;
-  } else if (lower.includes("flavour") || lower.includes("flavor")) {
-    reply = responses.flavours;
-  } else if (lower.includes("quantity")) {
-    reply = responses.quantities;
-  } else if (lower.includes("hello") || lower.includes("hi")) {
-    reply = responses.hello;
+  if (text.includes("shipping")) {
+    reply = "Shipping is available depending on location and order size.";
+  }
+
+  else if (text.includes("flavour") || text.includes("flavor")) {
+    reply = "Our signature Salsa Picao Caldense offers balanced Colombian-inspired heat and depth.";
+  }
+
+  else if (text.includes("quantity")) {
+    reply = "Please tell us your desired quantity and we will respond with availability.";
+  }
+
+  else if (text.includes("hello") || text.includes("hi")) {
+    reply = "Welcome to Salsa Picao Caldense 🌶️";
   }
 
   box.innerHTML += `
@@ -39,9 +38,5 @@ function sendMessage() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("send-btn");
-
-  if (btn) {
-    btn.onclick = sendMessage;
-  }
+  document.getElementById("send-btn").onclick = sendMessage;
 });
