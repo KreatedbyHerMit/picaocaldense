@@ -19,7 +19,6 @@
       text-align:center;
     }
 
-    #chatbox{
       border:1px solid #ccc;
       border-radius:12px;
       padding:20px;
@@ -53,7 +52,6 @@
 
 <h1>🌶️ Contact Us</h1>
 
-<div id="chatbox">
   <h2>Picao Assistant</h2>
 
   <div id="messages"></div>
@@ -61,6 +59,19 @@
   <input id="input" type="text"
     placeholder="Ask about orders, flavors, shipping..." />
 
+</div>
+
+
+</body>
+</html>
+
+<!-- CLEAN CHATBOX -->
+<div id="chatbox">
+  <h2>Picao Assistant</h2>
+
+  <div id="messages"></div>
+
+  <input id="input" placeholder="Ask about orders..." />
   <button onclick="sendMsg()">Send</button>
 </div>
 
@@ -69,45 +80,25 @@ async function sendMsg() {
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
 
-  const message = input.value.trim();
-  if (!message) return;
+  const msg = input.value.trim();
+  if (!msg) return;
 
-  messages.innerHTML += `
-    <div style="margin-bottom:10px;">
-      <b>You:</b> ${message}
-    </div>
-  `;
-
+  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
   input.value = '';
 
   try {
-    const response = await fetch('/chat', {
+    const res = await fetch('/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message })
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ message: msg })
     });
 
-    const data = await response.json();
+    const data = await res.json();
 
-    messages.innerHTML += `
-      <div style="margin-bottom:10px;">
-        <b>Picao Assistant:</b> ${data.reply}
-      </div>
-    `;
-
-    messages.scrollTop = messages.scrollHeight;
-
-  } catch (error) {
-    messages.innerHTML += `
-      <div style="margin-bottom:10px;color:red;">
-        <b>Picao Assistant:</b> Unable to connect right now.
-      </div>
-    `;
+    messages.innerHTML += `<div><b>Picao Assistant:</b> ${data.reply}</div>`;
+  } catch (e) {
+    messages.innerHTML += `<div><b>Picao Assistant:</b> Offline</div>`;
   }
 }
 </script>
 
-</body>
-</html>
