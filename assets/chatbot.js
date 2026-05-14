@@ -2,13 +2,8 @@ const chatToggle = document.getElementById("chat-toggle");
 const chatWidget = document.getElementById("chat-widget");
 const closeChat = document.getElementById("close-chat");
 
-chatToggle.onclick = () => {
-  chatWidget.classList.remove("hidden");
-};
-
-closeChat.onclick = () => {
-  chatWidget.classList.add("hidden");
-};
+chatToggle.onclick = () => chatWidget.classList.remove("hidden");
+closeChat.onclick = () => chatWidget.classList.add("hidden");
 
 function sendMessage() {
   const input = document.getElementById("userInput");
@@ -31,7 +26,7 @@ function sendMessage() {
     reply = "Shipping takes 2–5 business days depending on your location.";
   }
 
-  if (text.includes("quantity")) {
+  if (text.includes("quantity") || text.includes("how many")) {
     reply = "We sell 355ml bottles individually or by the dozen.";
   }
 
