@@ -46,7 +46,6 @@
       We are here to provide clear, helpful answers.
     </p>
 
-    <div id="messages"
       style="height:320px;overflow:auto;border:1px solid #eee;padding:12px;border-radius:10px;background:#fafafa;">
     </div>
 
@@ -81,12 +80,10 @@
 <script>
 async function sendMsg() {
   const input = document.getElementById('input');
-  const messages = document.getElementById('messages');
 
   const msg = input.value.trim();
   if (!msg) return;
 
-  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
   input.value = '';
 
   try {
@@ -97,11 +94,8 @@ async function sendMsg() {
     });
 
     const data = await res.json();
-    messages.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
-    messages.scrollTop = messages.scrollHeight;
 
   } catch (e) {
-    messages.innerHTML += `<div><b>Picao:</b> Offline</div>`;
   }
 }
 </script>
