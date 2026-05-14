@@ -7,98 +7,90 @@
   <title>Contact Us - Picao Caldense</title>
 
   <style>
-    body{
-      font-family:Arial;
-      max-width:800px;
-      margin:auto;
-      padding:40px;
-      background:#fafafa;
+    body {
+      font-family: Arial;
+      max-width: 800px;
+      margin: auto;
+      padding: 40px;
+      background: #fafafa;
     }
 
-    h1{
-      text-align:center;
+    h1 {
+      text-align: center;
     }
 
-      border:1px solid #ccc;
-      border-radius:12px;
-      padding:20px;
-      background:white;
+    #chatbox {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      background: white;
+      margin-top: 20px;
     }
 
-    #messages{
-      height:350px;
-      overflow-y:auto;
-      border:1px solid #ddd;
-      padding:10px;
-      margin-bottom:15px;
-      border-radius:8px;
-      background:#f9f9f9;
+    #messages {
+      height: 350px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background: #f9f9f9;
     }
 
-    input{
-      width:75%;
-      padding:12px;
+    input {
+      width: 75%;
+      padding: 12px;
     }
 
-    button{
-      padding:12px 18px;
-      border:none;
-      cursor:pointer;
+    button {
+      padding: 12px 18px;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
 
-<h1>🌶️ Contact Us</h1>
+  <h1>🌶️ Contact Us</h1>
 
-  <h2>Picao Assistant</h2>
+  <div id="chatbox">
+    <h2>Picao Assistant</h2>
 
-  <div id="messages"></div>
+    <div id="messages"></div>
 
-  <input id="input" type="text"
-    placeholder="Ask about orders, flavors, shipping..." />
+    <input id="input" type="text" placeholder="Ask about orders, flavors, shipping..." />
+    <button onclick="sendMsg()">Send</button>
+  </div>
 
-</div>
+  <script>
+    async function sendMsg() {
+      const input = document.getElementById('input');
+      const messages = document.getElementById('messages');
 
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+      input.value = '';
+
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg })
+        });
+
+        const data = await res.json();
+
+        messages.innerHTML += `<div><b>Picao Assistant:</b> ${data.reply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+
+      } catch (e) {
+        messages.innerHTML += `<div><b>Picao Assistant:</b> Offline</div>`;
+      }
+    }
+  </script>
 
 </body>
 </html>
-
-<!-- CLEAN CHATBOX -->
-<div id="chatbox">
-  <h2>Picao Assistant</h2>
-
-  <div id="messages"></div>
-
-  <input id="input" placeholder="Ask about orders..." />
-  <button onclick="sendMsg()">Send</button>
-</div>
-
-<script>
-async function sendMsg() {
-  const input = document.getElementById('input');
-  const messages = document.getElementById('messages');
-
-  const msg = input.value.trim();
-  if (!msg) return;
-
-  messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
-  input.value = '';
-
-  try {
-    const res = await fetch('/chat', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ message: msg })
-    });
-
-    const data = await res.json();
-
-    messages.innerHTML += `<div><b>Picao Assistant:</b> ${data.reply}</div>`;
-  } catch (e) {
-    messages.innerHTML += `<div><b>Picao Assistant:</b> Offline</div>`;
-  }
-}
-</script>
-
