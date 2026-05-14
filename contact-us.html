@@ -3,44 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us</title>
+  <title>Contact Us - Picao Caldense</title>
 
-<link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="order.html">Order</a>
-</nav>
+  <h1>🌶️ Contact Us</h1>
 
-<h1>Contact Us</h1>
+  <p class="caption">
+    Ask us about orders, flavours, or shipping status.
+  </p>
 
+  <div class="contact-card" style="max-width:700px;margin:auto;padding:20px;background:#fff;border-radius:12px;">
+    
+    <h2>Picao Assistant</h2>
 
-  <input id="input" placeholder="Ask something..." />
-  <button onclick="sendMsg()">Send</button>
-</div>
+    <div id="messages" style="height:300px;overflow:auto;border:1px solid #ddd;padding:10px;margin-bottom:10px;"></div>
 
-<script>
-function sendMsg() {
-  const input = document.getElementById("input");
+    <input id="input" placeholder="Ask a question..." style="width:70%;padding:10px;" />
+    <button onclick="sendMsg()" style="padding:10px;">Send</button>
 
-  const msg = input.value.trim();
-  if (!msg) return;
+  </div>
 
+  <script>
+    async function sendMsg() {
+      const input = document.getElementById('input');
+      const messages = document.getElementById('messages');
 
-  let reply = "I can help with orders, shipping, and flavours.";
+      const msg = input.value.trim();
+      if (!msg) return;
 
-  if (msg.toLowerCase().includes("shipping")) reply = "Shipping is 2–5 days.";
-  if (msg.toLowerCase().includes("order")) reply = "Go to the Order page.";
-  if (msg.toLowerCase().includes("flavour")) reply = "We offer 3 signature sauces.";
+      messages.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+      input.value = '';
 
-  input.value = "";
-}
-</script>
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ message: msg })
+        });
+
+        const data = await res.json();
+        messages.innerHTML += `<div><b>Picao:</b> ${data.reply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+
+      } catch (e) {
+        messages.innerHTML += `<div><b>Picao:</b> Offline</div>`;
+      }
+    }
+  </script>
 
 </body>
 </html>
-<script src="assets/chatbot.js"></script>
