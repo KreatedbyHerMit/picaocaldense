@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
 * {
   box-sizing: border-box;
@@ -6,53 +6,57 @@
 
 body {
   margin: 0;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
   background: #f7f3ef;
   color: #2b2b2b;
-  line-height: 1.7;
+  line-height: 1.8;
+  font-size: 20px;
 }
 
 /* Navigation */
 nav {
   background: #b23a48;
-  padding: 16px 0;
+  padding: 18px 0;
   text-align: center;
 }
 
 nav a {
   color: #fff;
   text-decoration: none;
-  margin: 0 16px;
+  margin: 0 18px;
   font-weight: 500;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  font-size: 20px;
 }
 
-/* Content wrapper */
+/* Main content */
 .container {
   max-width: 900px;
-  margin: 50px auto;
-  padding: 40px;
+  margin: 60px auto;
+  padding: 50px;
   background: #fffaf6;
   border-radius: 14px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.06);
   border: 1px solid #eee3db;
 }
 
-/* Typography */
+/* Headings */
 h1 {
   text-align: center;
   color: #b23a48;
   font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 48px;
+  margin-bottom: 25px;
 }
 
 h2 {
   color: #7a2d36;
-  margin-top: 30px;
+  margin-top: 35px;
+  font-size: 32px;
 }
 
 p, li {
-  font-size: 16px;
+  font-size: 22px;
 }
 
 ul {
