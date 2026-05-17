@@ -8,36 +8,49 @@
 <body>
 
 <header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="order.html">Order</a>
-    <a href="contact-us.html">Contact</a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="order.html">Order</a>
+  <a href="contact-us.html">Contact</a>
+</nav>
 </header>
 
 <div class="container">
 
-  <h1>Place Your Order</h1>
+<h1>Place Your Order</h1>
 
-  <form id="orderForm">
+<p class="tagline">
+Each bottle of Picao Caldense is crafted in small batches, inspired by Colombian family tradition and generational recipes.
+</p>
 
-    <input type="text" name="name" placeholder="Full Name" required>
+<h2>Signature Collection</h2>
+<ul>
+  <li><strong>Classic Piqué Salsa</strong> — Lime, herbs, balanced heat.</li>
+  <li><strong>Jalapeño Special</strong> — Fresh green heat with a clean finish.</li>
+  <li><strong>Spicy Thai Delight</strong> — Bold fusion heat with aromatic depth.</li>
+</ul>
 
-    <select name="product" required>
-      <option value="">Select Product</option>
-      <option value="Classic Pique">Classic Piqué Salsa</option>
-      <option value="Jalapeno Special">Jalapeño Special</option>
-      <option value="Spicy Thai Delight">Spicy Thai Delight</option>
-    </select>
+<h2>Order Details</h2>
 
-    <input type="number" name="quantity" placeholder="Quantity (e.g. 1, 6, 12)" required min="1">
+<form id="orderForm">
 
-    <textarea name="message" placeholder="Special instructions (optional)"></textarea>
+  <input type="text" name="name" placeholder="Full Name" required>
 
-    <button type="submit">Send Order</button>
+  <select name="product" required>
+    <option value="">Select Product</option>
+    <option value="Classic Pique">Classic Piqué Salsa</option>
+    <option value="Jalapeno Special">Jalapeño Special</option>
+    <option value="Spicy Thai Delight">Spicy Thai Delight</option>
+  </select>
 
-  </form>
+  <input type="number" name="quantity" placeholder="Quantity" min="1" required>
+
+  <textarea name="message" placeholder="Special instructions (optional)"></textarea>
+
+  <button type="submit">Send Order</button>
+
+</form>
 
 </div>
 
@@ -56,15 +69,12 @@ document.getElementById("orderForm").addEventListener("submit", async (e) => {
 
   const res = await fetch("/order", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify(data)
   });
 
   const result = await res.json();
-
-  alert(result.reply || "Order sent successfully!");
+  alert(result.reply || "Order sent!");
 });
 </script>
 

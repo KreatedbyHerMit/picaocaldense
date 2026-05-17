@@ -1,1 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-01T04:07:49+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Picao Caldense</title><subtitle>Official website for Picao Caldense</subtitle></feed>
+{
+  "name": "picaocaldense",
+  "version": "1.0.0",
+  "description": "Picao Caldense - Société des sauces chatbot and website backend",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "prod": "NODE_ENV=production node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KreatedbyHerMit/picaocaldense.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KreatedbyHerMit/picaocaldense/issues"
+  },
+  "homepage": "https://github.com/KreatedbyHerMit/picaocaldense#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.5.2",
+    "openai": "^6.37.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "keywords": [
+    "sauce",
+    "colombian",
+    "chatbot",
+    "food",
+    "ecommerce"
+  ],
+  "license": "UNLICENSED"
+}

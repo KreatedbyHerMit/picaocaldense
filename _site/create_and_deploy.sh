@@ -1,19 +1,22 @@
 #!/bin/bash
 
+set -e  # stop on errors
+
 # -------------------------
 # Configuration
 # -------------------------
 GITHUB_USER="KreatedbyHerMit"
 REPO_NAME="picaocaldense"
-PROJECT_DIR="/workspaces/Python/PicaoCaldenseSite"
-CUSTOM_DOMAIN="picaocaldense.com"
-OLD_NETLIFY_IP="65.39.166.132"
+PROJECT_DIR="$(pwd)"
+BRANCH="main"
 
 # -------------------------
 # Go to project folder
 # -------------------------
 mkdir -p "$PROJECT_DIR"
-cd "$PROJECT_DIR" || { echo "Failed to access project folder"; exit 1; }
+cd "$PROJECT_DIR"
+
+echo "📁 Working in: $PROJECT_DIR"
 
 # -------------------------
 # Ensure index.html exists
@@ -34,18 +37,43 @@ echo "Created basic index.html"
 fi
 
 # -------------------------
-# Initialize git
+# Initialize git safely
 # -------------------------
-git init
+if [ ! -d .git ]; then
+  git init -b "$BRANCH"
+else
+  echo "Git already initialized"
+fi
 
 # -------------------------
-# Commit all files
+# Add remote if missing
+# -------------------------
+if ! git remote | grep -q origin; then
+  git remote add origin "https://github.com/$GITHUB_USER/$REPO_NAME.git"
+fi
+
+# -------------------------
+# Commit changes
 # -------------------------
 git add .
-git commit -m "Initial commit for GitHub Pages" || echo "Nothing to commit"
+
+if git diff --cached --quiet; then
+  echo "No changes to commit"
+else
+  git commit -m "Deploy Picao Caldense site"
+fi
 
 # -------------------------
-# Create GitHub repository
+# Push to GitHub
 # -------------------------
-gh repo create "$GITHUB_USER/$REPO_NAME" --public --source=. --remote=origin --push || {
-    echo "Failed to create repo. M
+git push -u origin "$BRANCH"
+
+# -------------------------
+# Create repo (only if needed)
+# -------------------------
+gh repo view "$GITHUB_USER/$REPO_NAME" >/dev/null 2>&1 || {
+  echo "Creating GitHub repo..."
+  gh repo create "$GITHUB_USER/$REPO_NAME" --public --source=. --remote=origin --push
+}
+
+echo "🚀 Deployment complete"
