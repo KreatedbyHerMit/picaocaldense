@@ -1,0 +1,48 @@
+/* =========================
+   PICAO CALDENSE LUXURY CORE
+   ========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  background: #f7f3ef;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* SCROLL REVEAL */
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.9s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PREMIUM CARDS */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
