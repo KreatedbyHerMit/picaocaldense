@@ -1,39 +1,38 @@
-/* =========================
-   PICAO CALDENSE CHATBOT + MEMORY
-   ========================= */
-
 const STORAGE_KEY = "picao_chat_memory";
+
+/* =========================
+   BOT RESPONSES
+   ========================= */
 
 const botResponses = {
   en: {
-    hello: "Hello 👋 I’m your Picao assistant. How can I help you?",
+    hello: "Welcome to Picao Caldense 🌶️ How may I assist you today?",
     order: "You can place orders on the Order page 🥘",
     story: "Picao Caldense is inspired by Colombian kitchens where food is shared, remembered, and felt.",
-    repeat: "Got it — I’ll remember that.",
     default: "I can help with orders, story, or navigation."
   },
   fr: {
-    hello: "Bonjour 👋 Je suis votre assistant Picao.",
+    hello: "Bienvenue chez Picao Caldense 🌶️ Comment puis-je vous aider ?",
     order: "Vous pouvez commander sur la page Commande 🥘",
-    story: "Picao Caldense s’inspire des cuisines colombiennes où la nourriture est partagée et ressentie.",
-    repeat: "D’accord — je vais m’en souvenir.",
+    story: "Picao Caldense s’inspire des cuisines colombiennes où les saveurs se partagent.",
     default: "Je peux vous aider avec les commandes ou l’histoire."
   },
   es: {
-    hello: "Hola 👋 Soy tu asistente Picao.",
+    hello: "Bienvenido a Picao Caldense 🌶️ ¿Cómo puedo ayudarte?",
     order: "Puedes hacer pedidos en la página de pedidos 🥘",
-    story: "Picao Caldense nace de cocinas colombianas donde la comida se comparte y se siente.",
-    repeat: "Entendido — lo recordaré.",
+    story: "Picao Caldense nace de cocinas colombianas donde la comida se comparte.",
     default: "Puedo ayudarte con pedidos o historia."
   }
 };
 
-/* ---------- MEMORY ---------- */
+/* =========================
+   MEMORY
+   ========================= */
 
 function loadMemory() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
-      lang: "en",
+      lang: localStorage.getItem("lang") || "en",
       lastTopic: null,
       name: null
     };
@@ -46,20 +45,25 @@ function saveMemory(mem) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(mem));
 }
 
-/* ---------- CORE ---------- */
+/* =========================
+   BOT LOGIC
+   ========================= */
 
 function botReply(msg, mem) {
+
   const text = msg.toLowerCase();
 
-  if (text.includes("my name is")) {
-    const name = msg.split("is")[1]?.trim();
+  // NAME DETECTION (FIXED)
+  const nameMatch = msg.match(/my name is (.+)/i);
+  if (nameMatch) {
+    const name = nameMatch[1].trim();
     mem.name = name;
     saveMemory(mem);
     return `Nice to meet you, ${name} 👋`;
   }
 
   if (text.includes("hello") || text.includes("hi")) {
-    mem.lastTopic = "greeting";
+    mem.lastTopic = "hello";
     saveMemory(mem);
     return botResponses[mem.lang].hello;
   }
@@ -79,19 +83,24 @@ function botReply(msg, mem) {
   return botResponses[mem.lang].default;
 }
 
-/* ---------- UI ---------- */
+/* =========================
+   UI
+   ========================= */
 
-function addMessage(container, text, type) {
+function addMessage(box, text, type) {
   const div = document.createElement("div");
   div.className = type;
-  div.innerText = text;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
 }
 
-/* ---------- INIT ---------- */
+/* =========================
+   INIT
+   ========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const input = document.querySelector("#chatInput");
   const sendBtn = document.querySelector("#chatSend");
   const box = document.querySelector("#chatBox");
@@ -115,4 +124,5 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") sendBtn.click();
   });
+
 });
