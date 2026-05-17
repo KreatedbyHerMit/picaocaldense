@@ -1,45 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
+/* =========================
+   PICAO CALDENSE LUXURY CORE
+   STABLE DESIGN SYSTEM
+   ========================= */
 
-* { box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
 
 body {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
-  background: #f6f1ea;
-  color: #2f2a26;
-  line-height: 1.8;
-  font-size: 20px;
+  background: #f7f3ef;
+  color: #1a1a1a;
+  line-height: 1.7;
 }
 
-nav {
-  background: #6f4e37;
-  padding: 18px 0;
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 18px;
-  font-weight: 500;
+/* SECTION ANIMATION (CINEMATIC FEEL) */
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.9s ease;
 }
 
-.container {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 50px;
-  background: #fffaf5;
-  border-radius: 12px;
-  border: 1px solid #ece2d8;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-h1 {
-  text-align: center;
-  color: #5c4033;
-  font-size: 48px;
+/* PREMIUM CONTENT BLOCKS */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  transition: all 0.3s ease;
 }
 
-h2 {
-  color: #6f4e37;
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* HEADINGS */
+h1, h2 {
+  letter-spacing: 1px;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  opacity: 0.85;
 }
