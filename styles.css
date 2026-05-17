@@ -1,59 +1,46 @@
-/* =========================
-   PICAO CALDENSE LUXURY CORE
-   STABLE DESIGN SYSTEM
-   ========================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
-
 body {
   margin: 0;
-  font-family: "Cormorant Garamond", serif;
+  font-family: Georgia, serif;
   background: #f7f3ef;
   color: #1a1a1a;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+header {
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #e5ded6;
 }
 
-/* SECTION ANIMATION (CINEMATIC FEEL) */
-section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.9s ease;
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #2c2c2c;
+  font-weight: bold;
 }
 
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
 }
 
-/* PREMIUM CONTENT BLOCKS */
-.card {
+button {
+  background: #2c2c2c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.chatbox {
+  border: 1px solid #ddd;
+  padding: 10px;
   background: white;
-  border-radius: 18px;
-  padding: 24px;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-}
-
-/* HEADINGS */
-h1, h2 {
-  letter-spacing: 1px;
-}
-
-p {
-  font-family: "Inter", sans-serif;
-  opacity: 0.85;
 }

@@ -1,46 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order | Picao Caldense</title>
-<link rel="stylesheet" href="styles.css">
+  <title>Order</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
+<header>
 <nav>
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="order.html">Order</a>
   <a href="contact-us.html">Contact</a>
 </nav>
+</header>
 
 <div class="container">
 
-<h1>Order Page</h1>
+<h1>Order</h1>
 
-<p>Picao Caldense - Société des sauces is produced in small batches to preserve authenticity, freshness, and depth of flavor.</p>
+<form action="mailto:Jessica.betancur@picaocaldense.com" method="POST" enctype="text/plain">
 
-<h2>Product</h2>
-<p>Picao Caldense - Société des sauces (Signature Blend)</p>
+<input type="text" name="name" placeholder="Name">
+<input type="text" name="product" placeholder="Product">
+<input type="number" name="quantity" placeholder="Quantity">
+<textarea name="message" placeholder="Details"></textarea>
 
-<h2>Flavours</h2>
-<p>
-Classic Piqué Salsa — Tangy lime and cilantro<br>
-Jalapeño Special — Fresh jalapeño heat<br>
-Spicy Thai Delight — Bold spicy fusion
-</p>
+<button type="submit">Send Order</button>
 
-<h2>Quantities Available</h2>
-<p>
-355 ml glass bottles<br>
-Half dozen (6)<br>
-Dozen (12)
-</p>
-
-<h2>How to Order</h2>
-<p>Email: jessica.betancur@picaocaldense.com</p>
+</form>
 
 </div>
 
