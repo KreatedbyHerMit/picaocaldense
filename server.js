@@ -91,3 +91,39 @@ Message: ${message || "None"}`
     res.status(500).json({ reply: "Email failed to send" });
   }
 });
+
+import nodemailer from "nodemailer";
+
+const mailer = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+app.post("/order", async (req, res) => {
+  try {
+    const { name, product, quantity, message } = req.body;
+
+    await mailer.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: `New Order - ${product}`,
+      text: `
+New Order Received:
+
+Name: ${name}
+Product: ${product}
+Quantity: ${quantity}
+Message: ${message || "None"}
+      `
+    });
+
+    res.json({ reply: "Order received and sent by email." });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ reply: "Order failed to send." });
+  }
+});
