@@ -21,11 +21,6 @@ nav a {
   text-decoration: none;
   color: #2a2a2a;
   font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-nav a:hover {
-  text-decoration: underline;
 }
 
 .container {
@@ -36,38 +31,16 @@ nav a:hover {
 
 h1 {
   font-size: 42px;
-  margin-bottom: 20px;
-  font-weight: normal;
-}
-
-h2 {
-  font-size: 28px;
-  margin-top: 40px;
   font-weight: normal;
 }
 
 p {
   font-size: 18px;
-  margin-bottom: 20px;
 }
 
 button {
   background: #2a2a2a;
   color: white;
-  border: none;
   padding: 12px 18px;
-  cursor: pointer;
-  border-radius: 2px;
-}
-
-button:hover {
-  opacity: 0.85;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  font-family: inherit;
+  border: none;
 }
