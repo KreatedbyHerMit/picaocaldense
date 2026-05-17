@@ -56,3 +56,38 @@ Always answer warmly and professionally.
     });
   }
 });
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+app.post('/order', async (req, res) => {
+  try {
+    const { name, product, quantity, message } = req.body;
+
+    if (!name || !product || !quantity) {
+      return res.status(400).json({ reply: "Missing order fields" });
+    }
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: "New Order - Picao Caldense",
+      text: `Name: ${name}
+Product: ${product}
+Quantity: ${quantity}
+Message: ${message || "None"}`
+    });
+
+    res.json({ reply: "Order sent successfully" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ reply: "Email failed to send" });
+  }
+});

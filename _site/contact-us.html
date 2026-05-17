@@ -23,7 +23,7 @@
 <div class="chatbox" id="chatbox"></div>
 
 <input id="input" placeholder="Type...">
-<button id="sendBtn" onclick="send()">Send</button>
+<button onclick="send()">Send</button>
 
 </div>
 
@@ -31,40 +31,21 @@
 async function send() {
   const inputEl = document.getElementById("input");
   const chat = document.getElementById("chatbox");
-  const btn = document.getElementById("sendBtn");
 
   const message = inputEl.value.trim();
   if (!message) return;
 
-  // -------------------------
-  // SAFE user message rendering
-  // -------------------------
+  // Show user message safely
   const userMsg = document.createElement("p");
-  const userBold = document.createElement("b");
-  userBold.textContent = "You: ";
-
-  const userText = document.createElement("span");
-  userText.textContent = message;
-
-  userMsg.appendChild(userBold);
-  userMsg.appendChild(userText);
+  userMsg.innerHTML = "<b>You:</b> " + message;
   chat.appendChild(userMsg);
 
   inputEl.value = "";
 
   // Loading state
   const loadingMsg = document.createElement("p");
-  const botBold = document.createElement("b");
-  botBold.textContent = "Bot: ";
-
-  const botText = document.createElement("span");
-  botText.textContent = "typing...";
-
-  loadingMsg.appendChild(botBold);
-  loadingMsg.appendChild(botText);
+  loadingMsg.innerHTML = "<b>Bot:</b> typing...";
   chat.appendChild(loadingMsg);
-
-  btn.disabled = true;
 
   try {
     const res = await fetch("/chat", {
@@ -77,23 +58,11 @@ async function send() {
 
     const data = await res.json();
 
-    // Replace bot response safely
-    botText.textContent = data.reply || "No response";
-
+    loadingMsg.innerHTML = "<b>Bot:</b> " + (data.reply || "No response");
   } catch (err) {
-    botText.textContent = "Sorry, connection error.";
+    loadingMsg.innerHTML = "<b>Bot:</b> Sorry, connection error.";
   }
-
-  btn.disabled = false;
-
-  // Auto scroll
-  chat.scrollTop = chat.scrollHeight;
 }
-
-// Enter key support
-document.getElementById("input").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") send();
-});
 </script>
 
 </body>
