@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Contact - Picao Caldense</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contact</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="lang.js"></script>
+
+  <style>
+    #chatbox {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .chat-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chat-row input {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .chat-row button {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
 
 <header class="site-header">
   <nav class="nav">
 
     <div class="nav-left">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="order.html" data-i18n="nav_order">Order</a>
+      <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
     </div>
 
     <div class="lang-switch">
@@ -25,68 +60,76 @@
 
 <main class="container">
 
-<h1>Contact</h1>
+  <h1>Chatbot Assistant</h1>
 
-<p>
-Email: jessica.betancur@picaocaldense.com
-</p>
+  <div id="chatbox"></div>
 
-<div class="chat-wrapper">
-
-<div id="chatbox"></div>
-
-<div class="chat-input">
-  <input id="input" type="text" placeholder="Type a message...">
-  <button onclick="send()">Send</button>
-</div>
-
-</div>
+  <div class="chat-row">
+    <input id="input" placeholder="Type message..." />
+    <button id="sendBtn">Send</button>
+  </div>
 
 </main>
 
 <footer class="site-footer">
-  <p data-i18n="footer">
-© 2025 Picao Caldense
+  <p data-i18n="footer">© 2025 Picao Caldense</p>
 </footer>
 
-<script src="lang.js"></script>
-
 <script>
-async function send(){
+const chat = document.getElementById("chatbox");
+const input = document.getElementById("input");
+const btn = document.getElementById("sendBtn");
 
-  const input = document.getElementById("input");
-  const chatbox = document.getElementById("chatbox");
+function addMessage(sender, text) {
+  const p = document.createElement("p");
 
+  const bold = document.createElement("b");
+  bold.textContent = sender + ": ";
+
+  p.appendChild(bold);
+  p.appendChild(document.createTextNode(text));
+
+  chat.appendChild(p);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function send() {
   const message = input.value.trim();
+  if (!message) return;
 
-  if(!message) return;
-
-  chatbox.innerHTML += "<p><strong>You:</strong> " + message + "</p>";
-
+  addMessage("You", message);
   input.value = "";
 
-  try{
+  const bot = document.createElement("p");
+  bot.innerHTML = "<b>Bot:</b> typing...";
+  chat.appendChild(bot);
 
-    const response = await fetch("/chat",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({message})
+  btn.disabled = true;
+
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
     });
 
-    const data = await response.json();
+    const data = await res.json();
 
-    chatbox.innerHTML += "<p><strong>Bot:</strong> " + data.reply + "</p>";
+    bot.innerHTML = "<b>Bot:</b> ";
+    bot.appendChild(document.createTextNode(data.reply || "No response"));
 
-    chatbox.scrollTop = chatbox.scrollHeight;
-
-  }catch(error){
-
-    chatbox.innerHTML += "<p><strong>Bot:</strong> Connection error.</p>";
-
+  } catch (err) {
+    bot.innerHTML = "<b>Bot:</b> connection error";
   }
+
+  btn.disabled = false;
 }
+
+btn.addEventListener("click", send);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") send();
+});
 </script>
 
 </body>
