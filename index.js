@@ -1,39 +1,37 @@
+import express from "express";
 
-// -------------------------
-// EMAIL ORDER SYSTEM
-// -------------------------
-const nodemailer = require("nodemailer");
+const app = express();
+app.use(express.json());
 
-app.post("/order", async (req, res) => {
-  try {
-    const { name, product, quantity, message } = req.body;
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Picao Caldense Order",
-      text: `
-New Order:
-
-Name: ${name}
-Product: ${product}
-Quantity: ${quantity}
-Message: ${message || "None"}
-      `
-    });
-
-    res.json({ reply: "Order received! We'll contact you shortly." });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ reply: "Order failed to send." });
-  }
+// health check
+app.get("/", (req, res) => {
+  res.json({ status: "ok" });
 });
+
+// chatbot
+app.post("/chat", (req, res) => {
+  const msg = (req.body?.message || "").toLowerCase();
+
+  let reply = "I didn't understand that.";
+
+  if (msg.includes("hello")) reply = "Hello 👋 Welcome to Picao Caldense!";
+  else if (msg.includes("menu")) reply = "We offer traditional Colombian sauces 🇨🇴";
+  else if (msg.includes("order")) reply = "Go to the Order page to place your order 🛒";
+  else if (msg.includes("help")) reply = "Ask me about products, orders, or tradition!";
+
+  res.json({ reply });
+});
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// serve static files (HTML/CSS/JS)
+app.use(express.static(__dirname));

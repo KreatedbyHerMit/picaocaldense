@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="assets/css/styles.css">
-  <title>Contact</title>
-</head>
-
-<body>
-
-<header>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="order.html">Order</a>
-  <a href="contact-us.html">Contact</a>
-</nav>
-</header>
-
-<div class="container">
-
-<h1>Chatbot Assistant</h1>
-
-<div class="chatbox" id="chatbox"></div>
-
-<input id="input" placeholder="Type...">
-<button onclick="send()">Send</button>
-
-</div>
-
 <script>
 async function send() {
   const inputEl = document.getElementById("input");
@@ -35,17 +6,47 @@ async function send() {
   const message = inputEl.value.trim();
   if (!message) return;
 
-  // Show user message safely
   const userMsg = document.createElement("p");
   userMsg.innerHTML = "<b>You:</b> " + message;
   chat.appendChild(userMsg);
 
   inputEl.value = "";
 
-  // Loading state
-  const loadingMsg = document.createElement("p");
-  loadingMsg.innerHTML = "<b>Bot:</b> typing...";
-  chat.appendChild(loadingMsg);
+  const botMsg = document.createElement("p");
+  botMsg.innerHTML = "<b>Bot:</b> typing...";
+  chat.appendChild(botMsg);
+
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    if (!res.ok) throw new Error("Network error");
+
+    const data = await res.json();
+
+    botMsg.innerHTML = "<b>Bot:</b> " + data.reply;
+
+  } catch (err) {
+    console.error(err);
+    botMsg.innerHTML = "<b>Bot:</b> Connection error";
+  }
+}
+</script>
+<script>
+async function send() {
+  const inputEl = document.getElementById("input");
+  const chat = document.getElementById("chatbox");
+
+  const message = inputEl.value.trim();
+  if (!message) return;
+
+  chat.innerHTML += `<p><b>You:</b> ${message}</p>`;
+  inputEl.value = "";
 
   try {
     const res = await fetch("/chat", {
@@ -58,12 +59,10 @@ async function send() {
 
     const data = await res.json();
 
-    loadingMsg.innerHTML = "<b>Bot:</b> " + (data.reply || "No response");
+    chat.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
   } catch (err) {
-    loadingMsg.innerHTML = "<b>Bot:</b> Sorry, connection error.";
+    console.error(err);
+    chat.innerHTML += `<p><b>Bot:</b> error</p>`;
   }
 }
 </script>
-
-</body>
-</html>

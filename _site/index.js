@@ -1,39 +1,52 @@
+import express from "express";
+import nodemailer from "nodemailer";
+
+const app = express();
+
+app.use(express.json());
 
 // -------------------------
-// EMAIL ORDER SYSTEM
+// ORDER ROUTE
 // -------------------------
-const nodemailer = require("nodemailer");
-
 app.post("/order", async (req, res) => {
   try {
     const { name, product, quantity, message } = req.body;
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+    res.json({
+      success: true,
+      message: "Order received"
     });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Picao Caldense Order",
-      text: `
-New Order:
-
-Name: ${name}
-Product: ${product}
-Quantity: ${quantity}
-Message: ${message || "None"}
-      `
-    });
-
-    res.json({ reply: "Order received! We'll contact you shortly." });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ reply: "Order failed to send." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
   }
+});
+
+// -------------------------
+// CHATBOT ROUTE (optional basic)
+// -------------------------
+app.post("/chat", async (req, res) => {
+  try {
+    const userMessage = req.body?.message;
+
+    if (!userMessage) {
+      return res.status(400).json({ reply: "No message provided" });
+    }
+
+    res.json({
+      reply: "Chatbot received: " + userMessage
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ reply: "Server error" });
+  }
+});
+
+// -------------------------
+// SERVER START
+// -------------------------
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
