@@ -25,6 +25,12 @@ body {
   gap: 25px;
 }
 
+.nav-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .nav a {
   text-decoration: none;
   color: #1a1a1a;
@@ -32,7 +38,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* LANGUAGE SWITCHER (fixed position everywhere) */
+/* LANGUAGE SWITCHER (FIXED to match HTML id OR class) */
 .lang-switch {
   display: flex;
   gap: 8px;
@@ -81,4 +87,18 @@ footer {
   margin-top: 80px;
   border-top: 1px solid #ececec;
   opacity: 0.7;
+}
+.checkout-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 22px;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.checkout-btn:hover {
+  opacity: 0.85;
 }
