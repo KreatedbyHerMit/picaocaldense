@@ -1,35 +1,38 @@
 import express from "express";
-import dotenv from "dotenv";
-
-dotenv.config();
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(express.json());
 
-// SIMPLE CHAT ENDPOINT (WORKING CORE)
-app.post("/chat", async (req, res) => {
-  try {
-    const message = req.body.message;
+// fix __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    if (!message) {
-      return res.status(400).json({ reply: "No message received" });
-    }
+// serve static files FIRST
+app.use(express.static(__dirname));
 
-    res.json({
-      reply: "Picao Assistant is online: " + message
-    });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ reply: "Server error" });
-  }
+// health check (optional)
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
-app.get("/", (req, res) => {
-  res.send("Server running");
+// chatbot
+app.post("/chat", (req, res) => {
+  const msg = (req.body?.message || "").toLowerCase();
+
+  let reply = "I didn't understand that.";
+
+  if (msg.includes("hello")) reply = "Hello 👋 Welcome to Picao Caldense!";
+  else if (msg.includes("menu")) reply = "We offer traditional Colombian sauces 🇨🇴";
+  else if (msg.includes("order")) reply = "Go to the Order page to place your order 🛒";
+  else if (msg.includes("help")) reply = "Ask me about products, orders, or tradition!";
+
+  res.json({ reply });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log("Server running on http://localhost:" + PORT);
 });

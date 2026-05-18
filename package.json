@@ -2,11 +2,10 @@
   "name": "picaocaldense",
   "version": "1.0.0",
   "description": "Picao Caldense - Société des sauces",
-  "main": "index.js",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -16,9 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/KreatedbyHerMit/picaocaldense.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/KreatedbyHerMit/picaocaldense/issues"
   },
