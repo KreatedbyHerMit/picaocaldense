@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Picao Caldense</title>
-
-  <link rel="stylesheet" href="styles.css" />
-  <script src="lang.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact - Picao Caldense</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
 <header class="site-header">
@@ -30,37 +27,70 @@
   </nav>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <h1>Picao Caldense</h1>
+<h1>Contact</h1>
 
-  <p class="tagline" data-i18n="tagline">
-    Luxury Colombian sauce tradition refined through heritage,
-    craftsmanship, and flavor.
-  </p>
+<p>
+Email: jessica.betancur@picaocaldense.com
+</p>
 
-  <section class="story">
-    <p data-i18n="story">
-      Our Colombian Heritage — a generational recipe carried through time,
-      refined, remembered, and reimagined into every bottle today.
-    </p>
-  </section>
+<div class="chat-wrapper">
 
-  <section class="philosophy">
-    <h2 data-i18n="philosophy_title">A Recipe Passed Through Generations</h2>
+<div id="chatbox"></div>
 
-    <p data-i18n="philosophy_text">
-      Picao Caldense began long before it became a brand.
-      It started as a family tradition rooted in Colombian culture,
-      where flavor was crafted slowly, with patience and pride.
-    </p>
-  </section>
+<div class="chat-input">
+  <input id="input" type="text" placeholder="Type a message...">
+  <button onclick="send()">Send</button>
+</div>
 
 </div>
 
-<footer>
-  <p data-i18n="footer">© 2025 Picao Caldense</p>
+</main>
+
+<footer data-i18n="footer">
+© 2025 Picao Caldense
 </footer>
+
+<script src="lang.js"></script>
+
+<script>
+async function send(){
+
+  const input = document.getElementById("input");
+  const chatbox = document.getElementById("chatbox");
+
+  const message = input.value.trim();
+
+  if(!message) return;
+
+  chatbox.innerHTML += "<p><strong>You:</strong> " + message + "</p>";
+
+  input.value = "";
+
+  try{
+
+    const response = await fetch("/chat",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({message})
+    });
+
+    const data = await response.json();
+
+    chatbox.innerHTML += "<p><strong>Bot:</strong> " + data.reply + "</p>";
+
+    chatbox.scrollTop = chatbox.scrollHeight;
+
+  }catch(error){
+
+    chatbox.innerHTML += "<p><strong>Bot:</strong> Connection error.</p>";
+
+  }
+}
+</script>
 
 </body>
 </html>
