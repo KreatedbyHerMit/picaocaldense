@@ -4,16 +4,14 @@ const translations = {
     nav_about: "About",
     nav_order: "Order",
     nav_contact: "Contact",
+    footer: "© 2025 Picao Caldense",
 
     tagline: "Luxury Colombian sauce tradition refined through heritage, craftsmanship, and flavor.",
 
     story: "Our Colombian Heritage — a generational recipe carried through time, refined, remembered, and reimagined into every bottle today.",
 
     philosophy_title: "A Recipe Passed Through Generations",
-
-    philosophy_text: "Picao Caldense began long before it became a brand. It started as a family tradition rooted in Colombian culture, where flavor was crafted slowly, with patience and pride.",
-
-    footer: "© 2025 Picao Caldense"
+    philosophy_text: "Picao Caldense began long before it became a brand. It started as a family tradition rooted in Colombian culture, where flavor was crafted slowly, with patience and pride."
   },
 
   fr: {
@@ -21,16 +19,14 @@ const translations = {
     nav_about: "À propos",
     nav_order: "Commander",
     nav_contact: "Contact",
+    footer: "© 2025 Picao Caldense",
 
     tagline: "Une tradition de sauce colombienne de luxe raffinée par l’héritage, le savoir-faire et la saveur.",
 
     story: "Notre héritage colombien — une recette générationnelle transmise à travers le temps, raffinée et réinventée dans chaque bouteille.",
 
     philosophy_title: "Une recette transmise de génération en génération",
-
-    philosophy_text: "Picao Caldense existait bien avant de devenir une marque. C’était une tradition familiale ancrée dans la culture colombienne, où la saveur était créée lentement avec patience et fierté.",
-
-    footer: "© 2025 Picao Caldense"
+    philosophy_text: "Picao Caldense existait bien avant de devenir une marque. C’était une tradition familiale ancrée dans la culture colombienne, où la saveur était créée lentement avec patience et fierté."
   },
 
   es: {
@@ -38,16 +34,14 @@ const translations = {
     nav_about: "Acerca de",
     nav_order: "Ordenar",
     nav_contact: "Contacto",
+    footer: "© 2025 Picao Caldense",
 
     tagline: "Tradición de salsa colombiana de lujo refinada a través de la herencia, la artesanía y el sabor.",
 
     story: "Nuestro legado colombiano — una receta generacional transmitida a través del tiempo, refinada y reinventada en cada botella.",
 
     philosophy_title: "Una receta pasada de generación en generación",
-
-    philosophy_text: "Picao Caldense comenzó mucho antes de convertirse en una marca. Nació como una tradición familiar en la cultura colombiana, donde el sabor se creaba lentamente con paciencia y orgullo.",
-
-    footer: "© 2025 Picao Caldense"
+    philosophy_text: "Picao Caldense comenzó mucho antes de convertirse en una marca. Nació como una tradición familiar en la cultura colombiana, donde el sabor se creaba lentamente con paciencia y orgullo."
   }
 };
 
@@ -66,5 +60,6 @@ function setLanguage(lang) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setLanguage(localStorage.getItem("lang") || "en");
+  const savedLang = localStorage.getItem("lang") || "en";
+  setLanguage(savedLang);
 });
