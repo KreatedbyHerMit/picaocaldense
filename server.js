@@ -1,129 +1,35 @@
-app.post('/chat', async (req, res) => {
-  try {
-    const userMessage = req.body.message;
+import express from "express";
+import dotenv from "dotenv";
 
-    if (!userMessage || typeof userMessage !== 'string') {
-      return res.status(400).json({
-        reply: "Please send a valid message."
-      });
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+// SIMPLE CHAT ENDPOINT (WORKING CORE)
+app.post("/chat", async (req, res) => {
+  try {
+    const message = req.body.message;
+
+    if (!message) {
+      return res.status(400).json({ reply: "No message received" });
     }
 
-    const completion = await client.chat.completions.create({
-      model: 'gpt-4.1-mini',
-      temperature: 0.6,
-      messages: [
-        {
-          role: 'system',
-          content: `
-You are Picao Assistant for Picao Caldense.
-
-You help customers with:
-- sauce flavors
-- order placement
-- wholesale inquiries
-- shipping questions
-- ingredient questions
-
-Available flavors:
-- Classic Pique
-- Jalapeño Special
-- Spicy Thai Delight
-
-Bottle size:
-355ml
-
-Always answer warmly and professionally.
-          `
-        },
-        {
-          role: 'user',
-          content: userMessage
-        }
-      ]
+    res.json({
+      reply: "Picao Assistant is online: " + message
     });
-
-    const reply =
-      completion?.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't generate a response.";
-
-    res.json({ reply });
-
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      reply: 'Sorry, Picao Assistant is temporarily unavailable.'
-    });
-  }
-});
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-
-app.post('/order', async (req, res) => {
-  try {
-    const { name, product, quantity, message } = req.body;
-
-    if (!name || !product || !quantity) {
-      return res.status(400).json({ reply: "Missing order fields" });
-    }
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Order - Picao Caldense",
-      text: `Name: ${name}
-Product: ${product}
-Quantity: ${quantity}
-Message: ${message || "None"}`
-    });
-
-    res.json({ reply: "Order sent successfully" });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ reply: "Email failed to send" });
+    res.status(500).json({ reply: "Server error" });
   }
 });
 
-import nodemailer from "nodemailer";
-
-const mailer = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+app.get("/", (req, res) => {
+  res.send("Server running");
 });
 
-app.post("/order", async (req, res) => {
-  try {
-    const { name, product, quantity, message } = req.body;
-
-    await mailer.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `New Order - ${product}`,
-      text: `
-New Order Received:
-
-Name: ${name}
-Product: ${product}
-Quantity: ${quantity}
-Message: ${message || "None"}
-      `
-    });
-
-    res.json({ reply: "Order received and sent by email." });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ reply: "Order failed to send." });
-  }
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });

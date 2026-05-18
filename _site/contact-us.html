@@ -1,68 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8">
   <title>Contact</title>
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Chat-only safe styling (does NOT affect your theme) -->
+  <style>
+    #chatbox {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .chat-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chat-row input {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .chat-row button {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="order.html">Order</a>
-  <a href="contact-us.html">Contact</a>
-</nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="order.html">Order</a>
+    <a href="contact-us.html">Contact</a>
+  </nav>
 </header>
 
 <div class="container">
 
-<h1>Chatbot Assistant</h1>
+  <h1>Chatbot Assistant</h1>
 
-<div class="chatbox" id="chatbox"></div>
+  <div id="chatbox"></div>
 
-<input id="input" placeholder="Type...">
-<button onclick="send()">Send</button>
+  <div class="chat-row">
+    <input id="input" placeholder="Type message..." />
+    <button id="sendBtn">Send</button>
+  </div>
 
 </div>
 
 <script>
-async function send() {
-  const inputEl = document.getElementById("input");
-  const chat = document.getElementById("chatbox");
+const chat = document.getElementById("chatbox");
+const input = document.getElementById("input");
+const btn = document.getElementById("sendBtn");
 
-  const message = inputEl.value.trim();
+function addMessage(sender, text) {
+  const p = document.createElement("p");
+
+  const bold = document.createElement("b");
+  bold.textContent = sender + ": ";
+
+  p.appendChild(bold);
+  p.appendChild(document.createTextNode(text));
+
+  chat.appendChild(p);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function send() {
+  const message = input.value.trim();
   if (!message) return;
 
-  // Show user message safely
-  const userMsg = document.createElement("p");
-  userMsg.innerHTML = "<b>You:</b> " + message;
-  chat.appendChild(userMsg);
+  addMessage("You", message);
+  input.value = "";
 
-  inputEl.value = "";
+  const bot = document.createElement("p");
+  bot.innerHTML = "<b>Bot:</b> typing...";
+  chat.appendChild(bot);
 
-  // Loading state
-  const loadingMsg = document.createElement("p");
-  loadingMsg.innerHTML = "<b>Bot:</b> typing...";
-  chat.appendChild(loadingMsg);
+  btn.disabled = true;
 
   try {
     const res = await fetch("/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
     });
 
     const data = await res.json();
 
-    loadingMsg.innerHTML = "<b>Bot:</b> " + (data.reply || "No response");
+    bot.innerHTML = "<b>Bot:</b> ";
+    bot.appendChild(document.createTextNode(data.reply || "No response"));
+
   } catch (err) {
-    loadingMsg.innerHTML = "<b>Bot:</b> Sorry, connection error.";
+    bot.innerHTML = "<b>Bot:</b> connection error";
   }
+
+  btn.disabled = false;
 }
+
+btn.addEventListener("click", send);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") send();
+});
 </script>
 
 </body>

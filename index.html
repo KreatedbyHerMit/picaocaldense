@@ -1,86 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <title>Picao Caldense - Société des sauces</title>
-</head>
-
-<body>
-
-<!-- Language Switcher -->
-<div class="language-switcher">
-  <button data-lang="en">EN</button>
-  <button data-lang="fr">FR</button>
-  <button data-lang="es">ES</button>
-</div>
-
-<header>
-  <nav>
-    <a href="index.html" data-i18n="nav_home">Home</a>
-    <a href="about.html" data-i18n="nav_about">About</a>
-    <a href="order.html" data-i18n="nav_order">Order</a>
-    <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
-  </nav>
-</header>
-
-<div class="container">
-
-  <!-- Brand Identity -->
-  <h1>Picao Caldense - Société des sauces</h1>
-
-  <!-- Tagline -->
-  <p class="tagline" data-i18n="story">
-    Our Colombian Heritage — a generational recipe carried through time, refined, remembered, and reimagined into every bottle today.
-  </p>
-
-  <!-- Philosophy -->
-  <section>
-    <h3 data-i18n="philosophy_title">A Recipe Passed Through Generations</h3>
-    <p data-i18n="philosophy_text">
-      Picao Caldense began long before it became a brand. It started as a family recipe, born in Colombian kitchens where nothing was written down—only remembered. The sauce was passed from hand to hand, generation to generation, each one preserving its essence while quietly adding its own touch.
-    </p>
-  </section>
-
-  <!-- Craft -->
-  <section>
-    <h3 data-i18n="craft_title">From Home Kitchens to a Signature Sauce</h3>
-    <p data-i18n="craft_text">
-      What once belonged to everyday family meals has evolved into a signature creation. Picao Caldense stays rooted in its origins while embracing craft and precision—honoring the bold, fresh, and vibrant character of Colombian cuisine, refined for today’s table.
-    </p>
-  </section>
-
-  <!-- Heritage -->
-  <section>
-    <h3 data-i18n="heritage_title">Crafted in the Present, Rooted in the Past</h3>
-    <p data-i18n="heritage_text">
-      Each bottle exists between two worlds: memory and modernity. We preserve the soul of the original recipe while elevating its consistency, balance, and depth. The result is a sauce that feels familiar, yet unmistakably refined.
-    </p>
-  </section>
-
-  <!-- Identity -->
-  <section>
-    <h3 data-i18n="identity_title">Our Identity</h3>
-    <p data-i18n="identity_text">
-      Picao Caldense is more than a condiment—it is heritage made tangible. A story of family, culture, and continuity, transformed into a modern Société des sauces built on authenticity, pride, and craft.
-    </p>
-  </section>
-
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/translations.js"></script>
-
-<!-- Load chatbot only when needed -->
 <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    if (document.body.dataset.chatbot === "enabled") {
-      const script = document.createElement("script");
-      script.src = "assets/js/chatbot.js";
-      document.body.appendChild(script);
-    }
-  });
-</script>
+function escapeHTML(str) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-</body>
-</html>
+function appendMessage(sender, text) {
+  const chat = document.getElementById("chatbox");
+
+  const p = document.createElement("p");
+  p.innerHTML = `<b>${sender}:</b> ${escapeHTML(text)}`;
+
+  chat.appendChild(p);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function send() {
+  const inputEl = document.getElementById("input");
+  const button = document.querySelector("button");
+  const message = inputEl.value.trim();
+
+  if (!message) return;
+
+  appendMessage("You", message);
+  inputEl.value = "";
+
+  button.disabled = true;
+
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+    appendMessage("Bot", data.reply || "No response");
+
+  } catch (err) {
+    appendMessage("Bot", "Connection error");
+  }
+
+  button.disabled = false;
+}
+</script>
