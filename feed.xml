@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-01T04:07:49+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Picao Caldense</title><subtitle>Official website for Picao Caldense</subtitle></feed>
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Picao Caldense</title>
+  <subtitle>Luxury Colombian sauce tradition refined through generations.</subtitle>
+
+  <link href="https://picaocaldense.com/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://picaocaldense.com/" rel="alternate" type="text/html"/>
+
+  <updated>2026-05-18T00:00:00Z</updated>
+
+  <id>https://picaocaldense.com/</id>
+
+  <author>
+    <name>Picao Caldense</name>
+  </author>
+
+  <entry>
+    <title>Picao Caldense Signature Sauces</title>
+
+    <link href="https://picaocaldense.com/order.html"/>
+
+    <id>https://picaocaldense.com/order.html</id>
+
+    <updated>2026-05-18T00:00:00Z</updated>
+
+    <summary>
+      Handcrafted Colombian sauces inspired by traditional family recipes.
+    </summary>
+  </entry>
+
+</feed>

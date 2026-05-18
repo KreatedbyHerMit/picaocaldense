@@ -1,142 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Cormorant Garamond', serif;
 }
 
-body{
-  background:#ffffff;
-  color:#1a1a1a;
-  font-family:'Cormorant Garamond',serif;
+.site-header {
+  padding: 25px 40px;
+  border-bottom: 1px solid #ececec;
 }
 
-.site-header{
-  padding:25px 40px;
-  border-bottom:1px solid #ececec;
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.nav-left {
+  display: flex;
+  gap: 25px;
 }
 
-.nav-left{
-  display:flex;
-  gap:28px;
+.nav a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 17px;
+  letter-spacing: 0.5px;
 }
 
-.nav a{
-  text-decoration:none;
-  color:#1a1a1a;
-  font-size:17px;
-  letter-spacing:0.5px;
+.lang-switch {
+  display: flex;
+  gap: 8px;
 }
 
-.nav a:hover{
-  opacity:.7;
+.lang-switch button {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.lang-switch{
-  display:flex;
-  gap:8px;
+.container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 70px 25px;
 }
 
-.lang-switch button{
-  border:1px solid #ddd;
-  background:#fff;
-  padding:6px 10px;
-  cursor:pointer;
-  font-family:inherit;
-}
-
-.container{
-  max-width:950px;
-  margin:0 auto;
-  padding:70px 25px;
-}
-
-h1{
-  font-size:54px;
-  margin-bottom:20px;
-}
-
-h2{
-  margin-top:40px;
-  margin-bottom:12px;
-  font-size:30px;
+h1 {
+  font-size: 54px;
+  margin-bottom: 20px;
 }
 
 p,
-li{
-  font-size:18px;
-  line-height:1.9;
+li {
+  font-size: 18px;
+  line-height: 1.8;
 }
 
-ul{
-  margin-left:20px;
-  margin-top:10px;
+.checkout-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 28px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
 }
 
-.tagline{
-  font-size:20px;
-  opacity:.75;
-  margin-bottom:40px;
+footer {
+  text-align: center;
+  padding: 40px 10px;
+  margin-top: 80px;
+  border-top: 1px solid #ececec;
+  opacity: 0.7;
 }
 
-.story,
-.philosophy{
-  margin-top:40px;
+.site-footer {
+  text-align: center;
+  padding: 40px 10px;
+  margin-top: 80px;
+  border-top: 1px solid #ececec;
+  opacity: 0.7;
 }
 
-.checkout-btn{
-  display:inline-block;
-  margin-top:25px;
-  padding:14px 24px;
-  background:#111;
-  color:#fff;
-  text-decoration:none;
-  border-radius:4px;
-}
-
-.chat-wrapper{
-  max-width:700px;
-  margin-top:40px;
-}
-
-#chatbox{
-  height:320px;
-  overflow-y:auto;
-  border:1px solid #ddd;
-  padding:15px;
-  margin-bottom:12px;
-}
-
-.chat-input{
-  display:flex;
-  gap:10px;
-}
-
-.chat-input input{
-  flex:1;
-  padding:12px;
-  border:1px solid #ddd;
-}
-
-.chat-input button{
-  padding:12px 18px;
-  border:none;
-  background:#111;
-  color:white;
-  cursor:pointer;
-}
-
-footer{
-  text-align:center;
-  padding:40px 10px;
-  margin-top:80px;
-  border-top:1px solid #ececec;
-  opacity:.7;
+.site-footer p {
+  margin: 0;
 }

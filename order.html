@@ -4,171 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Order - Picao Caldense</title>
-
 <link rel="stylesheet" href="styles.css">
-
-<style>
-.order-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-
-.product-card{
-  border:1px solid #ececec;
-  padding:30px;
-  border-radius:8px;
-}
-
-.product-card h3{
-  margin-bottom:15px;
-  font-size:28px;
-}
-
-.price{
-  font-size:22px;
-  margin:15px 0;
-}
-
-.checkout-btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:14px 22px;
-  background:#111;
-  color:#fff;
-  text-decoration:none;
-  border-radius:4px;
-}
-
-.checkout-btn:hover{
-  opacity:.85;
-}
-</style>
-
 </head>
 <body>
 
 <header class="site-header">
+<nav class="nav">
 
-  <nav class="nav">
+<div class="nav-left">
+<a href="index.html" data-i18n="nav_home">Home</a>
+<a href="about.html" data-i18n="nav_about">About</a>
+<a href="order.html" data-i18n="nav_order">Order</a>
+<a href="contact-us.html" data-i18n="nav_contact">Contact</a>
+</div>
 
-    <div class="nav-left">
-      <a href="index.html" data-i18n="nav_home">Home</a>
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="order.html" data-i18n="nav_order">Order</a>
-      <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
-    </div>
+<div class="lang-switch">
+<button onclick="setLanguage('en')">EN</button>
+<button onclick="setLanguage('fr')">FR</button>
+<button onclick="setLanguage('es')">ES</button>
+</div>
 
-    <div class="lang-switch">
-      <button onclick="setLanguage('en')">EN</button>
-      <button onclick="setLanguage('fr')">FR</button>
-      <button onclick="setLanguage('es')">ES</button>
-    </div>
-
-  </nav>
-
+</nav>
 </header>
 
 <main class="container">
 
 <h1>Order</h1>
 
-<p class="tagline">
-Luxury Colombian sauces crafted in small batches.
+<p>
+Picao Caldense sauces are handcrafted in small batches for authentic flavor and premium quality.
 </p>
 
-<div class="order-grid">
+<h2>Signature Product</h2>
 
-  <div class="product-card">
+<p><strong>Picao Caldense – Signature Blend</strong></p>
 
-    <h3>Classic Piqué Salsa</h3>
-
-    <p>
-      Tangy lime, cilantro, and balanced traditional Colombian heat.
-    </p>
-
-    <div class="price">
-      355ml — $14
-    </div>
-
-    <a
-      class="checkout-btn"
-      href="mailto:jessica.betancur@picaocaldense.com?subject=Classic%20Pique%20Salsa%20Order"
-    >
-      Order Now
-    </a>
-
-  </div>
-
-  <div class="product-card">
-
-    <h3>Jalapeño Special</h3>
-
-    <p>
-      Fresh jalapeño flavor with clean vibrant spice.
-    </p>
-
-    <div class="price">
-      355ml — $16
-    </div>
-
-    <a
-      class="checkout-btn"
-      href="mailto:jessica.betancur@picaocaldense.com?subject=Jalapeno%20Special%20Order"
-    >
-      Order Now
-    </a>
-
-  </div>
-
-  <div class="product-card">
-
-    <h3>Spicy Thai Delight</h3>
-
-    <p>
-      Aromatic fusion heat with bold depth and complexity.
-    </p>
-
-    <div class="price">
-      355ml — $18
-    </div>
-
-    <a
-      class="checkout-btn"
-      href="mailto:jessica.betancur@picaocaldense.com?subject=Spicy%20Thai%20Delight%20Order"
-    >
-      Order Now
-    </a>
-
-  </div>
-
-</div>
-
-<section style="margin-top:60px;">
-
-<h2>Bulk Orders</h2>
+<h2>Flavours</h2>
 
 <ul>
-  <li>Half Dozen (6 Bottles)</li>
-  <li>Dozen (12 Bottles)</li>
-  <li>Custom quantities available</li>
+<li><strong>Classic Piqué Salsa</strong></li>
+<li><strong>Jalapeño Special</strong></li>
+<li><strong>Spicy Thai Delight</strong></li>
 </ul>
 
-<p style="margin-top:20px;">
-For catering, restaurant partnerships, or wholesale inquiries:
-</p>
+<h2>Checkout</h2>
 
 <p>
-<strong>Email:</strong>
-jessica.betancur@picaocaldense.com
+Place your order directly through email.
 </p>
 
-</section>
+<a class="checkout-btn" href="mailto:jessica.betancur@picaocaldense.com?subject=Picao%20Caldense%20Order">
+Place Order
+</a>
 
 </main>
 
-<footer data-i18n="footer">
+<footer class="site-footer">
+  <p data-i18n="footer">
 © 2025 Picao Caldense
 </footer>
 
