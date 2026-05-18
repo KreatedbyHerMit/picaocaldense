@@ -1,3 +1,6 @@
+/****************************************************
+ * 1. TRANSLATION DATABASE
+ ****************************************************/
 const translations = {
   en: {
     nav_home: "Home",
@@ -5,7 +8,8 @@ const translations = {
     nav_order: "Order",
     nav_contact: "Contact",
 
-    story: "Our Colombian Heritage — a generational recipe carried through time, refined, remembered, and reimagined into every bottle today.",
+    story:
+      "Our Colombian Heritage — a generational recipe carried through time, refined, remembered, and reimagined into every bottle today.",
 
     philosophy_title: "A Recipe Passed Through Generations",
     philosophy_text:
@@ -77,24 +81,44 @@ const translations = {
   }
 };
 
-// Language switcher
+/****************************************************
+ * 2. LANGUAGE SWITCH FUNCTION (SAFE)
+ ****************************************************/
 function setLanguage(lang) {
+  const dict = translations[lang];
+
+  if (!dict) return;
+
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
+
+    if (dict[key]) {
+      el.textContent = dict[key];
     }
   });
+
+  // optional: store preference
+  localStorage.setItem("site-language", lang);
 }
 
-// Buttons
+/****************************************************
+ * 3. INIT + BUTTON HANDLING (SAFE WINDOW BOOT)
+ ****************************************************/
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-lang]").forEach(btn => {
+  const buttons = document.querySelectorAll("[data-lang]");
+
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
     btn.addEventListener("click", () => {
-      setLanguage(btn.dataset.lang);
+      const lang = btn.dataset.lang;
+      setLanguage(lang);
     });
   });
 
-  // default language
-  setLanguage("en");
+  /****************************************************
+   * 4. AUTO RESTORE SAVED LANGUAGE
+   ****************************************************/
+  const savedLang = localStorage.getItem("site-language") || "en";
+  setLanguage(savedLang);
 });

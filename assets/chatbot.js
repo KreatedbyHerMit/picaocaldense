@@ -1,83 +1,111 @@
-function sendMessage() {
+/****************************************************
+ * 0. SAFETY CHECK (prevents runtime crashes)
+ ****************************************************/
+function getEl(id) {
+  return document.getElementById(id);
+}
 
-  const input = document.getElementById("userInput");
-  const box = document.getElementById("chat-box");
+/****************************************************
+ * 1. MAIN MESSAGE FUNCTION
+ ****************************************************/
+function sendMessage() {
+  const input = getEl("userInput");
+  const box = getEl("chat-box");
+
+  // Safety guard (prevents "null error" crashes)
+  if (!input || !box) return;
 
   const msg = input.value.trim();
-
   if (!msg) return;
-
-  box.insertAdjacentHTML("beforeend", `
-    <div class="user-msg">
-      <strong>You:</strong> ${msg}
-    </div>
-  `);
-
-  let reply =
-    "Thank you for contacting Picao Caldense.";
 
   const text = msg.toLowerCase();
 
-  if (text.includes("shipping")) {
+  /****************************************************
+   * 2. USER MESSAGE (SAFE DOM BUILD)
+   ****************************************************/
+  const userDiv = document.createElement("div");
+  userDiv.className = "user-msg";
 
-    reply =
-      "Shipping is available depending on location and order size.";
+  const userStrong = document.createElement("strong");
+  userStrong.textContent = "You: ";
 
+  const userText = document.createTextNode(msg);
+
+  userDiv.appendChild(userStrong);
+  userDiv.appendChild(userText);
+  box.appendChild(userDiv);
+
+  /****************************************************
+   * 3. BOT LOGIC (RULE ENGINE)
+   ****************************************************/
+  let reply = "Thank you for contacting Picao Caldense.";
+
+  const rules = [
+    {
+      keywords: ["shipping"],
+      reply: "Shipping is available depending on location and order size."
+    },
+    {
+      keywords: ["flavour", "flavor"],
+      reply:
+        "Our signature Salsa Picao Caldense offers balanced Colombian-inspired heat and depth."
+    },
+    {
+      keywords: ["quantity"],
+      reply:
+        "Please tell us your desired quantity and we will respond with availability."
+    },
+    {
+      keywords: ["hello", "hi"],
+      reply: "Welcome to Salsa Picao Caldense 🌶️"
+    }
+  ];
+
+  for (const rule of rules) {
+    if (rule.keywords.some(k => text.includes(k))) {
+      reply = rule.reply;
+      break;
+    }
   }
 
-  else if (
-    text.includes("flavour") ||
-    text.includes("flavor")
-  ) {
+  /****************************************************
+   * 4. BOT MESSAGE (SAFE DOM BUILD)
+   ****************************************************/
+  const botDiv = document.createElement("div");
+  botDiv.className = "bot-msg";
 
-    reply =
-      "Our signature Salsa Picao Caldense offers balanced Colombian-inspired heat and depth.";
+  const botStrong = document.createElement("strong");
+  botStrong.textContent = "Picao Assistant: ";
 
-  }
+  const botText = document.createTextNode(reply);
 
-  else if (text.includes("quantity")) {
+  botDiv.appendChild(botStrong);
+  botDiv.appendChild(botText);
+  box.appendChild(botDiv);
 
-    reply =
-      "Please tell us your desired quantity and we will respond with availability.";
-
-  }
-
-  else if (
-    text.includes("hello") ||
-    text.includes("hi")
-  ) {
-
-    reply =
-      "Welcome to Salsa Picao Caldense 🌶️";
-
-  }
-
-  box.insertAdjacentHTML("beforeend", `
-    <div class="bot-msg">
-      <strong>Picao Assistant:</strong> ${reply}
-    </div>
-  `);
-
+  /****************************************************
+   * 5. CLEANUP + UX
+   ****************************************************/
   input.value = "";
-
+  input.focus();
   box.scrollTop = box.scrollHeight;
-
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+/****************************************************
+ * 6. WINDOW INIT (SAFE BINDING)
+ ****************************************************/
+window.addEventListener("DOMContentLoaded", () => {
+  const btn = getEl("send-btn");
+  const input = getEl("userInput");
 
-  document
-    .getElementById("send-btn")
-    .addEventListener("click", sendMessage);
+  // Safety checks (prevents null listener crashes)
+  if (!btn || !input) return;
 
-  document
-    .getElementById("userInput")
-    .addEventListener("keypress", (e) => {
+  btn.addEventListener("click", sendMessage);
 
-      if (e.key === "Enter") {
-        sendMessage();
-      }
-
-    });
-
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  });
 });
