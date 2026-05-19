@@ -2,12 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picao Caldense - Chat & Order</title>
 
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 
-  <!-- Chat-only safe styling (does NOT affect your theme) -->
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #111;
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .lang-switch button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* MAIN */
+    main {
+      padding: 20px;
+    }
+
+    /* CHAT */
     #chatbox {
       height: 300px;
       overflow-y: auto;
@@ -33,40 +67,86 @@
       padding: 10px 15px;
       cursor: pointer;
     }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #f5f5f5;
+      font-size: 14px;
+    }
   </style>
-<script src="lang.js"></script>
 </head>
 
 <body>
 
-<header>
-  <nav>
-<div class="lang-switch">
-<button onclick="setLanguage('en')">EN</button>
-<button onclick="setLanguage('fr')">FR</button>
-<button onclick="setLanguage('es')">ES</button>
-</div>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="order.html">Order</a>
-    <a href="contact-us.html">Contact</a>
-  </nav>
-</header>
+<!-- NAVIGATION -->
+<nav>
+  <div><strong>Picao Caldense</strong></div>
 
-<div class="container">
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Order</a>
+    <a href="#">Contact</a>
+  </div>
 
-  <h1>Chatbot Assistant</h1>
+  <div class="lang-switch">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('fr')">FR</button>
+    <button onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <h1 data-i18n="title">Chatbot Assistant</h1>
 
   <div id="chatbox"></div>
 
   <div class="chat-row">
     <input id="input" placeholder="Type message..." />
-    <button id="sendBtn">Send</button>
+    <button id="sendBtn" data-i18n="send">Send</button>
   </div>
 
-</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p data-i18n="footer">© 2025 Picao Caldense</p>
+</footer>
 
 <script>
+/* ---------------- LANGUAGE SYSTEM ---------------- */
+
+const translations = {
+  en: {
+    title: "Chatbot Assistant",
+    send: "Send",
+    footer: "© 2025 Picao Caldense"
+  },
+  fr: {
+    title: "Assistant Chatbot",
+    send: "Envoyer",
+    footer: "© 2025 Picao Caldense"
+  },
+  es: {
+    title: "Asistente Chatbot",
+    send: "Enviar",
+    footer: "© 2025 Picao Caldense"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    el.textContent = translations[lang][key];
+  });
+}
+
+/* ---------------- CHAT SYSTEM ---------------- */
+
 const chat = document.getElementById("chatbox");
 const input = document.getElementById("input");
 const btn = document.getElementById("sendBtn");
@@ -110,6 +190,7 @@ async function send() {
     bot.appendChild(document.createTextNode(data.reply || "No response"));
 
   } catch (err) {
+    console.error(err);
     bot.innerHTML = "<b>Bot:</b> connection error";
   }
 

@@ -1,64 +1,52 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="assets/css/styles.css">
-  <title>About | Picao Caldense</title>
-<script src="lang.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Picao Caldense</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<header>
-<nav>
-<div class="lang-switch">
-<button onclick="setLanguage('en')">EN</button>
-<button onclick="setLanguage('fr')">FR</button>
-<button onclick="setLanguage('es')">ES</button>
-</div>
-  <a href="index.html" data-i18n="nav_home">Home</a>
-  <a href="about.html" data-i18n="nav_about">About</a>
-  <a href="order.html" data-i18n="nav_order">Order</a>
-  <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
-</nav>
+<header class="site-header">
+  <nav class="nav">
+
+    <div class="nav-left">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="order.html" data-i18n="nav_order">Order</a>
+      <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
+    </div>
+
+    <div class="lang-switch">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('fr')">FR</button>
+      <button onclick="setLanguage('es')">ES</button>
+    </div>
+
+  </nav>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <h1 data-i18n="about_title">Our Colombian Heritage</h1>
+<h1>Picao Caldense - Societe des sauces</h1>
 
-  <p class="tagline" data-i18n="about_tagline">
-    A story of family, tradition, and quiet craftsmanship behind every flavor—where each recipe carries the memory of those who came before us and the care of those who continue it today.
-  </p>
+<p class="tagline">
+A legacy of Colombian flavour, crafted in every bottle. Honoring generations of culinary tradition, refined for today's palate 
+</p>
 
-  <section>
-    <h2 data-i18n="about_section1_title">Rooted in Tradition</h2>
-    <p data-i18n="about_section1_text">
-      Picao Caldense is deeply rooted in Colombian culinary culture, where food is far more than sustenance—it is identity, memory, and celebration woven into everyday life. Meals are shared stories that connect generations, preserve heritage, and honor the simple yet meaningful act of gathering around a table. Each flavor reflects a lineage of tradition passed down with care, shaped by time, place, and the hands of family who cooked not from instruction, but from memory.
-    </p>
-  </section>
-
-  <section>
-    <h2 data-i18n="about_section2_title">Craft & Respect</h2>
-    <p data-i18n="about_section2_text">
-      Our approach is guided by deep respect—for ingredients, for process, and for the traditions that shaped them. We believe that true flavor cannot be rushed. It is built slowly, through patience, repetition, and intention, in kitchens where technique was learned through observation and experience rather than written instruction. Every step reflects the discipline of traditional home cooking passed down through generations, where nothing is wasted and everything carries purpose.
-    </p>
-  </section>
-
-  <section>
-    <h2 data-i18n="about_section3_title">Our Values</h2>
-    <p data-i18n="about_section3_text">
-      We are guided by authenticity, consistency, and cultural pride. Authenticity in staying true to our origins without compromise. Consistency in delivering depth, balance, and quality in every bottle. Cultural pride in honoring the Colombian heritage that defines who we are. These values are not abstract ideas—they are practices embedded in every decision we make, shaping every bottle we produce and every table we reach.
-    </p>
-  </section>
-
-  <section>
-    <h2 data-i18n="about_brand_identity">Société des sauces</h2>
-    <p data-i18n="about_brand_identity_text">
-      More than a brand, Picao Caldense is a living expression of Colombian flavor—refined through time, crafted with intention, and made to be shared, remembered, and felt across every table it reaches.
-    </p>
-  </section>
-
+<div class="story">
+Our Colombian heritage lives through every handcrafted bottle.— where tradition, craftsmanship, and bold flavor come together to honor generations of culture from the heart of Caldas. Each bottle of Picao Caldense is carefully crafted to preserve the warmth of family recipes, the richness of Colombian culinary artistry, and the spirit of gathering around unforgettable meals. Refined with a modern sense of luxury yet deeply rooted in authenticity, every taste is a tribute to the land, the people, and the stories that continue to inspire us.
 </div>
+
+</main>
+
+<footer class="site-footer">
+  <p data-i18n="footer">
+© 2025 Picao Caldense - Société des sauces
+</footer>
+
+<script src="lang.js"></script>
 
 </body>
 </html>
