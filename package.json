@@ -7,6 +7,19 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "cors": "^2.8.6",
+    "express": "^4.22.2"
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KreatedbyHerMit/picaocaldense.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KreatedbyHerMit/picaocaldense/issues"
+  },
+  "homepage": "https://github.com/KreatedbyHerMit/picaocaldense#readme"
 }
