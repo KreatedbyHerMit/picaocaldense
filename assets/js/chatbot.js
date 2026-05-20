@@ -1,12 +1,32 @@
 const STORAGE_KEY = "picao_chat_memory";
 
 /* =========================
-   BOT RESPONSES
+   MEMORY
+   ========================= */
+
+function loadMemory() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+      lang: "en",
+      name: null,
+      lastTopic: null
+    };
+  } catch {
+    return { lang: "en", name: null, lastTopic: null };
+  }
+}
+
+function saveMemory(mem) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(mem));
+}
+
+/* =========================
+   BOT RESPONSES (FALLBACK)
    ========================= */
 
 const botResponses = {
   en: {
-    hello: "Welcome to Picao Caldense 🌶️ How may I assist you today?",
+    hello: "Welcome to Picao Caldense 🌶️ How can I help you today?",
     order: "You can place orders on the Order page 🥘",
     story: "Picao Caldense is inspired by Colombian kitchens where food is shared, remembered, and felt.",
     default: "I can help with orders, story, or navigation."
@@ -26,73 +46,65 @@ const botResponses = {
 };
 
 /* =========================
-   MEMORY
+   CORE BOT LOGIC (LOCAL)
    ========================= */
 
-function loadMemory() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
-      lang: localStorage.getItem("lang") || "en",
-      lastTopic: null,
-      name: null
-    };
-  } catch {
-    return { lang: "en", lastTopic: null, name: null };
-  }
-}
-
-function saveMemory(mem) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(mem));
-}
-
-/* =========================
-   BOT LOGIC
-   ========================= */
-
-function botReply(msg, mem) {
-
+function localBotReply(msg, mem) {
   const text = msg.toLowerCase();
 
-  // NAME DETECTION (FIXED)
   const nameMatch = msg.match(/my name is (.+)/i);
   if (nameMatch) {
-    const name = nameMatch[1].trim();
-    mem.name = name;
+    mem.name = nameMatch[1].trim();
     saveMemory(mem);
-    return `Nice to meet you, ${name} 👋`;
+    return `Nice to meet you, ${mem.name} 👋`;
   }
 
   if (text.includes("hello") || text.includes("hi")) {
-    mem.lastTopic = "hello";
-    saveMemory(mem);
-    return botResponses[mem.lang].hello;
+    return botResponses[mem.lang]?.hello;
   }
 
   if (text.includes("order")) {
-    mem.lastTopic = "order";
-    saveMemory(mem);
-    return botResponses[mem.lang].order;
+    return botResponses[mem.lang]?.order;
   }
 
   if (text.includes("story")) {
-    mem.lastTopic = "story";
-    saveMemory(mem);
-    return botResponses[mem.lang].story;
+    return botResponses[mem.lang]?.story;
   }
 
-  return botResponses[mem.lang].default;
+  return botResponses[mem.lang]?.default;
+}
+
+/* =========================
+   OPTIONAL BACKEND CALL
+   ========================= */
+
+async function backendReply(message) {
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    if (!res.ok) throw new Error("No backend");
+
+    const data = await res.json();
+    return data.reply;
+  } catch {
+    return null; // fallback to local bot
+  }
 }
 
 /* =========================
    UI
    ========================= */
 
-function addMessage(box, text, type) {
-  const div = document.createElement("div");
+function addMessage(chat, text, type) {
+  const div = document.createElement("p");
   div.className = type;
-  div.textContent = text;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
+  div.innerHTML = `<b>${type === "user" ? "You" : "Bot"}:</b> ${text}`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 /* =========================
@@ -100,29 +112,48 @@ function addMessage(box, text, type) {
    ========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+  const chat = document.getElementById("chatbox");
+  const input = document.getElementById("input");
+  const btn = document.getElementById("sendBtn");
 
-  const input = document.querySelector("#chatInput");
-  const sendBtn = document.querySelector("#chatSend");
-  const box = document.querySelector("#chatBox");
-
-  if (!input || !sendBtn || !box) return;
+  if (!chat || !input || !btn) return;
 
   const memory = loadMemory();
 
-  sendBtn.addEventListener("click", () => {
-    const msg = input.value.trim();
-    if (!msg) return;
+  async function send() {
+    const message = input.value.trim();
+    if (!message) return;
 
-    addMessage(box, msg, "user");
+    addMessage(chat, message, "user");
     input.value = "";
 
-    setTimeout(() => {
-      addMessage(box, botReply(msg, memory), "bot");
-    }, 400);
-  });
+    // typing indicator
+    const typing = document.createElement("p");
+    typing.innerHTML = "<b>Bot:</b> typing...";
+    chat.appendChild(typing);
 
-  input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendBtn.click();
-  });
+    btn.disabled = true;
 
+    // 1. Try backend (if exists)
+    const backend = await backendReply(message);
+
+    let reply;
+
+    if (backend) {
+      reply = backend;
+    } else {
+      // 2. fallback to local bot
+      reply = localBotReply(message, memory);
+    }
+
+    typing.innerHTML = `<b>Bot:</b> ${reply}`;
+
+    btn.disabled = false;
+  }
+
+  btn.addEventListener("click", send);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") send();
+  });
 });

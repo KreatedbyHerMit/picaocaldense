@@ -1,5 +1,10 @@
+/* =========================
+   PICAO CALDENSE LUXURY CORE
+   ========================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
 
+/* ROOT */
 :root {
   --bg: #f7f3ef;
   --text: #1a1a1a;
@@ -7,76 +12,221 @@
   --accent: #8b1e1e;
 }
 
+/* BASE */
 body {
   margin: 0;
-  font-family: "Cormorant Garamond", serif;
   background: var(--bg);
   color: var(--text);
+  font-family: "Cormorant Garamond", serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
-/* HEADER */
-header {
-  padding: 28px 0;
+/* =========================
+   HEADER + NAV (combined)
+   ========================= */
+
+header,
+.site-header {
+  padding: 25px 40px;
+  border-bottom: 1px solid #ececec;
 }
 
-/* NAV */
-nav {
+nav,
+.nav {
   display: flex;
-  justify-content: center;
-  gap: 28px;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav a {
+.nav-left {
+  display: flex;
+  gap: 25px;
+}
+
+nav a,
+.nav a {
   text-decoration: none;
   color: var(--text);
-  font-weight: 500;
-  position: relative;
+  font-size: 16px;
+  letter-spacing: 0.5px;
   transition: 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover,
+.nav a:hover {
   color: var(--accent);
 }
 
-/* subtle underline animation */
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.3s ease;
+/* =========================
+   LANGUAGE SWITCH
+   ========================= */
+
+.lang-switch {
+  display: flex;
+  gap: 8px;
 }
 
-nav a:hover::after {
-  width: 100%;
+.lang-switch button {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.3s ease;
 }
 
-/* CONTAINER */
+.lang-switch button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+
 .container {
   max-width: 1100px;
-  margin: auto;
-  padding: 80px 20px;
+  margin: 0 auto;
+  padding: 80px 25px;
 }
 
-/* HEADINGS */
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
 h1 {
-  font-size: 52px;
+  font-size: 54px;
   margin-bottom: 20px;
-  letter-spacing: -0.02em;
 }
 
-p {
+p,
+li {
   font-size: 18px;
   line-height: 1.8;
   color: var(--muted);
-  max-width: 70ch;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.9s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   CARDS
+   ========================= */
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+button {
+  font-family: "Inter", sans-serif;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* =========================
+   CHECKOUT BUTTON
+   ========================= */
+
+.checkout-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 28px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+/* =========================
+   CHAT SYSTEM
+   ========================= */
+
+#chatbox {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.chat-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-row input {
+  flex: 1;
+  padding: 10px;
+}
+
+.chat-row button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+/* =========================
+   FOOTER (merged)
+   ========================= */
+
+footer,
+.site-footer {
+  text-align: center;
+  padding: 40px 10px;
+  margin-top: 80px;
+  border-top: 1px solid #ececec;
+  opacity: 0.7;
+}
+
+.site-footer p {
+  margin: 0;
 }
