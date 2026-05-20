@@ -2,78 +2,381 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>About | Picao Caldense</title>
-<script src="lang.js"></script>
-<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Picao Caldense</title>
+
+<style>
+:root{
+  --bg:#f7f1e8;
+  --text:#1a1a1a;
+  --green:#1f3b2c;
+  --heat:#c2412d;
+  --gold:#b08a57;
+}
+
+body{
+  margin:0;
+  font-family: "Georgia", serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 40px;
+  border-bottom:1px solid rgba(176,138,87,0.25);
+}
+
+nav a{
+  margin-right:16px;
+  cursor:pointer;
+  font-family: Arial, sans-serif;
+  font-size:14px;
+}
+
+nav a:hover{ color:var(--green); }
+
+.lang button{
+  margin-left:6px;
+  background:transparent;
+  border:1px solid var(--gold);
+  padding:6px 10px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:90px 20px 60px;
+}
+
+.hero h1{ font-size:44px; margin:0; }
+
+.hero p{
+  max-width:600px;
+  margin:15px auto 0;
+  font-family: Arial, sans-serif;
+  color:#444;
+}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.4);
+  border:1px solid rgba(176,138,87,0.3);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:16px;
+}
+
+/* BUTTON */
+button.primary{
+  background:var(--heat);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+section{ display:none; }
+section.active{ display:block; }
+
+/* CHAT */
+#chatbox{
+  height:180px;
+  overflow:auto;
+  border:1px solid rgba(176,138,87,0.3);
+  padding:10px;
+  margin-bottom:10px;
+  background:rgba(255,255,255,0.3);
+}
+
+input{
+  padding:10px;
+  width:70%;
+  border:1px solid rgba(176,138,87,0.4);
+  border-radius:8px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px 20px;
+  border-top:1px solid rgba(176,138,87,0.25);
+  margin-top:40px;
+  font-family: Arial, sans-serif;
+  font-size:13px;
+  color:#444;
+}
+</style>
 </head>
+
 <body>
 
-<header class="site-header">
-  <nav class="nav">
+<header>
 
-    <div class="nav-left">
-      <a href="index.html" data-i18n="nav_home">Home</a>
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="order.html" data-i18n="nav_order">Order</a>
-      <a href="contact-us.html" data-i18n="nav_contact">Contact</a>
-    </div>
-
-    <div class="lang-switch">
-      <button onclick="setLanguage('en')">EN</button>
-      <button onclick="setLanguage('fr')">FR</button>
-      <button onclick="setLanguage('es')">ES</button>
-    </div>
-
+  <nav>
+    <a onclick="show('home')" data-i18n="nav_home"></a>
+    <a onclick="show('about')" data-i18n="nav_about"></a>
+    <a onclick="show('order')" data-i18n="nav_order"></a>
+    <a onclick="show('contact')" data-i18n="nav_contact"></a>
   </nav>
+
+  <div class="lang">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('fr')">FR</button>
+    <button onclick="setLang('es')">ES</button>
+  </div>
+
 </header>
 
-<div class="container">
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <h1 data-i18n="title"></h1>
+    <p data-i18n="story"></p>
+  </div>
+</section>
 
-  <h1 data-i18n="about_title">Heritage</h1>
+<!-- ABOUT -->
+<section id="about">
+  <div class="hero">
+    <h1 data-i18n="about_title"></h1>
+    <p data-i18n="about_text"></p>
+  </div>
+</section>
 
-  <p class="tagline" data-i18n="about_tagline">
-    A story of family, tradition, and quiet craftsmanship behind every flavor—where the recipe carries the memory of those who came before us and the care of those who continue it today.
-  </p>
+<!-- ORDER -->
+<section id="order">
+  <div class="hero">
+    <h1 data-i18n="order_heading"></h1>
+    <p data-i18n="order_intro"></p>
+  </div>
 
-  <section>
-    <h2 data-i18n="about_section1_title">Rooted in Tradition</h2>
-    <p data-i18n="about_section1_text">
-      Picao Caldense is deeply rooted in Colombian culinary culture, where food is far more than sustenance—it is identity, memory, and celebration woven into everyday life. Meals are shared stories that connect generations, preserve heritage, and honor the simple yet meaningful act of gathering around a table. Each flavor reflects a lineage of tradition passed down with care, shaped by time, place, and the hands of family who cooked not from instruction, but from memory.
-    </p>
-  </section>
+  <div class="container">
+    <div class="card">
+      <p><b data-i18n="order_signature_text"></b></p>
+      <p data-i18n="flavour_classic"></p>
+      <p data-i18n="flavour_jalapeno"></p>
+      <p data-i18n="flavour_thai"></p>
 
-  <section>
-    <h2 data-i18n="about_section2_title">Craft & Respect</h2>
-    <p data-i18n="about_section2_text">
-      Our approach is guided by deep respect—for ingredients, for process, and for the traditions that shaped them. We believe that true flavor cannot be rushed. It is built slowly, through patience, repetition, and intention, in kitchens where technique was learned through observation and experience rather than written instruction. Every step reflects the discipline of traditional home cooking passed down through generations, where nothing is wasted and everything carries purpose.
-    </p>
-  </section>
+      <button class="primary" onclick="orderEmail()" data-i18n="place_order"></button>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2 data-i18n="about_section3_title">Our Values</h2>
-    <p data-i18n="about_section3_text">
-      We are guided by authenticity, consistency, and cultural pride. Authenticity in staying true to our origins without compromise. Consistency in delivering depth, balance, and quality in every bottle. Cultural pride in honoring the Colombian heritage that defines who we are. These values are not abstract ideas—they are practices embedded in every decision we make, shaping every bottle we produce.
-    </p>
-  </section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="hero">
+    <h1 data-i18n="contact_title"></h1>
+  </div>
 
-  <section>
-    <h2 data-i18n="about_brand_identity">Société des sauces</h2>
-    <p data-i18n="about_brand_identity_text">
-      More than a brand, Picao Caldense is a living expression of Colombian flavor—refined through time, crafted with intention, and made to be shared, remembered, and felt across every table it reaches.
-    </p>
-  </section>
+  <div class="container">
+    <div class="card">
 
-</div>
+      <div id="chatbox"></div>
 
-</body>
-</html>
+      <input id="msg" placeholder="Type message...">
+      <button class="primary" onclick="send()">Send</button>
 
-<footer class="site-footer">
-  <p data-i18n="footer">
-© 2025 Picao Caldense - Société des sauces
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p data-i18n="instagram"></p>
+  <p data-i18n="footer"></p>
 </footer>
 
-<script src="lang.js"></script>
+<script>
+
+/* TRANSLATIONS */
+const translations = {
+  en:{
+    nav_home:"Home",
+    nav_about:"About",
+    nav_order:"Order",
+    nav_contact:"Contact",
+
+    title:"Picao Caldense",
+    story:"Born from Colombian kitchens where flavor becomes memory. 
+    story_text:B"Picao Caldense is a handcrafted sauce experience inspired by tradition, warmth, and bold authentic ingredients. Created to elevate everyday meals, each blend brings together heritage, heat, and contemporary elegance in every bottle.",
+    about_title:"About Us",
+    about_text:"A handcrafted Colombian sauce rooted in heritage.",
+    about_text:"Picao Caldense is a handcrafted Colombian sauce experience inspired by family kitchens, bold ingredients, and the warmth of shared meals.",
+    about_text:"Rooted in Colombian culinary tradition, Picao Caldense was created to celebrate flavour, connection, and culture. Every recipe reflects memories of homemade meals, fresh herbs, vibrant peppers, and conversations shared around the table.
+    Our sauces are crafted with a balance of elegance and heat — combining authentic inspiration with a modern premium experience." ,
+    about_text:D" From herb-forward blends to deeper spice profiles, each flavour is designed to complement food rather than overpower it.
+    The technique makes it more than a sauce, Picao Caldense represents hospitality, heritage, and the energy of Colombian kitchens brought into a refined contemporary experience.",
+
+    order_heading:"Order",
+    order_intro:"Premium handcrafted sauces inspired by Colombia.",
+    order_signature_text:"Signature Blend",
+    flavour_classic:"Classic Piqué",
+    flavour_jalapeno:"Jalapeño Special",
+    flavour_thai:"Spicy Thai",
+    place_order:"Place Order",
+
+    contact_title:"Contact",
+
+    instagram:"Follow us @thisispicaocaldense",
+    footer:"© 2025 Picao Caldense"
+  },
+
+  fr:{
+    nav_home:"Accueil",
+    nav_about:"À propos",
+    nav_order:"Commander",
+    nav_contact:"Contact",
+
+    title:"Picao Caldense",
+    story:"Saveur colombienne artisanale.",
+    story:"Né des cuisines colombiennes où la saveur devient souvenir.",
+    story:"Picao Caldense est une sauce artisanale inspirée de la tradition, de la chaleur humaine et d’ingrédients authentiques aux saveurs audacieuses. Créée pour sublimer les repas du quotidien, chaque mélange réunit héritage, intensité et élégance contemporaine dans chaque bouteille.",
+    about_title:"À propos",
+    about_text:"Une sauce colombienne artisanale ancrée dans l’héritage.",
+    about_text:"Picao Caldense est une expérience de sauce colombienne artisanale inspirée des cuisines familiales, d’ingrédients audacieux et de la chaleur des repas partagés.",
+    about_text:"Ancré dans la tradition culinaire colombienne, Picao Caldense a été créé pour célébrer la saveur, la connexion et la culture. Chaque recette évoque les souvenirs de repas faits maison, d’herbes fraîches, de piments vibrants et de conversations autour de la table. Nos sauces sont élaborées avec un équilibre entre élégance et intensité — mêlant inspiration authentique et expérience moderne et raffinée.",
+    about_text:"Des mélanges herbacés aux profils d’épices plus profonds, chaque saveur est conçue pour accompagner les plats sans les dominer. Plus qu’une sauce, Picao Caldense incarne l’hospitalité, l’héritage et l’énergie des cuisines colombiennes dans une expérience contemporaine raffinée.",
+      
+    order_heading:"Commande",
+    order_intro:"Sauces premium artisanales.",
+    order_signature_text:"Mélange signature",
+    flavour_classic:"Classique",
+    flavour_jalapeno:"Jalapeño",
+    flavour_thai:"Thaï",
+    place_order:"Commander",
+
+    contact_title:"Contact",
+
+    instagram:"Suivez-nous @thisispicaocaldense",
+    footer:"© 2025 Picao Caldense"
+  },
+
+  es:{
+    nav_home:"Inicio",
+    nav_about:"Acerca de",
+    nav_order:"Ordenar",
+    nav_contact:"Contacto",
+
+    title:"Picao Caldense",
+    story:"Nacido de las cocinas colombianas donde el sabor se convierte en memoria.",
+    story:"Picao Caldense es una experiencia artesanal de salsas inspirada en la tradición, la calidez y los ingredientes auténticos de sabores intensos. Creada para elevar las comidas cotidianas, cada mezcla reúne herencia, picante y elegancia contemporánea en cada botella.",
+    about_title:"Acerca de",
+    about_text:"Una salsa colombiana artesanal arraigada en la herencia.",
+    about_text:"Picao Caldense es una experiencia artesanal de salsa colombiana inspirada en las cocinas familiares, ingredientes intensos y la calidez de las comidas compartidas.",
+    about_text:"Arraigado en la tradición culinaria colombiana, Picao Caldense fue creado para celebrar el sabor, la conexión y la cultura. Cada receta refleja recuerdos de comidas caseras, hierbas frescas, ajíes vibrantes y conversaciones compartidas alrededor de la mesa. Nuestras salsas están elaboradas con un equilibrio entre elegancia y picante, combinando inspiración auténtica con una experiencia moderna y premium.",
+    about_text:"Desde mezclas con notas herbales hasta perfiles de especias más profundos, cada sabor está diseñado para complementar la comida en lugar de dominarla. Más que una salsa, Picao Caldense representa hospitalidad, herencia y la energía de las cocinas colombianas llevadas a una experiencia contemporánea refinada.",
+      
+    order_heading:"Pedido",
+    order_intro:"Salsas premium artesanales.",
+    order_signature_text:"Mezcla exclusiva",
+    flavour_classic:"Clásica",
+    flavour_jalapeno:"Jalapeño",
+    flavour_thai:"Tailandesa",
+    place_order:"Ordenar",
+
+    contact_title:"Contacto",
+
+    instagram:"Síguenos @thisispicaocaldense",
+    footer:"© 2025 Picao Caldense"
+  }
+};
+
+/* LANGUAGE */
+function setLang(lang){
+  const d = translations[lang];
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.dataset.i18n;
+    if(d[key]) el.textContent = d[key];
+  });
+
+  localStorage.setItem("lang", lang);
+}
+
+/* NAV */
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* ORDER EMAIL */
+function orderEmail(){
+  window.location.href =
+    "mailto:jessica.betancur@picaocaldense.com?subject=Picao Caldense Order";
+}
+
+/* BOT */
+function send(){
+  const input = document.getElementById("msg");
+  const box = document.getElementById("chatbox");
+
+  const text = input.value.trim();
+  if(!text) return;
+
+  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+
+  const t = text.toLowerCase();
+
+  let reply = "";
+
+  if(t.includes("hello") || t.includes("hi")){
+    reply = "Hello 👋 How can I help you today?";
+  }
+  else if(t.includes("order")){
+    reply = "You can place orders in the Order section.";
+  }
+  else if(t.includes("deliver") || t.includes("shipping")){
+    reply = "Orders are shipped within a few business days after confirmation.";
+  }
+  else if(t.includes("quantity")){
+    reply = "You can order any quantity. Custom orders are available.";
+  }
+  else if(t.includes("flavour")){
+    reply = "We offer Classic Piqué, Jalapeño Special, and Spicy Thai.";
+  }
+  else if(t.includes("cancel")){
+    reply = "Your request to cancel your order has been received. We can cancel it for you before it is processed. Please confirm your order number via email so we can proceed right away.”;
+  }
+  else if(t.includes("shipping cancellation")){
+     reply = “We’ve received your cancellation request. Your order is currently being processed with care in our kitchen. If it hasn’t shipped yet, we’ll do our best to stop it right away. If it’s already on its way, we will not be able to cancel the order or offer return options once it arrives.”;
+  }
+  else if(t.includes("cancel/not processed")){
+    reply = “Your request to cancel your order has been received. We can cancel it for you before it is processed. Please confirm your order number via email so we can proceed right away.”;
+  }
+  else if(t.includes("credit")){
+    reply = "We do not provide store credit after recieving payment; in reference of cancellations.";
+  }
+  else{
+    reply = "Thanks for your message. Please send us an email and we’ll get back to you shortly.";
+  }
+
+  setTimeout(()=>{
+    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+    box.scrollTop = box.scrollHeight;
+  },400);
+
+  input.value = "";
+}
+
+/* INIT */
+setLang(localStorage.getItem("lang") || "en");
+
+</script>
+
 </body>
 </html>
