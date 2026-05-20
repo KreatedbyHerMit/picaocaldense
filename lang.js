@@ -19,6 +19,9 @@ const translations = {
     checkout: "Checkout",
     place_order: "Place Order",
 
+    title: "Picao Caldense",
+    story: "Born from Colombian kitchens where food is shared, remembered, and felt.",
+
     footer: "© 2025 Picao Caldense"
   },
 
@@ -41,6 +44,9 @@ const translations = {
     send: "Envoyer",
     checkout: "Paiement",
     place_order: "Commander",
+
+    title: "Picao Caldense",
+    story: "Né des cuisines colombiennes où la nourriture est partagée, mémorisée et ressentie.",
 
     footer: "© 2025 Picao Caldense"
   },
@@ -65,32 +71,37 @@ const translations = {
     checkout: "Pago",
     place_order: "Hacer pedido",
 
+    title: "Picao Caldense",
+    story: "Nacido de cocinas colombianas donde la comida se comparte, se recuerda y se siente.",
+
     footer: "© 2025 Picao Caldense"
   }
 };
 
-function setLanguage(lang) {
+function applyLang(lang) {
+  const dict = translations[lang] || translations.en;
+
   document.documentElement.lang = lang;
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-
-    if (translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    } else {
-      // safe fallback (prevents missing text)
-      el.textContent = el.textContent;
-    }
+    const key = el.dataset.i18n;
+    if (dict[key]) el.innerText = dict[key];
   });
 
   localStorage.setItem("lang", lang);
 }
 
-// auto-load saved language on every page
-document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("lang") || "en";
-  setLanguage(savedLang);
-});
+function initLang() {
+  const saved = localStorage.getItem("lang") || "en";
+  applyLang(saved);
 
-// expose globally
-window.setLanguage = setLanguage;
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      applyLang(btn.dataset.lang);
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initLang);
+
+window.setLang = applyLang;
