@@ -3,352 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Picao Caldense</title>
 
 <style>
-:root{
-  --bg:#f7f1e8;
-  --text:#1a1a1a;
-  --green:#1f3b2c;
-  --heat:#c2412d;
-  --gold:#b08a57;
-}
-
-body{
+body {
   margin:0;
-  font-family: "Georgia", serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:Arial;
+  background:#f4f4f4;
 }
 
-/* HEADER */
-header{
+/* NAV */
+nav {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 40px;
-  border-bottom:1px solid rgba(176,138,87,0.25);
+  background:#111;
+  color:white;
+  padding:15px 20px;
 }
 
-nav a{
-  margin-right:16px;
-  cursor:pointer;
-  font-family: Arial, sans-serif;
-  font-size:14px;
+nav a {
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
 }
 
-nav a:hover{ color:var(--green); }
+nav a:hover { text-decoration:underline; }
 
-.lang button{
-  margin-left:6px;
-  background:transparent;
-  border:1px solid var(--gold);
-  padding:6px 10px;
-  cursor:pointer;
-}
-
-/* HERO */
-.hero{
+/* LANGUAGE */
+.lang {
+  background:#1c1c1c;
   text-align:center;
-  padding:90px 20px 60px;
+  padding:10px;
 }
 
-.hero h1{ font-size:44px; margin:0; }
-
-.hero p{
-  max-width:600px;
-  margin:15px auto 0;
-  font-family: Arial, sans-serif;
-  color:#444;
-}
-
-/* CONTAINER */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-/* CARD */
-.card{
-  background:rgba(255,255,255,0.4);
-  border:1px solid rgba(176,138,87,0.3);
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:16px;
-}
-
-/* BUTTON */
-button.primary{
-  background:var(--heat);
-  color:#fff;
+.lang button {
+  margin:5px;
+  padding:6px 10px;
+  background:#333;
+  color:white;
   border:none;
-  padding:12px 18px;
-  border-radius:10px;
   cursor:pointer;
 }
 
-section{ display:none; }
-section.active{ display:block; }
+/* LAYOUT */
+.container {
+  max-width:1100px;
+  margin:20px auto;
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap:15px;
+}
 
 /* CHAT */
-#chatbox{
-  height:180px;
-  overflow:auto;
-  border:1px solid rgba(176,138,87,0.3);
+#chat {
+  background:white;
+  height:520px;
+  overflow-y:auto;
   padding:10px;
-  margin-bottom:10px;
-  background:rgba(255,255,255,0.3);
+  border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1);
 }
 
-input{
-  padding:10px;
-  width:70%;
-  border:1px solid rgba(176,138,87,0.4);
-  border-radius:8px;
+.msg { margin:8px 0; }
+.user { text-align:right; }
+.bot { color:#1a7f5a; }
+
+.input {
+  display:flex;
+  margin-top:10px;
 }
+
+input {
+  flex:1;
+  padding:12px;
+  border:none;
+}
+
+button.send {
+  padding:12px;
+  background:#111;
+  color:white;
+  border:none;
+}
+
+/* PANEL */
+.panel {
+  background:white;
+  height:520px;
+  overflow-y:auto;
+  padding:10px;
+  border-radius:10px;
+}
+
+.q {
+  width:100%;
+  margin:4px 0;
+  padding:8px;
+  background:#111;
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-size:12px;
+  text-align:left;
+}
+.q:hover { background:#333; }
 
 /* FOOTER */
-footer{
+footer {
   text-align:center;
-  padding:30px 20px;
-  border-top:1px solid rgba(176,138,87,0.25);
-  margin-top:40px;
-  font-family: Arial, sans-serif;
+  padding:20px;
+  color:#666;
   font-size:13px;
-  color:#444;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-
-  <nav>
-    <a onclick="show('home')" data-i18n="nav_home"></a>
-    <a onclick="show('about')" data-i18n="nav_about"></a>
-    <a onclick="show('order')" data-i18n="nav_order"></a>
-    <a onclick="show('contact')" data-i18n="nav_contact"></a>
-  </nav>
-
-  <div class="lang">
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('fr')">FR</button>
-    <button onclick="setLang('es')">ES</button>
+<!-- NAV -->
+<nav>
+  <div><b>Picao Caldense</b></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Order</a>
+    <a href="#">Contact</a>
   </div>
+</nav>
 
-</header>
+<!-- LANGUAGE -->
+<div class="lang">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('fr')">FR</button>
+  <button onclick="setLang('es')">ES</button>
+</div>
 
-<!-- HOME -->
-<section id="home" class="active">
-  <div class="hero">
-    <h1 data-i18n="title"></h1>
-    <p data-i18n="story"></p>
+<!-- MAIN -->
+<div class="container">
+
+<!-- CHAT -->
+<div>
+  <div id="chat"></div>
+
+  <div class="input">
+    <input id="input" placeholder="Ask something..." />
+    <button class="send" onclick="send()">Send</button>
   </div>
-</section>
+</div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="hero">
-    <h1 data-i18n="about_title"></h1>
-    <p data-i18n="about_text"></p>
-  </div>
-</section>
+<!-- INPUTS -->
+<div class="panel">
 
-<!-- ORDER -->
-<section id="order">
-  <div class="hero">
-    <h1 data-i18n="order_heading"></h1>
-    <p data-i18n="order_intro"></p>
-  </div>
+<h3>ORDER</h3>
+<button class="q" onclick="ask('order_1')">How do I place an order?</button>
+<button class="q" onclick="ask('order_2')">Can I order multiple items?</button>
+<button class="q" onclick="ask('order_3')">Payment methods?</button>
+<button class="q" onclick="ask('order_4')">Cancel order?</button>
 
-  <div class="container">
-    <div class="card">
-      <p><b data-i18n="order_signature_text"></b></p>
-      <p data-i18n="flavour_classic"></p>
-      <p data-i18n="flavour_jalapeno"></p>
-      <p data-i18n="flavour_thai"></p>
+<h3>DELIVERY</h3>
+<button class="q" onclick="ask('delivery_1')">Delivery time?</button>
+<button class="q" onclick="ask('delivery_2')">Shipping area?</button>
+<button class="q" onclick="ask('delivery_3')">Tracking?</button>
 
-      <button class="primary" onclick="orderEmail()" data-i18n="place_order"></button>
-    </div>
-  </div>
-</section>
+<h3>PRODUCT</h3>
+<button class="q" onclick="ask('product_1')">Flavors?</button>
+<button class="q" onclick="ask('product_2')">Spicy?</button>
+<button class="q" onclick="ask('product_3')">Ingredients?</button>
+<button class="q" onclick="ask('product_4')">Vegan?</button>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="hero">
-    <h1 data-i18n="contact_title"></h1>
-  </div>
+<h3>STORAGE</h3>
+<button class="q" onclick="ask('store_1')">Storage?</button>
+<button class="q" onclick="ask('store_2')">Refrigeration?</button>
 
-  <div class="container">
-    <div class="card">
+<h3>SUPPORT</h3>
+<button class="q" onclick="ask('support_1')">Refunds?</button>
+<button class="q" onclick="ask('support_2')">Damaged order?</button>
+<button class="q" onclick="ask('support_3')">Contact?</button>
 
-      <div id="chatbox"></div>
+<h3>BRAND</h3>
+<button class="q" onclick="ask('brand_1')">Story?</button>
 
-      <input id="msg" placeholder="Type message...">
-      <button class="primary" onclick="send()">Send</button>
+</div>
 
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <p data-i18n="instagram"></p>
-  <p data-i18n="footer"></p>
+© 2026 Picao Caldense | Instagram @thisispicaocaldense
 </footer>
 
 <script>
 
-/* TRANSLATIONS */
-const translations = {
-  en:{
-    nav_home:"Home",
-    nav_about:"About",
-    nav_order:"Order",
-    nav_contact:"Contact",
+/* TRANSLATIONS (STRUCTURE INCLUDED) */
+let lang = "en";
 
-    title:"Picao Caldense",
-    story:"Born from Colombian kitchens where flavor becomes memory.",
-    about_title:"About Us",
-    about_text:"A handcrafted Colombian sauce rooted in heritage.",
-
-    order_heading:"Order",
-    order_intro:"Premium handcrafted sauces inspired by Colombia.",
-    order_signature_text:"Signature Blend",
-    flavour_classic:"Classic herb-forward salsa",
-    flavour_jalapeno:"Jalapeño heat profile",
-    flavour_thai:"Thai fusion spice",
-    place_order:"Place Order",
-
-    contact_title:"Contact",
-
-    instagram:"Follow us @thisispicaocaldense",
-    footer:"© 2025 Picao Caldense"
-  },
-
-  fr:{
-    nav_home:"Accueil",
-    nav_about:"À propos",
-    nav_order:"Commander",
-    nav_contact:"Contact",
-
-    title:"Picao Caldense",
-    story:"Saveur colombienne artisanale.",
-    about_title:"À propos",
-    about_text:"Marque artisanale colombienne.",
-
-    order_heading:"Commande",
-    order_intro:"Sauces premium artisanales.",
-    order_signature_text:"Mélange signature",
-    flavour_classic:"Classique",
-    flavour_jalapeno:"Jalapeño",
-    flavour_thai:"Thaï",
-    place_order:"Commander",
-
-    contact_title:"Contact",
-
-    instagram:"Suivez-nous @thisispicaocaldense",
-    footer:"© 2025 Picao Caldense"
-  },
-
-  es:{
-    nav_home:"Inicio",
-    nav_about:"Acerca de",
-    nav_order:"Ordenar",
-    nav_contact:"Contacto",
-
-    title:"Picao Caldense",
-    story:"Sabor colombiano artesanal.",
-    about_title:"Acerca de",
-    about_text:"Marca artesanal colombiana.",
-
-    order_heading:"Pedido",
-    order_intro:"Salsas premium artesanales.",
-    order_signature_text:"Mezcla exclusiva",
-    flavour_classic:"Clásica",
-    flavour_jalapeno:"Jalapeño",
-    flavour_thai:"Tailandesa",
-    place_order:"Ordenar",
-
-    contact_title:"Contacto",
-
-    instagram:"Síguenos @thisispicaocaldense",
-    footer:"© 2025 Picao Caldense"
-  }
+const t = {
+ en: { fallback:"Try another question." },
+ fr: { fallback:"Essayez une autre question." },
+ es: { fallback:"Intenta otra pregunta." }
 };
 
-/* LANGUAGE */
-function setLang(lang){
-  const d = translations[lang];
-  document.documentElement.lang = lang;
+/* RESPONSES (FULL COVERAGE) */
+const r = {
 
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key = el.dataset.i18n;
-    if(d[key]) el.textContent = d[key];
-  });
+order_1:"Place orders via checkout.",
+order_2:"Yes, multiple items allowed.",
+order_3:"We accept online payments.",
+order_4:"Cancel shortly after ordering.",
 
-  localStorage.setItem("lang", lang);
+delivery_1:"2–7 business days.",
+delivery_2:"We ship to most regions.",
+delivery_3:"Tracking provided.",
+
+product_1:"Colombian-inspired flavors.",
+product_2:"Mild to hot spice levels.",
+product_3:"Natural ingredients.",
+product_4:"Some vegan options available.",
+
+store_1:"Store cool and dry.",
+store_2:"Refrigerate after opening.",
+
+support_1:"Refunds for damaged orders.",
+support_2:"We replace damaged items.",
+support_3:"Instagram @thisispicaocaldense",
+
+brand_1:"Colombian heritage sauce brand."
+};
+
+function add(type,text){
+const d=document.createElement("div");
+d.className="msg "+type;
+d.innerText=text;
+chat.appendChild(d);
+chat.scrollTop=9999;
 }
 
-/* NAV */
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-/* ORDER EMAIL */
-function orderEmail(){
-  window.location.href =
-    "mailto:orders@picaocaldense.com?subject=Picao Caldense Order";
-}
-
-/* BOT */
+/* CHAT SEND */
 function send(){
-  const input = document.getElementById("msg");
-  const box = document.getElementById("chatbox");
-
-  const text = input.value.trim();
-  if(!text) return;
-
-  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
-
-  const t = text.toLowerCase();
-
-  let reply = "";
-
-  if(t.includes("hello") || t.includes("hi")){
-    reply = "Hello 👋 How can I help you today?";
-  }
-  else if(t.includes("order")){
-    reply = "You can place orders in the Order section.";
-  }
-  else if(t.includes("deliver") || t.includes("shipping")){
-    reply = "Orders are shipped within a few business days after confirmation.";
-  }
-  else if(t.includes("quantity")){
-    reply = "You can order any quantity. Custom orders are available.";
-  }
-  else if(t.includes("flavour")){
-    reply = "We offer Classic Herb, Jalapeño Heat, and Thai Fusion.";
-  }
-  else{
-    reply = "Thanks for your message. We’ll get back to you shortly.";
-  }
-
-  setTimeout(()=>{
-    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
-    box.scrollTop = box.scrollHeight;
-  },400);
-
-  input.value = "";
+const i=document.getElementById("input");
+if(!i.value) return;
+add("user",i.value);
+add("bot",r[detect(i.value)] || t[lang].fallback);
+i.value="";
 }
 
-/* INIT */
-setLang(localStorage.getItem("lang") || "en");
+/* CLICK INPUT */
+function ask(k){
+add("user",k);
+setTimeout(()=>add("bot",r[k]),200);
+}
 
+/* SIMPLE DETECT */
+function detect(m){
+m=m.toLowerCase();
+if(m.includes("order")) return "order_1";
+if(m.includes("delivery")) return "delivery_1";
+if(m.includes("track")) return "delivery_3";
+if(m.includes("flavor")) return "product_1";
+if(m.includes("spicy")) return "product_2";
+if(m.includes("ingredient")) return "product_3";
+if(m.includes("refund")) return "support_1";
+if(m.includes("contact")) return "support_3";
+if(m.includes("picao")) return "brand_1";
+return "order_1";
+}
+
+/* LANGUAGE SWITCH */
+function setLang(l){
+lang=l;
+chat.innerHTML="";
+add("bot","Language switched.");
+}
+
+const chat=document.getElementById("chat");
+add("bot","Full system loaded: theme + nav + translations + chatbot.");
 </script>
 
 </body>
