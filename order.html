@@ -211,16 +211,22 @@ const translations = {
     nav_contact:"Contact",
 
     title:"Picao Caldense",
-    story:"Born from Colombian kitchens where flavor becomes memory.",
+    story:"Born from Colombian kitchens where flavor becomes memory. 
+    story_text:B"Picao Caldense is a handcrafted sauce experience inspired by tradition, warmth, and bold authentic ingredients. Created to elevate everyday meals, each blend brings together heritage, heat, and contemporary elegance in every bottle.",
     about_title:"About Us",
     about_text:"A handcrafted Colombian sauce rooted in heritage.",
+    about_text:"Picao Caldense is a handcrafted Colombian sauce experience inspired by family kitchens, bold ingredients, and the warmth of shared meals.",
+    about_text:"Rooted in Colombian culinary tradition, Picao Caldense was created to celebrate flavour, connection, and culture. Every recipe reflects memories of homemade meals, fresh herbs, vibrant peppers, and conversations shared around the table.
+    Our sauces are crafted with a balance of elegance and heat — combining authentic inspiration with a modern premium experience." ,
+    about_text:D" From herb-forward blends to deeper spice profiles, each flavour is designed to complement food rather than overpower it.
+    The technique makes it more than a sauce, Picao Caldense represents hospitality, heritage, and the energy of Colombian kitchens brought into a refined contemporary experience.",
 
     order_heading:"Order",
     order_intro:"Premium handcrafted sauces inspired by Colombia.",
     order_signature_text:"Signature Blend",
-    flavour_classic:"Classic herb-forward salsa",
-    flavour_jalapeno:"Jalapeño heat profile",
-    flavour_thai:"Thai fusion spice",
+    flavour_classic:"Classic Piqué",
+    flavour_jalapeno:"Jalapeño Special",
+    flavour_thai:"Spicy Thai",
     place_order:"Place Order",
 
     contact_title:"Contact",
@@ -237,9 +243,14 @@ const translations = {
 
     title:"Picao Caldense",
     story:"Saveur colombienne artisanale.",
+    story:"Né des cuisines colombiennes où la saveur devient souvenir.",
+    story:"Picao Caldense est une sauce artisanale inspirée de la tradition, de la chaleur humaine et d’ingrédients authentiques aux saveurs audacieuses. Créée pour sublimer les repas du quotidien, chaque mélange réunit héritage, intensité et élégance contemporaine dans chaque bouteille.",
     about_title:"À propos",
-    about_text:"Marque artisanale colombienne.",
-
+    about_text:"Une sauce colombienne artisanale ancrée dans l’héritage.",
+    about_text:"Picao Caldense est une expérience de sauce colombienne artisanale inspirée des cuisines familiales, d’ingrédients audacieux et de la chaleur des repas partagés.",
+    about_text:"Ancré dans la tradition culinaire colombienne, Picao Caldense a été créé pour célébrer la saveur, la connexion et la culture. Chaque recette évoque les souvenirs de repas faits maison, d’herbes fraîches, de piments vibrants et de conversations autour de la table. Nos sauces sont élaborées avec un équilibre entre élégance et intensité — mêlant inspiration authentique et expérience moderne et raffinée.",
+    about_text:"Des mélanges herbacés aux profils d’épices plus profonds, chaque saveur est conçue pour accompagner les plats sans les dominer. Plus qu’une sauce, Picao Caldense incarne l’hospitalité, l’héritage et l’énergie des cuisines colombiennes dans une expérience contemporaine raffinée.",
+      
     order_heading:"Commande",
     order_intro:"Sauces premium artisanales.",
     order_signature_text:"Mélange signature",
@@ -261,10 +272,14 @@ const translations = {
     nav_contact:"Contacto",
 
     title:"Picao Caldense",
-    story:"Sabor colombiano artesanal.",
+    story:"Nacido de las cocinas colombianas donde el sabor se convierte en memoria.",
+    story:"Picao Caldense es una experiencia artesanal de salsas inspirada en la tradición, la calidez y los ingredientes auténticos de sabores intensos. Creada para elevar las comidas cotidianas, cada mezcla reúne herencia, picante y elegancia contemporánea en cada botella.",
     about_title:"Acerca de",
-    about_text:"Marca artesanal colombiana.",
-
+    about_text:"Una salsa colombiana artesanal arraigada en la herencia.",
+    about_text:"Picao Caldense es una experiencia artesanal de salsa colombiana inspirada en las cocinas familiares, ingredientes intensos y la calidez de las comidas compartidas.",
+    about_text:"Arraigado en la tradición culinaria colombiana, Picao Caldense fue creado para celebrar el sabor, la conexión y la cultura. Cada receta refleja recuerdos de comidas caseras, hierbas frescas, ajíes vibrantes y conversaciones compartidas alrededor de la mesa. Nuestras salsas están elaboradas con un equilibrio entre elegancia y picante, combinando inspiración auténtica con una experiencia moderna y premium.",
+    about_text:"Desde mezclas con notas herbales hasta perfiles de especias más profundos, cada sabor está diseñado para complementar la comida en lugar de dominarla. Más que una salsa, Picao Caldense representa hospitalidad, herencia y la energía de las cocinas colombianas llevadas a una experiencia contemporánea refinada.",
+      
     order_heading:"Pedido",
     order_intro:"Salsas premium artesanales.",
     order_signature_text:"Mezcla exclusiva",
@@ -302,7 +317,7 @@ function show(id){
 /* ORDER EMAIL */
 function orderEmail(){
   window.location.href =
-    "mailto:orders@picaocaldense.com?subject=Picao Caldense Order";
+    "mailto:jessica.betancur@picaocaldense.com?subject=Picao Caldense Order";
 }
 
 /* BOT */
@@ -332,10 +347,22 @@ function send(){
     reply = "You can order any quantity. Custom orders are available.";
   }
   else if(t.includes("flavour")){
-    reply = "We offer Classic Herb, Jalapeño Heat, and Thai Fusion.";
+    reply = "We offer Classic Piqué, Jalapeño Special, and Spicy Thai.";
+  }
+  else if(t.includes("cancel")){
+    reply = "Your request to cancel your order has been received. We can cancel it for you before it is processed. Please confirm your order number via email so we can proceed right away.”;
+  }
+  else if(t.includes("shipping cancellation")){
+     reply = “We’ve received your cancellation request. Your order is currently being processed with care in our kitchen. If it hasn’t shipped yet, we’ll do our best to stop it right away. If it’s already on its way, we will not be able to cancel the order or offer return options once it arrives.”;
+  }
+  else if(t.includes("cancel/not processed")){
+    reply = “Your request to cancel your order has been received. We can cancel it for you before it is processed. Please confirm your order number via email so we can proceed right away.”;
+  }
+  else if(t.includes("credit")){
+    reply = "We do not provide store credit after recieving payment; in reference of cancellations.";
   }
   else{
-    reply = "Thanks for your message. We’ll get back to you shortly.";
+    reply = "Thanks for your message. Please send us an email and we’ll get back to you shortly.";
   }
 
   setTimeout(()=>{
