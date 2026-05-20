@@ -4,106 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title data-i18n="title">Picao Caldense</title>
+<title data-i18n="order_title">Order | Picao Caldense</title>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-header {
-  padding: 15px;
-  background: #111;
-  color: white;
-}
-
-nav a {
-  margin-right: 15px;
-  color: white;
-  text-decoration: none;
-}
-
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.lang-switch button {
-  margin-left: 5px;
-}
-</style>
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
 
-<!-- NAV -->
-<header>
-  <nav>
-    <a href="#" data-i18n="nav_home">Home</a>
-    <a href="#" data-i18n="nav_about">About</a>
-    <a href="#" data-i18n="nav_order">Order</a>
-    <a href="#" data-i18n="nav_contact">Contact</a>
-  </nav>
+<!-- NAVIGATION -->
+<header class="site-header">
+  <nav class="nav">
 
-  <div class="lang-switch">
-    <button onclick="setLanguage('en')">EN</button>
-    <button onclick="setLanguage('fr')">FR</button>
-    <button onclick="setLanguage('es')">ES</button>
-  </div>
+    <div class="nav-left">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="order.html" data-i18n="nav_order">Order</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+
+    <div class="lang-switch">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('fr')">FR</button>
+      <button onclick="setLanguage('es')">ES</button>
+    </div>
+
+  </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <h1 data-i18n="title">Picao Caldense</h1>
-  <p data-i18n="story"></p>
+  <h1 class="hero-title" data-i18n="order_title">Order</h1>
+  <p class="hero-subtitle" data-i18n="order_text">
+    Place your order below
+  </p>
 </section>
 
-<!-- CONTENT -->
-<section style="padding: 20px;">
-  <h2 data-i18n="home_title"></h2>
-  <p data-i18n="home_text"></p>
-</section>
+<!-- MAIN CONTENT -->
+<main class="content-section">
 
-<!-- TRANSLATIONS -->
+  <div class="two-column">
+
+    <!-- PRODUCT INFO -->
+    <div class="card">
+      <h2 data-i18n="order_heading">Order</h2>
+
+      <p data-i18n="order_intro"></p>
+
+      <h3 data-i18n="order_signature"></h3>
+      <p data-i18n="order_signature_text"></p>
+
+      <h3 data-i18n="order_flavours"></h3>
+
+      <p data-i18n="flavour_classic"></p>
+      <p data-i18n="flavour_jalapeno"></p>
+      <p data-i18n="flavour_thai"></p>
+
+      <h3 data-i18n="product_quantities"></h3>
+
+      <ul>
+        <li data-i18n="qty_355"></li>
+        <li data-i18n="qty_half_dozen"></li>
+        <li data-i18n="qty_dozen"></li>
+        <li data-i18n="qty_custom"></li>
+      </ul>
+
+    </div>
+
+    <!-- ORDER / INFO -->
+    <div class="card">
+
+      <h3 data-i18n="product_profile"></h3>
+      <p data-i18n="product_profile_text"></p>
+
+      <h3 data-i18n="product_use"></h3>
+      <p data-i18n="product_use_text"></p>
+
+      <h3 data-i18n="product_storage"></h3>
+      <p data-i18n="product_storage_text"></p>
+
+      <h3 data-i18n="order_checkout"></h3>
+      <p data-i18n="order_checkout_text"></p>
+
+      <button class="btn-primary" data-i18n="place_order">
+        Place Order
+      </button>
+
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p data-i18n="footer">© 2025 Picao Caldense</p>
+</footer>
+
+<!-- LANGUAGE SYSTEM -->
 <script>
-const translations = {
-  en: {
-    nav_home: "Home",
-    nav_about: "About",
-    nav_order: "Order",
-    nav_contact: "Contact",
-    title: "Picao Caldense",
-    story: "Born from Colombian kitchens where food is shared, remembered, and felt.",
-    home_title: "Welcome",
-    home_text: "Welcome to Picao Caldense"
-  },
-
-  fr: {
-    nav_home: "Accueil",
-    nav_about: "À propos",
-    nav_order: "Commander",
-    nav_contact: "Contact",
-    title: "Picao Caldense",
-    story: "Né des cuisines colombiennes où la nourriture est partagée.",
-    home_title: "Bienvenue",
-    home_text: "Bienvenue chez Picao Caldense"
-  },
-
-  es: {
-    nav_home: "Inicio",
-    nav_about: "Acerca de",
-    nav_order: "Ordenar",
-    nav_contact: "Contacto",
-    title: "Picao Caldense",
-    story: "Nacido de cocinas colombianas donde la comida se comparte.",
-    home_title: "Bienvenido",
-    home_text: "Bienvenido a Picao Caldense"
-  }
-};
-
-function applyLang(lang = "en") {
+function applyLanguage(lang = "en") {
   const dict = translations[lang] || translations.en;
 
   document.documentElement.lang = lang;
@@ -117,10 +116,10 @@ function applyLang(lang = "en") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyLang(localStorage.getItem("lang") || "en");
+  applyLanguage(localStorage.getItem("lang") || "en");
 });
 
-window.setLanguage = applyLang;
+window.setLanguage = applyLanguage;
 </script>
 
 </body>
