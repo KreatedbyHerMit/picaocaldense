@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title data-i18n="order_title">Order | Picao Caldense</title>
 
@@ -11,7 +11,7 @@
 
 <body>
 
-<!-- NAVIGATION (UNCHANGED STRUCTURE) -->
+<!-- NAVIGATION (CONSISTENT ACROSS SITE) -->
 <header class="site-header">
   <nav class="nav">
 
@@ -31,44 +31,51 @@
   </nav>
 </header>
 
-<!-- MAIN CONTENT (YOUR ORIGINAL LONG-FORM STYLE) -->
-<main class="container">
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-title" data-i18n="order_title">Order</h1>
+  <p class="hero-subtitle" data-i18n="order_subtitle">
+    Crafted flavors delivered with Colombian heritage.
+  </p>
+</section>
 
-  <h1 data-i18n="order_heading">Order</h1>
+<!-- ORDER SECTION -->
+<main class="content-section">
 
-  <p data-i18n="order_intro"></p>
+  <div class="two-column">
 
-  <h2 data-i18n="order_signature"></h2>
-  <p data-i18n="order_signature_text"></p>
+    <!-- PRODUCT INFO -->
+    <div class="card">
+      <h2 data-i18n="order_info_title">Our Selection</h2>
+      <p data-i18n="order_info_text">
+        Choose from our signature blends inspired by generations of Colombian kitchens.
+      </p>
+    </div>
 
-  <h3 data-i18n="order_flavours"></h3>
+    <!-- ORDER FORM -->
+    <div class="card">
+      <h2 data-i18n="order_form_title">Place an Order</h2>
 
-  <p data-i18n="flavour_classic"></p>
-  <p data-i18n="flavour_jalapeno"></p>
-  <p data-i18n="flavour_thai"></p>
+      <form id="orderForm">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
 
-  <h3 data-i18n="product_quantities"></h3>
+        <select required>
+          <option value="">Select Product</option>
+          <option>Picao Classic</option>
+          <option>Picao Spicy</option>
+          <option>Picao Premium</option>
+        </select>
 
-  <ul>
-    <li data-i18n="qty_355"></li>
-    <li data-i18n="qty_half_dozen"></li>
-    <li data-i18n="qty_dozen"></li>
-    <li data-i18n="qty_custom"></li>
-  </ul>
+        <input type="number" placeholder="Quantity" min="1" required />
 
-  <h3 data-i18n="product_profile"></h3>
-  <p data-i18n="product_profile_text"></p>
+        <button type="submit" class="btn-primary" data-i18n="order_submit">
+          Submit Order
+        </button>
+      </form>
+    </div>
 
-  <h3 data-i18n="product_use"></h3>
-  <p data-i18n="product_use_text"></p>
-
-  <h3 data-i18n="product_storage"></h3>
-  <p data-i18n="product_storage_text"></p>
-
-  <h3 data-i18n="order_checkout"></h3>
-  <p data-i18n="order_checkout_text"></p>
-
-  <button data-i18n="place_order">Place Order</button>
+  </div>
 
 </main>
 
@@ -77,28 +84,15 @@
   <p data-i18n="footer">© 2025 Picao Caldense</p>
 </footer>
 
-<!-- FIXED LANGUAGE ENGINE (ONLY SAFETY FIXS) -->
+<!-- SIMPLE LANGUAGE HOOK (or use your global lang.js) -->
+<script src="assets/js/lang.js"></script>
+
 <script>
-function applyLanguage(lang = "en") {
-  const dict = translations[lang] || translations.en;
-
-  document.documentElement.lang = lang;
-
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-
-    // SAFE: prevents missing text breaking layout
-    el.textContent = dict[key] || el.textContent;
-  });
-
-  localStorage.setItem("lang", lang);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  applyLanguage(localStorage.getItem("lang") || "en");
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  alert("Order submitted successfully!");
+  this.reset();
 });
-
-window.setLanguage = applyLanguage;
 </script>
 
 </body>
