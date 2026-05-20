@@ -1,77 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title data-i18n="title">Picao Caldense</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 15px;
+  background: #111;
+  color: white;
+}
+
+nav a {
+  margin-right: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.lang-switch button {
+  margin-left: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a href="#" data-i18n="nav_home">Home</a>
+    <a href="#" data-i18n="nav_about">About</a>
+    <a href="#" data-i18n="nav_order">Order</a>
+    <a href="#" data-i18n="nav_contact">Contact</a>
+  </nav>
+
+  <div class="lang-switch">
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('fr')">FR</button>
+    <button onclick="setLanguage('es')">ES</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 data-i18n="title">Picao Caldense</h1>
+  <p data-i18n="story"></p>
+</section>
+
+<!-- CONTENT -->
+<section style="padding: 20px;">
+  <h2 data-i18n="home_title"></h2>
+  <p data-i18n="home_text"></p>
+</section>
+
+<!-- TRANSLATIONS -->
+<script>
 const translations = {
   en: {
     nav_home: "Home",
     nav_about: "About",
     nav_order: "Order",
     nav_contact: "Contact",
-
     title: "Picao Caldense",
-    story:
-      "Born from Colombian kitchens where food is shared, remembered, and felt.",
-
+    story: "Born from Colombian kitchens where food is shared, remembered, and felt.",
     home_title: "Welcome",
-    about_title: "About Us",
-    order_title: "Order",
-    contact_title: "Contact",
-
-    home_text: "Welcome to Picao Caldense",
-    about_text: "Our story is built on Colombian heritage",
-    order_text: "Place your order below",
-    contact_text: "Get in touch with us",
-
-    order_heading: "Order",
-    order_intro:
-      "Picao Caldense sauces are handcrafted in batches of authentic flavor and premium quality.",
-
-    order_signature: "Signature Product",
-    order_signature_text: "Picao Caldense – Signature Blend",
-
-    order_flavours: "Flavours",
-
-    flavour_classic:
-      "Classic Piqué Salsa — Tangy lime and cilantro, perfect for any dish.",
-
-    flavour_jalapeno:
-      "Jalapeño Special — Fresh, vibrant jalapeño with a clean heat.",
-
-    flavour_thai:
-      "Spicy Thai Delight — Bold fusion heat with aromatic depth.",
-
-    product_quantities: "Available Quantities",
-    qty_355: "355 ml glass bottles",
-    qty_half_dozen: "Half dozen (6 bottles)",
-    qty_dozen: "Dozen (12 bottles)",
-    qty_custom: "Custom quantities available upon request",
-
-    product_profile: "Flavor Profile",
-
-    product_profile_text:
-      "Balanced heat, savory depth, and slow-building spice with fresh, vibrant undertones.",
-
-    product_use: "How to Use",
-
-    product_use_text:
-      "Use as a table sauce, marinade base, or finishing condiment.",
-
-    product_storage: "Storage",
-
-    product_storage_text:
-      "Refrigerate after opening. Shake well before use.",
-
-    product_order: "Order",
-
-    product_order_text:
-      "Use the Contact page chatbot to place orders and request quantities.",
-
-    order_checkout: "Checkout",
-    order_checkout_text:
-      "Place your order directly through email.",
-
-    send: "Send",
-    checkout: "Checkout",
-    place_order: "Place Order",
-
-    footer: "© 2025 Picao Caldense"
+    home_text: "Welcome to Picao Caldense"
   },
 
   fr: {
@@ -79,88 +85,10 @@ const translations = {
     nav_about: "À propos",
     nav_order: "Commander",
     nav_contact: "Contact",
-
     title: "Picao Caldense",
-
-    story:
-      "Né des cuisines colombiennes où la nourriture est partagée, mémorisée et ressentie.",
-
+    story: "Né des cuisines colombiennes où la nourriture est partagée.",
     home_title: "Bienvenue",
-    about_title: "À propos de nous",
-    order_title: "Commande",
-    contact_title: "Contact",
-
-    home_text: "Bienvenue chez Picao Caldense",
-
-    about_text:
-      "Notre histoire est ancrée dans l'héritage colombien",
-
-    order_text: "Passez votre commande ci-dessous",
-
-    contact_text: "Contactez-nous",
-
-    order_heading: "Commande",
-
-    order_intro:
-      "Les sauces Picao Caldense sont préparées artisanalement en petites quantités avec une saveur authentique et une qualité premium.",
-
-    order_signature: "Produit Signature",
-
-    order_signature_text:
-      "Picao Caldense – Mélange Signature",
-
-    order_flavours: "Saveurs",
-
-    flavour_classic:
-      "Salsa Piqué Classique — Citron vert acidulé et coriandre, parfaite pour tous les plats.",
-
-    flavour_jalapeno:
-      "Spécial Jalapeño — Saveur fraîche avec une chaleur équilibrée.",
-
-    flavour_thai:
-      "Délice Thaï Épicé — Fusion intense avec profondeur aromatique.",
-
-    product_quantities: "Quantités Disponibles",
-
-    qty_355: "Bouteilles en verre de 355 ml",
-
-    qty_half_dozen: "Demi-douzaine (6 bouteilles)",
-
-    qty_dozen: "Douzaine (12 bouteilles)",
-
-    qty_custom:
-      "Quantités personnalisées disponibles sur demande",
-
-    product_profile: "Profil de Saveur",
-
-    product_profile_text:
-      "Chaleur équilibrée, profondeur savoureuse et épices progressives avec des notes fraîches.",
-
-    product_use: "Comment Utiliser",
-
-    product_use_text:
-      "Utiliser comme sauce de table, marinade ou condiment final.",
-
-    product_storage: "Conservation",
-
-    product_storage_text:
-      "Réfrigérer après ouverture. Bien agiter avant utilisation.",
-
-    product_order: "Commande",
-
-    product_order_text:
-      "Utilisez le chatbot de la page Contact pour commander et demander des quantités.",
-
-    order_checkout: "Paiement",
-
-    order_checkout_text:
-      "Passez votre commande directement par courriel.",
-
-    send: "Envoyer",
-    checkout: "Paiement",
-    place_order: "Commander",
-
-    footer: "© 2025 Picao Caldense"
+    home_text: "Bienvenue chez Picao Caldense"
   },
 
   es: {
@@ -168,88 +96,10 @@ const translations = {
     nav_about: "Acerca de",
     nav_order: "Ordenar",
     nav_contact: "Contacto",
-
     title: "Picao Caldense",
-
-    story:
-      "Nacido de cocinas colombianas donde la comida se comparte, se recuerda y se siente.",
-
+    story: "Nacido de cocinas colombianas donde la comida se comparte.",
     home_title: "Bienvenido",
-    about_title: "Sobre nosotros",
-    order_title: "Pedido",
-    contact_title: "Contacto",
-
-    home_text: "Bienvenido a Picao Caldense",
-
-    about_text:
-      "Nuestra historia está basada en la herencia colombiana",
-
-    order_text: "Haz tu pedido abajo",
-
-    contact_text: "Contáctanos",
-
-    order_heading: "Pedido",
-
-    order_intro:
-      "Las salsas Picao Caldense están elaboradas artesanalmente en pequeños lotes con sabor auténtico y calidad premium.",
-
-    order_signature: "Producto Exclusivo",
-
-    order_signature_text:
-      "Picao Caldense – Mezcla Exclusiva",
-
-    order_flavours: "Sabores",
-
-    flavour_classic:
-      "Salsa Piqué Clásica — Lima y cilantro frescos, perfecta para cualquier plato.",
-
-    flavour_jalapeno:
-      "Especial Jalapeño — Sabor fresco con un picante limpio.",
-
-    flavour_thai:
-      "Delicia Tailandesa Picante — Fusión intensa con profundidad aromática.",
-
-    product_quantities: "Cantidades Disponibles",
-
-    qty_355: "Botellas de vidrio de 355 ml",
-
-    qty_half_dozen: "Media docena (6 botellas)",
-
-    qty_dozen: "Docena (12 botellas)",
-
-    qty_custom:
-      "Cantidades personalizadas disponibles bajo solicitud",
-
-    product_profile: "Perfil de Sabor",
-
-    product_profile_text:
-      "Picante equilibrado, profundidad sabrosa y especias progresivas con notas frescas.",
-
-    product_use: "Cómo Usar",
-
-    product_use_text:
-      "Usar como salsa de mesa, marinada o condimento final.",
-
-    product_storage: "Almacenamiento",
-
-    product_storage_text:
-      "Refrigerar después de abrir. Agitar bien antes de usar.",
-
-    product_order: "Pedido",
-
-    product_order_text:
-      "Use el chatbot de la página Contacto para realizar pedidos y solicitar cantidades.",
-
-    order_checkout: "Pago",
-
-    order_checkout_text:
-      "Realice su pedido directamente por correo electrónico.",
-
-    send: "Enviar",
-    checkout: "Pago",
-    place_order: "Hacer pedido",
-
-    footer: "© 2025 Picao Caldense"
+    home_text: "Bienvenido a Picao Caldense"
   }
 };
 
@@ -260,10 +110,7 @@ function applyLang(lang = "en") {
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
-
-    if (dict[key]) {
-      el.innerHTML = dict[key];
-    }
+    el.textContent = dict[key] || "";
   });
 
   localStorage.setItem("lang", lang);
@@ -273,5 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
   applyLang(localStorage.getItem("lang") || "en");
 });
 
-window.setLang = applyLang;
 window.setLanguage = applyLang;
+</script>
+
+</body>
+</html>
