@@ -300,29 +300,129 @@ function send(){
   box.innerHTML+=`<div><b>You:</b> ${text}</div>`;
   const t=text.toLowerCase();
 
-  let reply="";
+  let reply = "";
 
-  if(t.includes("hello")||t.includes("hi")){
-    reply="Hello 👋 How can I help you today?";
+// current language: "en", "fr", or "es"
+const lang = currentLang || "en";
+
+if (lang === "en") {
+
+  if (t.includes("hello") || t.includes("hi")) {
+    reply = "Hello 👋 How can I help you today?";
   }
-  else if(t.includes("order")||t.includes("buy")){
-    reply="You can place orders in the Order section.";
+  else if (t.includes("order") || t.includes("buy")) {
+    reply = "You can place orders in the Order section.";
   }
-  else if(t.includes("shipping")||t.includes("track")){
-    reply="Orders ship in a few days and can be tracked via email.";
+  else if (t.includes("shipping") || t.includes("track")) {
+    reply = "Orders ship in a few days and can be tracked via email.";
   }
-  else if(t.includes("cancel")){
-    reply="Cancellation request received. Please send order number via email.";
+  else if (t.includes("cancel")) {
+    reply = "Cancellation request received. Please send your order number via email.";
   }
-  else if(t.includes("refund")||t.includes("return")){
-    reply="Contact us via email with your order number for support via email.";
+  else if (t.includes("refund") || t.includes("return")) {
+    reply = "Contact us via email with your order number for support.";
   }
-  else if(t.includes("organic")||t.includes("natural")){
-    reply="Made with natural, organic-inspired ingredients.";
+  else if (t.includes("organic") || t.includes("natural")) {
+    reply = "Made with natural, organic-inspired ingredients.";
   }
-  else{
-    reply="Thanks for your message. Please email us for support.";
+  else {
+    reply = "Thanks for your message. Please email us for support.";
   }
+
+}
+
+else if (lang === "fr") {
+
+  if (
+    t.includes("bonjour") ||
+    t.includes("salut") ||
+    t.includes("allo")
+  ) {
+    reply = "Bonjour 👋 Comment puis-je vous aider aujourd'hui ?";
+  }
+  else if (
+    t.includes("commande") ||
+    t.includes("acheter")
+  ) {
+    reply = "Vous pouvez passer votre commande dans la section Commande.";
+  }
+  else if (
+    t.includes("livraison") ||
+    t.includes("suivi")
+  ) {
+    reply = "Les commandes sont expédiées en quelques jours et peuvent être suivies par courriel.";
+  }
+  else if (
+    t.includes("annuler") ||
+    t.includes("annulation")
+  ) {
+    reply = "Demande d'annulation reçue. Veuillez envoyer votre numéro de commande par courriel.";
+  }
+  else if (
+    t.includes("remboursement") ||
+    t.includes("retour")
+  ) {
+    reply = "Contactez-nous par courriel avec votre numéro de commande pour obtenir de l'aide.";
+  }
+  else if (
+    t.includes("biologique") ||
+    t.includes("naturel")
+  ) {
+    reply = "Préparée avec des ingrédients naturels d'inspiration biologique.";
+  }
+  else {
+    reply = "Merci pour votre message. Veuillez nous contacter par courriel pour obtenir de l'aide.";
+  }
+
+}
+
+else if (lang === "es") {
+
+  if (
+    t.includes("hola") ||
+    t.includes("buenas")
+  ) {
+    reply = "Hola 👋 ¿Cómo puedo ayudarte hoy?";
+  }
+  else if (
+    t.includes("pedido") ||
+    t.includes("orden") ||
+    t.includes("comprar")
+  ) {
+    reply = "Puedes realizar tu pedido en la sección de Pedidos.";
+  }
+  else if (
+    t.includes("envío") ||
+    t.includes("envio") ||
+    t.includes("seguimiento")
+  ) {
+    reply = "Los pedidos se envían en pocos días y pueden rastrearse por correo electrónico.";
+  }
+  else if (
+    t.includes("cancelar") ||
+    t.includes("cancelación")
+  ) {
+    reply = "Solicitud de cancelación recibida. Por favor envía tu número de pedido por correo electrónico.";
+  }
+  else if (
+    t.includes("reembolso") ||
+    t.includes("devolución") ||
+    t.includes("devolucion")
+  ) {
+    reply = "Contáctanos por correo electrónico con tu número de pedido para recibir asistencia.";
+  }
+  else if (
+    t.includes("orgánico") ||
+    t.includes("organico") ||
+    t.includes("natural")
+  ) {
+    reply = "Elaborada con ingredientes naturales inspirados en productos orgánicos.";
+  }
+  else {
+    reply = "Gracias por tu mensaje. Por favor contáctanos por correo electrónico para recibir asistencia.";
+  }
+
+}
 
   setTimeout(()=>{
     box.innerHTML+=`<div><b>Picao Bot:</b> ${reply}</div>`;
