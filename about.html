@@ -302,16 +302,49 @@ function send(){
 
   let reply="";
 
-  <script>
+  if(t.includes("hello")||t.includes("hi")){
+    reply="Hello 👋 How can I help you today?";
+  }
+  else if(t.includes("order")||t.includes("buy")){
+    reply="You can place orders in the Order section.";
+  }
+  else if(t.includes("shipping")||t.includes("track")){
+    reply="Orders ship in a few days and can be tracked via email.";
+  }
+  else if(t.includes("cancel")){
+    reply="Cancellation request received. Please send order number via email.";
+  }
+  else if(t.includes("refund")||t.includes("return")){
+    reply="Contact us via email with your order number for support.";
+  }
+  else if(t.includes("organic")||t.includes("natural")){
+    reply="Made with natural, organic-inspired ingredients.";
+  }
+  else{
+    reply="Thanks for your message. Please email us for support.";
+  }
+
+  setTimeout(()=>{
+    box.innerHTML+=`<div><b>Picao Bot:</b> ${reply}</div>`;
+    box.scrollTop=box.scrollHeight;
+  },300);
+
+  input.value="";
+}
+
+setLang(localStorage.getItem("lang")||"en");
+
+<script>
+  
+/* FULL CHATBOT FIXED */
+
 let currentLang = localStorage.getItem("lang") || "en";
 
 function setLang(lang){
   currentLang = lang;
   localStorage.setItem("lang", lang);
-  document.documentElement.lang = lang;
 }
 
-/* CHAT FUNCTION */
 function send(){
   const input = document.getElementById("msg");
   const box = document.getElementById("chatbox");
@@ -355,7 +388,7 @@ function send(){
     else if(t.includes("commande") || t.includes("acheter")){
       reply = "Vous pouvez passer votre commande dans la section Commande.";
     }
-    else if(t.includes("livraison") || t.includes("livrer")){
+    else if(t.includes("livraison")){
       reply = "Les commandes sont expédiées en quelques jours.";
     }
     else if(t.includes("annuler")){
@@ -363,6 +396,9 @@ function send(){
     }
     else if(t.includes("remboursement") || t.includes("retour")){
       reply = "Contactez-nous par email avec votre commande.";
+    }
+    else if(t.includes("naturel") || t.includes("biologique")){
+      reply = "Préparé avec des ingrédients naturels.";
     }
     else{
       reply = "Merci pour votre message.";
@@ -385,6 +421,9 @@ function send(){
     else if(t.includes("reembolso") || t.includes("devolución") || t.includes("devolucion")){
       reply = "Contáctanos por email.";
     }
+    else if(t.includes("natural") || t.includes("orgánico") || t.includes("organico")){
+      reply = "Hecho con ingredientes naturales.";
+    }
     else{
       reply = "Gracias por tu mensaje.";
     }
@@ -393,11 +432,15 @@ function send(){
   setTimeout(()=>{
     box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
     box.scrollTop = box.scrollHeight;
-  }, 300);
+  },300);
 
   input.value = "";
 }
 
 /* INIT */
 setLang(currentLang);
+  
 </script>
+  
+</body>
+</html>
