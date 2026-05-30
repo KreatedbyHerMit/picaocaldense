@@ -132,6 +132,7 @@ footer{
   </div>
 </header>
 
+<!-- HOME -->
 <section id="home" class="active">
   <div class="hero">
     <h1 data-i18n="title"></h1>
@@ -140,6 +141,7 @@ footer{
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="hero">
     <h1 data-i18n="about_title"></h1>
@@ -154,6 +156,7 @@ footer{
   </div>
 </section>
 
+<!-- ORDER -->
 <section id="order">
   <div class="hero">
     <h1 data-i18n="order_heading"></h1>
@@ -171,6 +174,7 @@ footer{
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="hero">
     <h1 data-i18n="contact_title"></h1>
@@ -193,34 +197,43 @@ footer{
 <script>
 
 const translations = {
-  en:{ nav_home:"Home", nav_about:"About", nav_order:"Order", nav_contact:"Contact",
-    title:"Picao Caldense", story:"Born from Colombian kitchens where flavor becomes memory.",
-    story_text:"Handcrafted sauce made with natural ingredients.",
+  en:{
+    nav_home:"Home",
+    nav_about:"About",
+    nav_order:"Order",
+    nav_contact:"Contact",
+    title:"Picao Caldense",
+    story:"Born from Colombian kitchens where flavor becomes memory.",
+    story_text:"Handcrafted sauce made with natural, organic-inspired ingredients.",
     about_title:"About Us",
-    about_text_a:"Artisanal sauce crafted with care.",
-    about_text_b:"Inspired by Caldas, Colombia...",
-    about_text_c:"Traditional meets modern craft.",
-    about_text_d:"Luxury culinary experience.",
+    about_text_a:"Every batch is prepared with attention to tradition, balancing vibrant herbs, rich peppers, and bold seasonings to deliver a refined flavor experience that feels both comforting and elevated. Inspired by Colombian culinary heritage, the sauce is designed to bring warmth, character, and memorable taste to every meal while honoring the simplicity of quality ingredients and artisanal preparation.",
+    about_text_b:"Picao Caldense draws its inspiration from the Caldas region of Colombia, an area known for its rich culinary traditions, mountain culture, warm hospitality, and bold, comforting flavors. The name “Caldense” references people and culture from Caldas, connecting the brand to Colombian heritage and the traditions of sharing food with family and community.",
+    about_text_c:"The concept behind Picao Caldense originates from the idea of elevating traditional Colombian-style sauces into a refined, handcrafted experience that blends authenticity with modern presentation. Its flavor profile is inspired by homemade kitchen recipes, street food culture, fresh herbs, peppers, garlic, and the vibrant seasoning traditions commonly found throughout Colombia.",
+    about_text_d:"Rather than being mass-produced, Picao Caldense is positioned as an artisanal brand rooted in storytelling, craftsmanship, and cultural pride — bringing the spirit of Colombian cooking into a contemporary luxury food experience, representing Colombian culinary culture.",
     order_heading:"Order",
-    order_intro:"355ml handcrafted sauce.",
+    order_intro:"355ml of artisanal handcrafted sauce.",
     order_signature_text:"Signature Blend",
-    flavour_classic:"Classic",
-    flavour_jalapeno:"Jalapeño",
+    flavour_classic:"Classic Piqué",
+    flavour_jalapeno:"Jalapeño Special",
     flavour_thai:"Spicy Thai",
     place_order:"Place Order",
     contact_title:"Contact",
-    instagram:"@thisispicaocaldense",
+    instagram:"Follow us @thisispicaocaldense",
     footer:"© 2026 Picao Caldense"
   },
-
-  fr:{ nav_home:"Accueil", nav_about:"À propos", nav_order:"Commander", nav_contact:"Contact",
-    title:"Picao Caldense", story:"Saveur colombienne.",
-    story_text:"Sauce artisanale naturelle.",
+  fr:{
+    nav_home:"Accueil",
+    nav_about:"À propos",
+    nav_order:"Commander",
+    nav_contact:"Contact",
+    title:"Picao Caldense",
+    story:"Né des cuisines colombiennes où la saveur devient souvenir.",
+    story_text:"Sauce artisanale aux ingrédients naturels.",
     about_title:"À propos",
-    about_text_a:"Sauce artisanale.",
-    about_text_b:"Inspiré de Caldas, Colombie.",
-    about_text_c:"Tradition et modernité.",
-    about_text_d:"Expérience gastronomique.",
+    about_text_a:"Sauce colombienne artisanale.",
+    about_text_b:"Picao Caldense puise son inspiration dans la région de Caldas en Colombie, une région reconnue pour ses riches traditions culinaires, sa culture montagnarde, son hospitalité chaleureuse et ses saveurs intenses et réconfortantes. Le nom « Caldense » fait référence aux habitants et à la culture de Caldas, reliant la marque à l’héritage colombien et aux traditions de partage de la nourriture en famille et en communauté.",
+    about_text_c:"Le concept derrière Picao Caldense repose sur l’idée d’élever les sauces traditionnelles de style colombien vers une expérience raffinée et artisanale qui allie authenticité et présentation moderne. Son profil de saveur s’inspire des recettes faites maison, de la culture de la cuisine de rue, des herbes fraîches, des piments, de l’ail et des traditions d’assaisonnement vibrantes que l’on retrouve partout en Colombie.",
+    about_text_d:"Plutôt que d’être produite en masse, Picao Caldense se positionne comme une marque artisanale fondée sur le storytelling, le savoir-faire et la fierté culturelle — apportant l’esprit de la cuisine colombienne dans une expérience gastronomique contemporaine et luxueuse.",
     order_heading:"Commande",
     order_intro:"355 ml de sauce artisanale",
     order_signature_text:"Mélange signature",
@@ -229,96 +242,100 @@ const translations = {
     flavour_thai:"Thaï",
     place_order:"Commander",
     contact_title:"Contact",
-    instagram:"@thisispicaocaldense",
+    instagram:"Suivez-nous @thisispicaocaldense",
     footer:"© 2026 Picao Caldense"
   },
-
-  es:{ nav_home:"Inicio", nav_about:"Acerca de", nav_order:"Ordenar", nav_contact:"Contacto",
-    title:"Picao Caldense", story:"Sabor colombiano.",
-    story_text:"Salsa artesanal natural.",
+  es:{
+    nav_home:"Inicio",
+    nav_about:"Acerca de",
+    nav_order:"Ordenar",
+    nav_contact:"Contacto",
+    title:"Picao Caldense",
+    story:"Nacido de cocinas colombianas.",
+    story_text:"Salsa artesanal con ingredientes naturales.",
     about_title:"Acerca de",
-    about_text_a:"Salsa artesanal.",
-    about_text_b:"Inspirado en Caldas, Colombia.",
-    about_text_c:"Tradición y modernidad.",
-    about_text_d:"Experiencia gourmet.",
+    about_text_a:"Salsa colombiana artesanal.",
+    about_text_b:"Picao Caldense se inspira en la región de Caldas, Colombia, una zona reconocida por sus ricas tradiciones culinarias, su cultura montañosa, su cálida hospitalidad y sus sabores intensos y reconfortantes. El nombre “Caldense” hace referencia a la gente y la cultura de Caldas, conectando la marca con la herencia colombiana y las tradiciones de compartir la comida con la familia y la comunidad.",
+    about_text_c:"El concepto detrás de Picao Caldense nace de la idea de elevar las salsas tradicionales de estilo colombiano hacia una experiencia refinada y artesanal que combina autenticidad con una presentación moderna. Su perfil de sabor está inspirado en recetas caseras, la cultura de la comida callejera, las hierbas frescas, los ajíes, el ajo y las vibrantes tradiciones de condimentos que se encuentran comúnmente en toda Colombia.",
+    about_text_d:"En lugar de ser producida en masa, Picao Caldense se posiciona como una marca artesanal basada en la narrativa, la artesanía y el orgullo cultural — llevando el espíritu de la cocina colombiana a una experiencia gastronómica contemporánea y lujosa.",
     order_heading:"Pedido",
-    order_intro:"355 ml de salsa artesanal",
+    order_intro:"355 ml de salsa artesanal.",
     order_signature_text:"Mezcla exclusiva",
     flavour_classic:"Clásica",
     flavour_jalapeno:"Jalapeño",
     flavour_thai:"Tailandesa",
     place_order:"Ordenar",
     contact_title:"Contacto",
-    instagram:"@thisispicaocaldense",
+    instagram:"Síguenos @thisispicaocaldense",
     footer:"© 2026 Picao Caldense"
   }
 };
 
-let currentLang = "en";
-
-/* LANGUAGE */
 function setLang(lang){
-  currentLang = lang;
   const d = translations[lang];
-
   document.documentElement.lang = lang;
-
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key = el.dataset.i18n;
     if(d[key]) el.textContent = d[key];
   });
-
   localStorage.setItem("lang", lang);
 }
 
-/* NAV */
 function show(id){
   document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* EMAIL */
 function orderEmail(){
-  window.location.href="mailto:jessica.betancur@picaocaldense.com?subject=Picao Order";
+  window.location.href="mailto:jessica.betancur@picaocaldense.com?subject=Picao Caldense Order";
 }
 
-/* CHATBOT */
+/* FULL CHATBOT FIXED */
 function send(){
   const input=document.getElementById("msg");
   const box=document.getElementById("chatbox");
   const text=input.value.trim();
   if(!text) return;
 
-  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+  box.innerHTML+=`<div><b>You:</b> ${text}</div>`;
   const t=text.toLowerCase();
 
   let reply="";
-  const lang=currentLang;
 
-  if(lang==="en"){
-    if(t.includes("hello")||t.includes("hi")) reply="Hello 👋 How can I help?";
-    else reply="Please email us for support.";
+  if(t.includes("hello")||t.includes("hi")){
+    reply="Hello 👋 How can I help you today?";
   }
-  else if(lang==="fr"){
-    if(t.includes("bonjour")) reply="Bonjour 👋";
-    else reply="Contactez-nous par email.";
+  else if(t.includes("order")||t.includes("buy")){
+    reply="You can place orders in the Order section.";
   }
-  else if(lang==="es"){
-    if(t.includes("hola")) reply="Hola 👋";
-    else reply="Contáctanos por email.";
+  else if(t.includes("shipping")||t.includes("track")){
+    reply="Orders ship in a few days and can be tracked via email.";
+  }
+  else if(t.includes("cancel")){
+    reply="Cancellation request received. Please send order number via email.";
+  }
+  else if(t.includes("refund")||t.includes("return")){
+    reply="Contact us via email with your order number for support via email.";
+  }
+  else if(t.includes("organic")||t.includes("natural")){
+    reply="Made with natural, organic-inspired ingredients.";
+  }
+  else{
+    reply="Thanks for your message. Please email us for support.";
   }
 
   setTimeout(()=>{
-    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+    box.innerHTML+=`<div><b>Picao Bot:</b> ${reply}</div>`;
     box.scrollTop=box.scrollHeight;
   },300);
 
   input.value="";
 }
 
-setLang(localStorage.getItem("lang") || "en");
+setLang(localStorage.getItem("lang")||"en");
 
 </script>
 
 </body>
 </html>
+
