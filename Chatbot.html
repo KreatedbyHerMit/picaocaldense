@@ -1,0 +1,48 @@
+<script>
+let currentLang = localStorage.getItem("lang") || "en";
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+}
+
+function send(){
+  const input = document.getElementById("msg");
+  const box = document.getElementById("chatbox");
+  const text = input.value.trim();
+  if(!text) return;
+
+  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+  const t = text.toLowerCase();
+
+  let reply = "";
+  const lang = currentLang;
+
+  if(lang === "en"){
+    if(t.includes("hello") || t.includes("hi")) reply = "Hello 👋 How can I help you today?";
+    else if(t.includes("order")) reply = "You can place orders in the Order section.";
+    else if(t.includes("shipping")) reply = "Orders ship in a few days.";
+    else if(t.includes("cancel")) reply = "Send your order number for cancellation.";
+    else reply = "Thanks for your message.";
+  }
+
+  else if(lang === "fr"){
+    if(t.includes("bonjour")) reply = "Bonjour 👋 Comment puis-je vous aider ?";
+    else if(t.includes("commande")) reply = "Vous pouvez commander dans la section Commande.";
+    else reply = "Merci pour votre message.";
+  }
+
+  else if(lang === "es"){
+    if(t.includes("hola")) reply = "Hola 👋 ¿Cómo puedo ayudarte?";
+    else if(t.includes("pedido")) reply = "Puedes hacer pedidos en la sección de pedidos.";
+    else reply = "Gracias por tu mensaje.";
+  }
+
+  box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+  box.scrollTop = box.scrollHeight;
+
+  input.value = "";
+}
+
+setLang(currentLang);
+</script>
