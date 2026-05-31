@@ -4,45 +4,113 @@ let currentLang = localStorage.getItem("lang") || "en";
 function setLang(lang){
   currentLang = lang;
   localStorage.setItem("lang", lang);
+
+  const d = translations[lang];
+  if(d){
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.dataset.i18n;
+      if(d[key]) el.textContent = d[key];
+    });
+  }
 }
 
 function send(){
   const input = document.getElementById("msg");
   const box = document.getElementById("chatbox");
+
   const text = input.value.trim();
   if(!text) return;
 
   box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+
   const t = text.toLowerCase();
-
   let reply = "";
-  const lang = currentLang;
 
-  if(lang === "en"){
-    if(t.includes("hello") || t.includes("hi")) reply = "Hello 👋 How can I help you today?";
-    else if(t.includes("order")) reply = "You can place orders in the Order section.";
-    else if(t.includes("shipping")) reply = "Orders ship in a few days.";
-    else if(t.includes("cancel")) reply = "Send your order number for cancellation.";
-    else reply = "Thanks for your message.";
+  /* GREETINGS */
+  if(
+    t.includes("hello") || t.includes("hi") ||
+    t.includes("bonjour") || t.includes("salut") ||
+    t.includes("hola")
+  ){
+    reply = "Hello 👋 How can I help you today?";
   }
 
-  else if(lang === "fr"){
-    if(t.includes("bonjour")) reply = "Bonjour 👋 Comment puis-je vous aider ?";
-    else if(t.includes("commande")) reply = "Vous pouvez commander dans la section Commande.";
-    else reply = "Merci pour votre message.";
+  /* ORDERS */
+  else if(
+    t.includes("order") || t.includes("buy") ||
+    t.includes("commande") || t.includes("acheter") ||
+    t.includes("pedido") || t.includes("comprar")
+  ){
+    reply = "You can place orders in the Order section.";
   }
 
-  else if(lang === "es"){
-    if(t.includes("hola")) reply = "Hola 👋 ¿Cómo puedo ayudarte?";
-    else if(t.includes("pedido")) reply = "Puedes hacer pedidos en la sección de pedidos.";
-    else reply = "Gracias por tu mensaje.";
+  /* SHIPPING */
+  else if(
+    t.includes("shipping") || t.includes("track") ||
+    t.includes("livraison") || t.includes("livrer") ||
+    t.includes("envío") || t.includes("envio")
+  ){
+    reply = "Orders ship in a few days and can be tracked via email.";
   }
 
-  box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
-  box.scrollTop = box.scrollHeight;
+  /* CANCELLATION */
+  else if(
+    t.includes("cancel") ||
+    t.includes("annuler") ||
+    t.includes("cancelar")
+  ){
+    reply = "Cancellation request received. Please send your order number by email.";
+  }
+
+  /* REFUNDS */
+  else if(
+    t.includes("refund") || t.includes("return") ||
+    t.includes("remboursement") || t.includes("retour") ||
+    t.includes("reembolso") || t.includes("devolución") || t.includes("devolucion")
+  ){
+    reply = "Contact us by email with your order number for support.";
+  }
+
+  /* INGREDIENTS */
+  else if(
+    t.includes("organic") || t.includes("natural") ||
+    t.includes("naturel") || t.includes("biologique") ||
+    t.includes("orgánico") || t.includes("organico")
+  ){
+    reply = "Made with natural, organic-inspired ingredients.";
+  }
+
+  /* PRICING */
+  else if(
+    t.includes("price") || t.includes("cost") ||
+    t.includes("prix") ||
+    t.includes("precio")
+  ){
+    reply = "Please contact us for current pricing information.";
+  }
+
+  /* FLAVOURS */
+  else if(
+    t.includes("flavour") || t.includes("flavor") ||
+    t.includes("saveur") ||
+    t.includes("sabor")
+  ){
+    reply = "We currently offer Signature Blend, Classic Piqué, Jalapeño Special and Spicy Thai.";
+  }
+
+  else{
+    reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
+  }
+
+  setTimeout(()=>{
+    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+    box.scrollTop = box.scrollHeight;
+  },300);
 
   input.value = "";
 }
 
+/* PAGE LOAD */
 setLang(currentLang);
 </script>
