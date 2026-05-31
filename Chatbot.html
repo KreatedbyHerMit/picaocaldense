@@ -1,20 +1,4 @@
 <script>
-let currentLang = localStorage.getItem("lang") || "en";
-
-function setLang(lang){
-  currentLang = lang;
-  localStorage.setItem("lang", lang);
-
-  const d = translations[lang];
-  if(d){
-    document.documentElement.lang = lang;
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.dataset.i18n;
-      if(d[key]) el.textContent = d[key];
-    });
-  }
-}
-
 function send(){
   const input = document.getElementById("msg");
   const box = document.getElementById("chatbox");
@@ -103,14 +87,11 @@ function send(){
     reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
   }
 
-  setTimeout(()=>{
+  setTimeout(() => {
     box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
     box.scrollTop = box.scrollHeight;
-  },300);
+  }, 300);
 
   input.value = "";
 }
-
-/* PAGE LOAD */
-setLang(currentLang);
 </script>
