@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Picao Caldense Chatbot Test</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    max-width:800px;
+    margin:40px auto;
+    padding:20px;
+}
+
+#chatbox{
+    height:300px;
+    overflow-y:auto;
+    border:1px solid #ccc;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+input{
+    width:75%;
+    padding:10px;
+}
+
+button{
+    padding:10px 20px;
+}
+</style>
+</head>
+<body>
+
+<h2>Picao Caldense Multilingual Chatbot</h2>
+
+<div id="chatbox"></div>
+
+<input id="msg" placeholder="Type a message...">
+<button onclick="send()">Send</button>
+
+<script>
+function send(){
+
+  const input = document.getElementById("msg");
+  const box = document.getElementById("chatbox");
+
+  const text = input.value.trim();
+  if(!text) return;
+
+  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+
+  const t = text.toLowerCase();
+  let reply = "";
+
+  /* GREETINGS */
+  if(
+    t.includes("hello") ||
+    t.includes("hi") ||
+    t.includes("bonjour") ||
+    t.includes("salut") ||
+    t.includes("hola")
+  ){
+    reply = "Hello 👋 How can I help you today?";
+  }
+
+  /* ORDERS */
+  else if(
+    t.includes("order") ||
+    t.includes("buy") ||
+    t.includes("commande") ||
+    t.includes("acheter") ||
+    t.includes("pedido") ||
+    t.includes("comprar")
+  ){
+    reply = "You can place orders in the Order section.";
+  }
+
+  /* SHIPPING */
+  else if(
+    t.includes("shipping") ||
+    t.includes("track") ||
+    t.includes("livraison") ||
+    t.includes("livrer") ||
+    t.includes("envio") ||
+    t.includes("envío")
+  ){
+    reply = "Orders ship in a few days and can be tracked via email.";
+  }
+
+  /* CANCELLATION */
+  else if(
+    t.includes("cancel") ||
+    t.includes("annuler") ||
+    t.includes("cancelar")
+  ){
+    reply = "Cancellation request received. Please send your order number via email.";
+  }
+
+  /* REFUNDS */
+  else if(
+    t.includes("refund") ||
+    t.includes("return") ||
+    t.includes("remboursement") ||
+    t.includes("retour") ||
+    t.includes("reembolso") ||
+    t.includes("devolucion") ||
+    t.includes("devolución")
+  ){
+    reply = "Contact us via email with your order number for support.";
+  }
+
+  /* INGREDIENTS */
+  else if(
+    t.includes("organic") ||
+    t.includes("natural") ||
+    t.includes("naturel") ||
+    t.includes("biologique") ||
+    t.includes("organico") ||
+    t.includes("orgánico")
+  ){
+    reply = "Made with natural, organic-inspired ingredients.";
+  }
+
+  /* PRICING */
+  else if(
+    t.includes("price") ||
+    t.includes("cost") ||
+    t.includes("prix") ||
+    t.includes("precio")
+  ){
+    reply = "Please contact us for current pricing information.";
+  }
+
+  /* FLAVOURS */
+  else if(
+    t.includes("flavour") ||
+    t.includes("flavor") ||
+    t.includes("saveur") ||
+    t.includes("sabor")
+  ){
+    reply = "We currently offer Signature Blend, Classic Piqué, Jalapeño Special and Spicy Thai.";
+  }
+
+  else{
+    reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
+  }
+
+  setTimeout(() => {
+    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+    box.scrollTop = box.scrollHeight;
+  }, 300);
+
+  input.value = "";
+}
+</script>
+
+</body>
+</html>
