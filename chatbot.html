@@ -2,31 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Picao Caldense Chatbot Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picao Caldense Chatbot</title>
 
 <style>
 body{
-    font-family:Arial,sans-serif;
-    max-width:800px;
+    font-family:Arial, sans-serif;
+    max-width:900px;
     margin:40px auto;
     padding:20px;
 }
 
+h2{
+    text-align:center;
+}
+
 #chatbox{
-    height:300px;
+    height:350px;
     overflow-y:auto;
     border:1px solid #ccc;
-    padding:10px;
+    border-radius:8px;
+    padding:15px;
     margin-bottom:10px;
 }
 
-input{
+#msg{
     width:75%;
     padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
 
 button{
     padding:10px 20px;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -36,122 +45,148 @@ button{
 
 <div id="chatbox"></div>
 
-<input id="msg" placeholder="Type a message...">
+<input
+    id="msg"
+    type="text"
+    placeholder="Type a message..."
+    onkeydown="if(event.key==='Enter') send();">
+
 <button onclick="send()">Send</button>
 
 <script>
 function send(){
 
-  const input = document.getElementById("msg");
-  const box = document.getElementById("chatbox");
+    const input = document.getElementById("msg");
+    const box = document.getElementById("chatbox");
 
-  const text = input.value.trim();
-  if(!text) return;
+    const text = input.value.trim();
 
-  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
+    if(!text) return;
 
-  const t = text.toLowerCase();
-  let reply = "";
+    box.innerHTML += `<div><b>You:</b> ${text}</div>`;
 
-  /* GREETINGS */
-  if(
-    t.includes("hello") ||
-    t.includes("hi") ||
-    t.includes("bonjour") ||
-    t.includes("salut") ||
-    t.includes("hola")
-  ){
-    reply = "Hello 👋 How can I help you today?";
-  }
+    const t = text.toLowerCase();
 
-  /* ORDERS */
-  else if(
-    t.includes("order") ||
-    t.includes("buy") ||
-    t.includes("commande") ||
-    t.includes("acheter") ||
-    t.includes("pedido") ||
-    t.includes("comprar")
-  ){
-    reply = "You can place orders in the Order section.";
-  }
+    let reply = "";
 
-  /* SHIPPING */
-  else if(
-    t.includes("shipping") ||
-    t.includes("track") ||
-    t.includes("livraison") ||
-    t.includes("livrer") ||
-    t.includes("envio") ||
-    t.includes("envío")
-  ){
-    reply = "Orders ship in a few days and can be tracked via email.";
-  }
+    /* FRENCH */
 
-  /* CANCELLATION */
-  else if(
-    t.includes("cancel") ||
-    t.includes("annuler") ||
-    t.includes("cancelar")
-  ){
-    reply = "Cancellation request received. Please send your order number via email.";
-  }
+    if(t.includes("bonjour") || t.includes("salut")){
+        reply = "Bonjour 👋 Comment puis-je vous aider aujourd'hui ?";
+    }
 
-  /* REFUNDS */
-  else if(
-    t.includes("refund") ||
-    t.includes("return") ||
-    t.includes("remboursement") ||
-    t.includes("retour") ||
-    t.includes("reembolso") ||
-    t.includes("devolucion") ||
-    t.includes("devolución")
-  ){
-    reply = "Contact us via email with your order number for support.";
-  }
+    else if(t.includes("commande") || t.includes("acheter")){
+        reply = "Vous pouvez passer votre commande dans la section Commande.";
+    }
 
-  /* INGREDIENTS */
-  else if(
-    t.includes("organic") ||
-    t.includes("natural") ||
-    t.includes("naturel") ||
-    t.includes("biologique") ||
-    t.includes("organico") ||
-    t.includes("orgánico")
-  ){
-    reply = "Made with natural, organic-inspired ingredients.";
-  }
+    else if(t.includes("livraison") || t.includes("livrer")){
+        reply = "Les commandes sont expédiées en quelques jours et peuvent être suivies par courriel.";
+    }
 
-  /* PRICING */
-  else if(
-    t.includes("price") ||
-    t.includes("cost") ||
-    t.includes("prix") ||
-    t.includes("precio")
-  ){
-    reply = "Please contact us for current pricing information.";
-  }
+    else if(t.includes("annuler")){
+        reply = "Demande d'annulation reçue. Veuillez envoyer votre numéro de commande par courriel.";
+    }
 
-  /* FLAVOURS */
-  else if(
-    t.includes("flavour") ||
-    t.includes("flavor") ||
-    t.includes("saveur") ||
-    t.includes("sabor")
-  ){
-    reply = "We currently offer Signature Blend, Classic Piqué, Jalapeño Special and Spicy Thai.";
-  }
+    else if(t.includes("remboursement") || t.includes("retour")){
+        reply = "Veuillez nous contacter par courriel avec votre numéro de commande.";
+    }
 
-  else{
-    reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
-  }
+    else if(t.includes("prix")){
+        reply = "Veuillez nous contacter pour connaître les prix actuels.";
+    }
 
-  setTimeout(() => {
-    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
-    box.scrollTop = box.scrollHeight;
-  }, 300);
+    else if(t.includes("saveur")){
+        reply = "Nous offrons actuellement Signature Blend, Classic Piqué, Jalapeño Special et Spicy Thai.";
+    }
 
-  input.value = "";
+    else if(t.includes("ingredient") || t.includes("ingrédient")){
+        reply = "Nos sauces sont préparées avec des ingrédients naturels de qualité.";
+    }
+
+    /* SPANISH */
+
+    else if(t.includes("hola")){
+        reply = "Hola 👋 ¿Cómo puedo ayudarte hoy?";
+    }
+
+    else if(t.includes("pedido") || t.includes("comprar")){
+        reply = "Puedes realizar pedidos en la sección de pedidos.";
+    }
+
+    else if(t.includes("envio") || t.includes("envío")){
+        reply = "Los pedidos se envían en pocos días y pueden rastrearse por correo electrónico.";
+    }
+
+    else if(t.includes("cancelar")){
+        reply = "Solicitud de cancelación recibida. Envía tu número de pedido por correo electrónico.";
+    }
+
+    else if(
+        t.includes("reembolso") ||
+        t.includes("devolucion") ||
+        t.includes("devolución")
+    ){
+        reply = "Contáctanos por correo electrónico con tu número de pedido.";
+    }
+
+    else if(t.includes("precio")){
+        reply = "Contáctanos para obtener la información de precios actual.";
+    }
+
+    else if(t.includes("sabor")){
+        reply = "Actualmente ofrecemos Signature Blend, Classic Piqué, Jalapeño Special y Spicy Thai.";
+    }
+
+    else if(t.includes("ingrediente")){
+        reply = "Nuestras salsas están elaboradas con ingredientes naturales de calidad.";
+    }
+
+    /* ENGLISH */
+
+    else if(t.includes("hello") || t.includes("hi")){
+        reply = "Hello 👋 How can I help you today?";
+    }
+
+    else if(t.includes("order") || t.includes("buy")){
+        reply = "You can place orders in the Order section.";
+    }
+
+    else if(t.includes("shipping") || t.includes("track")){
+        reply = "Orders ship in a few days and can be tracked via email.";
+    }
+
+    else if(t.includes("cancel")){
+        reply = "Cancellation request received. Please send your order number via email.";
+    }
+
+    else if(t.includes("refund") || t.includes("return")){
+        reply = "Contact us via email with your order number for support.";
+    }
+
+    else if(t.includes("price") || t.includes("cost")){
+        reply = "Please contact us for current pricing information.";
+    }
+
+    else if(t.includes("flavour") || t.includes("flavor")){
+        reply = "We currently offer Signature Blend, Classic Piqué, Jalapeño Special and Spicy Thai.";
+    }
+
+    else if(t.includes("ingredient")){
+        reply = "Our sauces are made with quality natural ingredients.";
+    }
+
+    /* DEFAULT */
+
+    else{
+        reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
+    }
+
+    setTimeout(() => {
+        box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+        box.scrollTop = box.scrollHeight;
+    }, 300);
+
+    input.value = "";
 }
 </script>
 
