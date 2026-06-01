@@ -291,50 +291,179 @@ function orderEmail(){
 }
 
 /* FULL CHATBOT FIXED */
+
+<script>
 function send(){
-  const input=document.getElementById("msg");
-  const box=document.getElementById("chatbox");
-  const text=input.value.trim();
+
+  const input = document.getElementById("msg");
+  const box = document.getElementById("chatbox");
+
+  const text = input.value.trim();
+
   if(!text) return;
 
-  box.innerHTML+=`<div><b>You:</b> ${text}</div>`;
-  const t=text.toLowerCase();
+  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
 
-  let reply="";
+  const t = text.toLowerCase();
 
-  if(t.includes("hello")||t.includes("hi")){
-    reply="Hello 👋 How can I help you today?";
+  let reply = "";
+
+  /* FRENCH */
+
+  if(
+      t.includes("bonjour") ||
+      t.includes("salut")
+  ){
+      reply = "Bonjour 👋 Comment puis-je vous aider aujourd'hui ?";
   }
-  else if(t.includes("order")||t.includes("buy")){
-    reply="You can place orders in the Order section.";
+
+  else if(
+      t.includes("commande") ||
+      t.includes("acheter")
+  ){
+      reply = "Vous pouvez passer votre commande dans la section Commande.";
   }
-  else if(t.includes("shipping")||t.includes("track")){
-    reply="Orders ship in a few days and can be tracked via email.";
+
+  else if(
+      t.includes("livraison") ||
+      t.includes("livrer")
+  ){
+      reply = "Les commandes sont expédiées en quelques jours et peuvent être suivies par courriel.";
   }
+
+  else if(t.includes("annuler")){
+      reply = "Demande d'annulation reçue. Veuillez envoyer votre numéro de commande par courriel.";
+  }
+
+  else if(
+      t.includes("remboursement") ||
+      t.includes("retour")
+  ){
+      reply = "Veuillez nous contacter par courriel avec votre numéro de commande.";
+  }
+
+  else if(t.includes("prix")){
+      reply = "Veuillez nous contacter pour connaître les prix actuels.";
+  }
+
+  else if(t.includes("saveur")){
+      reply = "Nous offrons actuellement Signature Blend, Classic Piqué, Jalapeño Special et Spicy Thai.";
+  }
+
+  else if(
+      t.includes("ingredient") ||
+      t.includes("ingrédient")
+  ){
+      reply = "Nos sauces sont préparées avec des ingrédients naturels de qualité.";
+  }
+
+  /* SPANISH */
+
+  else if(t.includes("hola")){
+      reply = "Hola 👋 ¿Cómo puedo ayudarte hoy?";
+  }
+
+  else if(
+      t.includes("pedido") ||
+      t.includes("comprar")
+  ){
+      reply = "Puedes realizar pedidos en la sección de pedidos.";
+  }
+
+  else if(
+      t.includes("envio") ||
+      t.includes("envío")
+  ){
+      reply = "Los pedidos se envían en pocos días y pueden rastrearse por correo electrónico.";
+  }
+
+  else if(t.includes("cancelar")){
+      reply = "Solicitud de cancelación recibida. Envía tu número de pedido por correo electrónico.";
+  }
+
+  else if(
+      t.includes("reembolso") ||
+      t.includes("devolucion") ||
+      t.includes("devolución")
+  ){
+      reply = "Contáctanos por correo electrónico con tu número de pedido.";
+  }
+
+  else if(t.includes("precio")){
+      reply = "Contáctanos para obtener la información de precios actual.";
+  }
+
+  else if(t.includes("sabor")){
+      reply = "Actualmente ofrecemos Signature Blend, Classic Piqué, Jalapeño Special y Spicy Thai.";
+  }
+
+  else if(t.includes("ingrediente")){
+      reply = "Nuestras salsas están elaboradas con ingredientes naturales de calidad.";
+  }
+
+  /* ENGLISH */
+
+  else if(
+      t.includes("hello") ||
+      t.includes("hi")
+  ){
+      reply = "Hello 👋 How can I help you today?";
+  }
+
+  else if(
+      t.includes("order") ||
+      t.includes("buy")
+  ){
+      reply = "You can place orders in the Order section.";
+  }
+
+  else if(
+      t.includes("shipping") ||
+      t.includes("track")
+  ){
+      reply = "Orders ship in a few days and can be tracked via email.";
+  }
+
   else if(t.includes("cancel")){
-    reply="Cancellation request received. Please send order number via email.";
+      reply = "Cancellation request received. Please send your order number via email.";
   }
-  else if(t.includes("refund")||t.includes("return")){
-    reply="Contact us via email with your order number for support via email.";
+
+  else if(
+      t.includes("refund") ||
+      t.includes("return")
+  ){
+      reply = "Contact us via email with your order number for support.";
   }
-  else if(t.includes("organic")||t.includes("natural")){
-    reply="Made with natural, organic-inspired ingredients.";
+
+  else if(
+      t.includes("price") ||
+      t.includes("cost")
+  ){
+      reply = "Please contact us for current pricing information.";
   }
+
+  else if(
+      t.includes("flavour") ||
+      t.includes("flavor")
+  ){
+      reply = "We currently offer Signature Blend, Classic Piqué, Jalapeño Special and Spicy Thai.";
+  }
+
+  else if(t.includes("ingredient")){
+      reply = "Our sauces are made with quality natural ingredients.";
+  }
+
+  /* DEFAULT */
+
   else{
-    reply="Thanks for your message. Please email us for support.";
+      reply = "Thank you for contacting Picao Caldense. Please email us if you require additional assistance.";
   }
 
-  setTimeout(()=>{
-    box.innerHTML+=`<div><b>Picao Bot:</b> ${reply}</div>`;
-    box.scrollTop=box.scrollHeight;
-  },300);
+  setTimeout(() => {
+      box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+      box.scrollTop = box.scrollHeight;
+  }, 300);
 
-  input.value="";
+  input.value = "";
 }
-
-setLang(localStorage.getItem("lang")||"en");
-
-</script>
-
-</body>
-</html>
+</script/>
