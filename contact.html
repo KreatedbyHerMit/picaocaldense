@@ -119,10 +119,10 @@ footer{
 
 <header>
   <nav>
-    <a onclick="show('home')" data-i18n="nav_home"></a>
-    <a onclick="show('about')" data-i18n="nav_about"></a>
-    <a onclick="show('order')" data-i18n="nav_order"></a>
-    <a onclick="show('contact')" data-i18n="nav_contact"></a>
+<a onclick="show('home')" data-i18n="nav_home">Home</a>
+<a onclick="show('about')" data-i18n="nav_about">About</a>
+<a onclick="show('order')" data-i18n="nav_order">Order</a>
+<a onclick="show('contact')" data-i18n="nav_contact">Contact</a>
   </nav>
 
   <div class="lang">
@@ -237,9 +237,9 @@ const translations = {
     order_heading:"Commande",
     order_intro:"355 ml de sauce artisanale",
     order_signature_text:"Mélange signature",
-    flavour_classic:"Classique",
-    flavour_jalapeno:"Jalapeño",
-    flavour_thai:"Thaï",
+    flavour_classic:"Classique Piqué",
+    flavour_jalapeno:"Jalapeño Spécial",
+    flavour_thai:"Thaï Épicé",
     place_order:"Commander",
     contact_title:"Contact",
     instagram:"Suivez-nous @thisispicaocaldense",
@@ -261,9 +261,9 @@ const translations = {
     order_heading:"Pedido",
     order_intro:"355 ml de salsa artesanal.",
     order_signature_text:"Mezcla exclusiva",
-    flavour_classic:"Clásica",
-    flavour_jalapeno:"Jalapeño",
-    flavour_thai:"Tailandesa",
+    flavour_classic:"Clásica Piqué",
+    flavour_jalapeno:"Jalapeño Especial",
+    flavour_thai:"Thai Picante",
     place_order:"Ordenar",
     contact_title:"Contacto",
     instagram:"Síguenos @thisispicaocaldense",
@@ -271,13 +271,20 @@ const translations = {
   }
 };
 
+let currentLang = localStorage.getItem("lang") || "en";
+
 function setLang(lang){
+  currentLang = lang;
+
   const d = translations[lang];
+
   document.documentElement.lang = lang;
+
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const key = el.dataset.i18n;
     if(d[key]) el.textContent = d[key];
   });
+
   localStorage.setItem("lang", lang);
 }
 
@@ -292,8 +299,6 @@ function orderEmail(){
 
 /* FULL CHATBOT FIXED */
 
-<script>
-
 function send(){
   const input = document.getElementById("msg");
   const box = document.getElementById("chatbox");
@@ -301,54 +306,115 @@ function send(){
   const text = input.value.trim();
   if(!text) return;
 
-  box.innerHTML += `<div><b>You:</b> ${text}</div>`;
-
+ box.innerHTML += `<div><b>You:</b> ${text.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>`;
   const t = text.toLowerCase();
+
   let reply = "";
 
-  /* ENGLISH */
-  if(t.includes("hello") || t.includes("hi")){
-    reply = "Hello 👋 How can I help you today?";
-  }
-  else if(t.includes("order") || t.includes("buy")){
-    reply = "You can place orders in the Order section.";
-  }
-  else if(t.includes("shipping") || t.includes("track")){
-    reply = "Orders ship in a few days and can be tracked via email.";
-  }
-
-  /* FRENCH */
-  else if(t.includes("bonjour") || t.includes("salut")){
-    reply = "Bonjour 👋 Comment puis-je vous aider aujourd'hui ?";
-  }
-  else if(t.includes("commande") || t.includes("acheter")){
-    reply = "Vous pouvez passer votre commande dans la section Commande.";
-  }
-  else if(t.includes("livraison")){
-    reply = "Les commandes sont expédiées en quelques jours.";
-  }
-
-  /* SPANISH */
-  else if(t.includes("hola")){
-    reply = "Hola 👋 ¿Cómo puedo ayudarte hoy?";
-  }
-  else if(t.includes("pedido") || t.includes("comprar")){
-    reply = "Puedes realizar pedidos en la sección de pedidos.";
-  }
-  else if(t.includes("envio") || t.includes("envío")){
-    reply = "Los pedidos se envían en pocos días.";
+  /* =========================
+     ENGLISH (6 INTENTS)
+  ========================== */
+  if(currentLang === "en"){
+    if(t.includes("hello") || t.includes("hi")){
+      reply = "Hello 👋 How can I help you today?";
+    }
+    else if(t.includes("order") || t.includes("buy")){
+      reply = "You can place an order in the Order section.";
+    }
+    else if(t.includes("shipping") || t.includes("delivery") || t.includes("track")){
+      reply = "Orders are shipped within a few days with tracking updates.";
+    }
+    else if(t.includes("refund") || t.includes("return") || t.includes("cancel")){
+      reply = "Please email us with your order number for assistance.";
+    }
+    else if(t.includes("flavour") || t.includes("flavor") || t.includes("sauce")){
+      reply = "We offer Classic Piqué, Jalapeño Special, and Spicy Thai.";
+    }
+    else if(t.includes("ingredient") || t.includes("made of")){
+      reply = "Our sauces are made with natural, handcrafted ingredients.";
+    }
+    else {
+      reply = "Thank you for contacting Picao Caldense.";
+    }
   }
 
-  else{
-    reply = "Thank you for contacting Picao Caldense. Please email us for assistance.";
+  /* =========================
+     FRENCH (6 INTENTS)
+  ========================== */
+  else if(currentLang === "fr"){
+    if(t.includes("bonjour") || t.includes("salut")){
+      reply = "Bonjour 👋 Comment puis-je vous aider aujourd’hui ?";
+    }
+    else if(t.includes("commande") || t.includes("acheter")){
+      reply = "Vous pouvez passer commande dans la section Order.";
+    }
+    else if(t.includes("livraison") || t.includes("expédition") || t.includes("suivi")){
+      reply = "Les commandes sont expédiées sous quelques jours avec suivi.";
+    }
+    else if(t.includes("remboursement") || t.includes("retour") || t.includes("annuler")){
+      reply = "Veuillez nous envoyer votre numéro de commande par email.";
+    }
+    else if(t.includes("saveur") || t.includes("sauce")){
+      reply = "Nous offrons Classic Piqué, Jalapeño Special et Spicy Thai.";
+    }
+    else if(t.includes("ingredient") || t.includes("ingrédient")){
+      reply = "Nos sauces sont faites d’ingrédients naturels artisanaux.";
+    }
+    else {
+      reply = "Merci de nous contacter pour plus d’informations.";
+    }
   }
 
-  setTimeout(() => {
-    box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
-    box.scrollTop = box.scrollHeight;
-  }, 300);
+  /* =========================
+     SPANISH (6 INTENTS)
+  ========================== */
+  else if(currentLang === "es"){
+    if(t.includes("hola")){
+      reply = "Hola 👋 ¿Cómo puedo ayudarte hoy?";
+    }
+    else if(t.includes("pedido") || t.includes("comprar")){
+      reply = "Puedes hacer tu pedido en la sección Order.";
+    }
+    else if(t.includes("envio") || t.includes("entrega") || t.includes("seguimiento")){
+      reply = "Los pedidos se envían en pocos días con seguimiento.";
+    }
+    else if(t.includes("reembolso") || t.includes("devolucion") || t.includes("cancelar")){
+      reply = "Envíanos tu número de pedido por correo electrónico.";
+    }
+    else if(t.includes("sabor") || t.includes("salsa")){
+      reply = "Ofrecemos Classic Piqué, Jalapeño Special y Spicy Thai.";
+    }
+    else if(t.includes("ingrediente") || t.includes("ingredientes")){
+      reply = "Nuestras salsas están hechas con ingredientes naturales artesanales.";
+    }
+    else {
+      reply = "Gracias por contactarnos.";
+    }
+  }
 
-  input.value = "";
+setTimeout(()=>{
+  box.innerHTML += `<div><b>Picao Bot:</b> ${reply}</div>`;
+  box.scrollTop = box.scrollHeight;
+},300);
+
+input.value = "";
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  setLang(currentLang);
+
+  document.getElementById("msg").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") send();
+  });
+
+  const greetings = {
+    en: "Hello 👋 How can I help you today?",
+    fr: "Bonjour 👋 Comment puis-je vous aider aujourd’hui ?",
+    es: "Hola 👋 ¿Cómo puedo ayudarte hoy?"
+  };
+
+  document.getElementById("chatbox").innerHTML =
+    `<div><b>Picao Bot:</b> ${greetings[currentLang]}</div>`;
+});
 
 </script>
